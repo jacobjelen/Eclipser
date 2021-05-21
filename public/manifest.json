@@ -1,18 +1,17 @@
 {
 	"name": "Eclipser - Block Feeds, Hide Distractions!",
   "short_name": "Eclipser",
-	"version": "1.0.9",
+	"version": "2.0.0",
 	"manifest_version": 2,
 	"description": "Stay focused! Filter out distractions, get some work done!",
-  "icons": 
-  {
-		"128":"logo512.png",
-		"48":"logo512.png",
-		"16":"logo512.png"
+	"icons": {
+		"128":"imgs/128.png",
+		"48":"imgs/48.png",
+		"16":"imgs/16.png"
 	},
   "content_scripts":[
 		{
-			"js": ["static/js/content.js"],
+			"js": ["/static/js/jquery-3.6.0.min.js","static/js/content_start.js"],
 			"matches": [ "*://*/*" ],
 			"run_at": "document_start"
 		 }
@@ -20,6 +19,11 @@
   "browser_action": {
 		"default_popup": "index.html",
 		"default_title": "Eclipser!",
-		"default_icon": "logo512.png"
-	}
+		"default_icon": "imgs/128.png"
+	},
+	"background": {
+		"persistent": true,
+		"scripts": [ "/static/js/defaults.js", "/static/js/background.js" ]
+	 },
+	"permissions": ["storage","tabs"]
 }

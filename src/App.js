@@ -7,7 +7,7 @@ import './App.css';
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
-  const mes = 'refresh';
+  const mes = 'new';
 
   return (
     <div className="body" >
