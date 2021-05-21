@@ -1,7 +1,166 @@
-.eclipser{
-  width: 200px;
-  height: 500px;
-  background-color: green;
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap'); */
+
+:root{
+  --green: rgb(19, 235, 163);
+  --dark_green: rgb(27, 167, 120);
+}
+
+.hide {
+margin: 10px 10px ;
+font-weight: 600;
+}
+
+.body{
+  width: 250px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  background: var(--green);  
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  color: gray;
+}
+
+#pophead{
+  width: 250px;
+  height: 80px;
+  background-color: var(--green);
+  font-family: 'Quicksand', sans-serif;
+  padding: 10px 0px;
+  text-align: center
+  
+}
+
+#logo{
+  max-width:150px;
+  height:auto;
+  margin: 10px 10px 6px 10px;
+}
+
+#tagline{
+  width:100%;
+  color: white;
+  font-weight: 600;
+  font-size: 10pt;
+}
+
+.shadow{
+  filter: drop-shadow(2px 2px 8px grey);
+}
+
+#footer{
+  width:100%;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f1f1f1;
+  padding: 5px 10px ;
+  width: 100%;
+  font-size: 8pt;
+  color: gray;
+}
+
+#footer > a{
+  color:var(--green);
+  text-align: right;
+  width: 100%;
 }
 
 
+.domainDiv{
+  display:grid;
+  grid-template-columns: 80% 20% ;
+  background-color: #f1f1f1;
+  padding-top: 7px;
+}
+
+.domainName{
+  font-weight: 600;
+  font-size: 12pt;
+  color: black;
+  position: relative;
+  margin: 5px 10px 8px;
+}
+
+.set{
+  font-weight: 300;
+  font-size: 10pt;
+  color: black;
+  position: relative;
+  margin: 5px 10px 8px;
+}
+
+.setDiv{
+  display:grid;
+  grid-template-columns: 80% 20% ;
+  margin-top: 5px;
+
+}
+
+.strike{
+  /* text-decoration: line-through;*/
+  position: relative;
+  margin-left: 10px;
+}
+
+
+/* Slider Inputs */
+/* SRC: https://www.youtube.com/watch?v=BQSNBa3gZJU */
+input[class="domainToggle"]{
+  position: relative;
+  width: 32px;
+  height: 16px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+  /* transition: .5s; */
+}
+
+input:checked[class="domainToggle"]{
+  background: var(--green);
+}
+
+input[class="domainToggle"]:before{
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  margin: 4px;
+  background: #fff;
+  /*transform: scale(1.1);
+  /*box-shadow: 0 2px 5px rgba(0,0,0,.2);*/
+  /* transition: .5s; */
+}
+
+input:checked[class="domainToggle"]:before{
+  left:16px;
+}
+
+/* setToggleS - not used */
+
+input[class="setToggle"]:before{
+  width: 10px;
+  height: 10px;
+}
+
+input[class="setToggle"]{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 10px;
+  transition: .5s;
+}
+
+input:checked[class="setToggle"]{
+  border: 3px;
+  border-color: greenyellow;
+  background: #252525;
+  transition: .5s;
+}
