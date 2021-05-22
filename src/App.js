@@ -9,13 +9,21 @@ import Footer from './components/Footer';
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
-  const mes = 'new';
+ 
 
   return (
     <div className="body" >
       <Pophead />
-      <button onClick={() => { messageCurrentTab(mes)} }>message</button>
+      
+      <button onClick={() => { 
+        messageCurrentTab('new');
+        window.close()
+        } }>New Eclipser</button>
+      <button onClick={() => { messageCurrentTab('stop')} }>Stop</button>
+      <button onClick={() => { chrome.runtime.sendMessage('reset')} }>Reset</button>
+      
       <Footer />
+
     </div>
   );
 }
