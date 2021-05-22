@@ -4,6 +4,8 @@
 // Alternatively /* eslint-disable no-undef */     // https://codepen.io/supernova_at/post/creating-a-browser-extension-with-create-react-app
 
 import './App.css';
+import Pophead from './components/Pophead';
+import Footer from './components/Footer';
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
@@ -11,8 +13,9 @@ function App() {
 
   return (
     <div className="body" >
-      <div className="eclipser">hello</div>
+      <Pophead />
       <button onClick={() => { messageCurrentTab(mes)} }>message</button>
+      <Footer />
     </div>
   );
 }
