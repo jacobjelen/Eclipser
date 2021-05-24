@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Jacob's dev files
+popup_old.js
+./public/static/js/test.js

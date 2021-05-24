@@ -1,11 +1,12 @@
 // POPUP //
 
-/*global chrome*/    //enables Chrome API. 
+/*global chrome*/    //enables Chrome API 
 // Alternatively /* eslint-disable no-undef */     // https://codepen.io/supernova_at/post/creating-a-browser-extension-with-create-react-app
 
 import './App.css';
 import Pophead from './components/Pophead';
 import Footer from './components/Footer';
+import DomainList from './components/DomainList';
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
@@ -22,6 +23,8 @@ function App() {
       <button onClick={() => { messageCurrentTab('stop')} }>Stop</button>
       <button onClick={() => { chrome.runtime.sendMessage('reset')} }>Reset</button>
       
+      <DomainList />
+
       <Footer />
 
     </div>
