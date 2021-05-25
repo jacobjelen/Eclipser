@@ -1,8 +1,8 @@
 const Domain = ({domainProp}) => {
     return (
-        <h3>
+        <div className="domainDiv">
             {domainProp}
-        </h3>
+        </div>
     )
 }
 
