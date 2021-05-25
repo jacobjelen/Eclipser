@@ -89,6 +89,10 @@ footer > a{
   margin: 5px 10px 8px;
 }
 
+.setList{
+  width: 100%;
+}
+
 .setDiv{
   display:grid;
   grid-template-columns: 80% 20% ;

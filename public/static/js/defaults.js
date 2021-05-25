@@ -67,9 +67,6 @@ const default_settings = {
                 },
             },    
         },
-        'stackoverflow.com': {
-
-        },
         'brainjar.com': {
             active: true,
             sets: {

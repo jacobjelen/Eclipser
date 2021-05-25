@@ -1,1 +1,30 @@
-App.js -> index.html
+POPUP (App.js):
+_____________________________
+HTML STRUCTURE 
+DomainList
+    domainDiv (facebook.com)
+        domainBar
+            domainName
+            buttons
+                toggle
+                delete
+        setDiv
+            SetBar
+                setName
+                buttons
+                    toggle
+                    delete
+
+
+
+_____________________________
+REACT COMPONENT STRUCTURE:
+App
+    Pophead
+    
+    DomainList
+        DomainList
+            Domain
+                SetList
+                    Set
+    Footer

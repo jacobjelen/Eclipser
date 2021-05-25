@@ -25,3 +25,5 @@ yarn-error.log*
 # Jacob's dev files
 popup_old.js
 ./public/static/js/test.js
+.vscode
+
