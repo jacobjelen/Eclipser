@@ -4,6 +4,7 @@
 // Alternatively /* eslint-disable no-undef */     // https://codepen.io/supernova_at/post/creating-a-browser-extension-with-create-react-app
 
 import './App.css';
+// import './fonts.css';
 import Pophead from './components/Pophead';
 import Footer from './components/Footer';
 import DomainList from './components/DomainList';

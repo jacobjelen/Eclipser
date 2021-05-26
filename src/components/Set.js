@@ -1,11 +1,9 @@
-import React from 'react'
-
 const Set = ({set}) => {
     
     
     return (
-        <div className="setDiv">
-            {set.toString()}
+        <div className="setLine">
+            <div className="setName"> {set.toString()} </div>
         </div>
     )
 }

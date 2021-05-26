@@ -4,7 +4,7 @@ const Domain = ({domainName, domainSettings}) => {
 
     return (
         <div className="domainDiv">
-            <div className="domainBar">
+            <div className="domainLine">
                 <div className="domainName">{domainName}</div>
             
                 <div className="domainButtons"> X </div>
