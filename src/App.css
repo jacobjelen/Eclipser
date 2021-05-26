@@ -13,6 +13,7 @@
               buttons
                   toggle
                   delete
+                  expand/close
           setList
               SetLine
                   setName
@@ -34,7 +35,7 @@
   height: 600px;
   margin: 0;
   padding: 0;
-  background: var(--green);  
+  background: white;  
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
   color: gray;
