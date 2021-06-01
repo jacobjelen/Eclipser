@@ -3,7 +3,8 @@
 import React from 'react'
 
 const Pophead = () => {
-    return (
+
+	return (
         <div id="pophead" onMouseOver={mouseOver} onMouseLeave={setPophead} onClick={popheadClick}>
             <div id="logoDiv">
                 <img src="imgs/Eclipser_logo.png" id="logo" class="shadow" />
@@ -17,11 +18,6 @@ export default Pophead
 
 
 // // POPHEAD - Eclipser On/Off button /////////////////////////////////////////////////
-
-// just testing... 
-const mouseOver2 = (e) => {
-    console.log(e)
-}
 
 const mouseOver = () => {
     const pophead = document.getElementById('pophead');
@@ -40,7 +36,7 @@ const mouseOver = () => {
 		}
 	});
 
-	pophead.style.backgroundColor = 'var(--dark_green)';
+	pophead.style.backgroundColor = 'var(--dark-green)';
 }
 
 const popheadClick = () => {

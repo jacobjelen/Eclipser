@@ -45,7 +45,6 @@ function set_elements_visibility() {
             console.log('4 - SET: '+set+' -');
             //is is the set active 
             if (settings.domains[domain].sets[set].active) {
-              console.log('5a - SET ACTIVE -');
               // for each selector in the set
               settings.domains[domain].sets[set].selectors.forEach(
                 (selector) => {

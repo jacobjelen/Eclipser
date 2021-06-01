@@ -11,3 +11,31 @@ App
                 SetList
                     Set
     Footer
+
+
+????
+- Domain.js:55 how to do conditional component display?  
+
+
+TO DO:
+- align bins
+- hover on domains/SetList
+- expand arrow pointing down when expanded
+- active/paused filters formating
+    - line through
+    - checkbox? slider / dot 
+
+- delete set/domain onClick bin
+    - confirmation 'Delete filter? Yes / No'?
+
+- current domain highlighted & expanded
+    - app level state holding the active/current domain?
+
+- 2s top bar appearing on all filtered pages
+
+- format overlay box
+
+- add default sets for Twitter, Netflix, Amazon...
+
+- time preferences ?
+- block this domain ?

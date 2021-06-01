@@ -8,7 +8,6 @@ const DomainList = () => {
     
     // useEffect hook. runs whenever app is rendered or something changes
     useEffect(() => {
-        
         getDomainsObj()                                 // load settings from storage
             .then((result) => {
                 setMySetting( Object.entries(result) )  // save settings to state as an array

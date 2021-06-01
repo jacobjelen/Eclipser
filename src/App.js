@@ -3,8 +3,8 @@
 /*global chrome*/    //enables Chrome API 
 // Alternatively /* eslint-disable no-undef */     // https://codepen.io/supernova_at/post/creating-a-browser-extension-with-create-react-app
 
-import './App.css';
-// import './fonts.css';
+import './components/Eclipser.css';
+import './fonts/DINPro.css';
 import Pophead from './components/Pophead';
 import Footer from './components/Footer';
 import DomainList from './components/DomainList';
@@ -12,7 +12,6 @@ import DomainList from './components/DomainList';
 // POPUP WINDOW //////////////////////////////////////
 function App() {
  
-
   return (
     <div className="body" >
       <Pophead />
