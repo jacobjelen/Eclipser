@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=DINPro:wght@300;400;500;600;700&display=swap');
+
+/* HTML STRUCTURE 
+.body
+  #pophead
+    #logo
+    #tagline
+  
+  .domainList
+      domainDiv (facebook.com)
+          domainLine
+              domainName
+              buttons
+                  toggle
+                  delete
+                  expand/close
+          setList
+              SetLine
+                  setName
+                  buttons
+                      toggle
+                      delete 
+
+  footer
+*/
+
+/* GENERAL */
+    :root{
+      --green: rgb(19, 235, 163);
+      --dark-green: rgb(27, 167, 120);
+      --light-gray: #f1f1f1;
+      --orange: #ff4b1e;
+      --grey: #808080;
+
+      --hover-transition: 0.3s
+    }
+
+    .body{
+      width: 250px;
+      height: 600px;
+      margin: 0;
+      padding: 0;
+      /* background: white;   */
+      font-family: 'DINPro', sans-serif;
+      font-weight: 400;
+      color: gray;
+    }
+
+    #pophead{
+      width: 250px;
+      height: 80px;
+      background-color: var(--green);
+      font-family: 'DINPro', sans-serif;
+      padding: 10px 0px;
+      text-align: center
+    }
+
+    #pophead:hover{
+      background-color: var(--dark-green);
+    }  
+
+    #logo{
+      max-width:150px;
+      height:auto;
+      margin: 10px 10px 6px 10px;
+    }
+
+    #tagline{
+      width:100%;
+      color: white;
+      font-weight: 600;
+      font-size: 10pt;
+    }
+
+    /* .shadow{
+      filter: drop-shadow(2px 2px 8px grey);
+    } */
+
+    footer{
+      width:100%;
+      position: absolute;
+      bottom: 0px;
+      text-align: left;
+      font-family: 'DINPro', sans-serif;
+      background-color: var(--light-gray);
+      padding: 5px 10px ;
+      width: 100%;
+      font-size: 8pt;
+      color: gray;
+    }
+
+    footer > a{
+      color:var(--dark-green);
+      text-align: right;
+      width: 100%;
+}
+
+/*  DOMAIN LIST */
+.domainList{
+}
+
+.domainDiv{
+  background-color: #f1f1f1;
+  /* padding-top: 7px;
+  margin-top: 5px; */
+}
+
+.domainLine{
+  width:100%;
+  display:grid;
+  grid-template-columns: 10% 70% 20% ;
+  margin: 5px 10px;
+  padding: 2px 0px;
+  vertical-align: middle;
+  color: black;
+}
+
+.domainArrowDiv{
+  font-weight: 500;
+  font-size: 10pt;
+    display: inline-block;
+  vertical-align: middle;
+  transition: var(--hover-transition);
+  /* margin: 2px 10px 8px; */
+}
+
+.domainLine__arrow{
+  font-size: 10px;
+  position: relative;
+  text-align: center;
+  vertical-align: auto;
+  transition: var(--hover-transition);
+}
+
+.domainLine__arrow:hover{
+  color: var(--dark-green);
+  transform: rotate(90deg);
+  transition: var(--hover-transition);
+}
+
+.domainName{
+  font-weight: 500;
+  font-size: 10pt;
+  display: inline-block;
+  vertical-align: middle;
+  transition: var(--hover-transition);
+  /* margin: 2px 10px 8px; */
+}
+
+.domainName:hover{
+  color: var(--dark-green);
+  transition: var(--hover-transition);
+}
+
+.lineButtons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bin{
+  color: var(--grey);
+  transition: var(--hover-transition);
+}
+
+.bin:hover{
+  color: var(--orange);
+  transition: var(--hover-transition);
+}
+
+
+/*  SET LIST */
+.setList{
+  width: 100%;
+}
+
+.setLine{
+  display:grid;
+  grid-template-columns: 80% 20% ;
+  margin-top: 2px;
+
+}
+
+.setName{
+  font-weight: 300;
+  font-size: 10pt;
+  color: black;
+  position: relative;
+  margin: 0px 15px 2px;
+  padding-left: 22px;
+}
+
+.setName:hover{
+text-decoration: line-through;
+}
+
+
+
+/*  OTHER */
+.hidden{
+  display: none !important;
+  visibility: hidden !important;
+}
+
+
+/* Slider Inputs */
+/* SRC: https://www.youtube.com/watch?v=BQSNBa3gZJU */
+input[class="domainToggle"]{
+  position: relative;
+  width: 32px;
+  height: 16px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+  /* transition: .5s; */
+}
+
+input:checked[class="domainToggle"]{
+  background: var(--green);
+}
+
+input[class="domainToggle"]:before{
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  margin: 4px;
+  background: #fff;
+  /*transform: scale(1.1);
+  /*box-shadow: 0 2px 5px rgba(0,0,0,.2);*/
+  /* transition: .5s; */
+}
+
+input:checked[class="domainToggle"]:before{
+  left:16px;
+}
+
+/* setToggleS - not used */
+
+input[class="setToggle"]:before{
+  width: 10px;
+  height: 10px;
+}
+
+input[class="setToggle"]{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 10px;
+  transition: .5s;
+}
+
+input:checked[class="setToggle"]{
+  border: 3px;
+  border-color: greenyellow;
+  background: #252525;
+  transition: .5s;
+}
