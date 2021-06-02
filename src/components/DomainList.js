@@ -18,7 +18,12 @@ const DomainList = () => {
     return (<div id="domainList">
             {
                 mySettings.map((item) => (
-                    <Domain domainName={item[0]} domainSettings={item[1]} />
+                    <Domain 
+                        domainName={item[0]} 
+                        domainSettings={item[1]} 
+                        saveChange={saveChange}
+                        deleteFilter={deleteFilter}
+                        />
                 ))
             }
         </div>)
@@ -39,4 +44,45 @@ function getDomainsObj() {
             }  
         });       
     })
+}
+
+// activate/deactivate domain or set
+function saveChange(e, newValue, domain, set=null) {   // e is the change event object
+	//- load storage to local settings
+    chrome.storage.sync.get('settings', (from_storage) => {
+		let local_settings = from_storage.settings;
+
+		if (set == undefined || set == null) {
+			//if no 'set' => it is a domain checkbox
+			local_settings.domains[domain.toString()].active = newValue;
+		} else {
+			// it is a set checkbox
+			local_settings.domains[domain.toString()].sets[set.toString()].active = newValue;
+		}
+
+		//- rewrite storage with local
+		chrome.storage.sync.set({ 'settings': local_settings }, () => { });
+	});
+}
+
+// Delete domain or set
+function deleteFilter(domain, set=null){
+    chrome.storage.sync.get('settings', (from_storage) => {
+		let local_settings = from_storage.settings;
+
+		if (set == undefined || set == null) {
+			//if no 'set' => it is a domain checkbox
+            console.log("deleting domain: "+domain)
+			delete local_settings.domains[domain.toString()];
+		} else {
+			// it is a set checkbox
+            console.log("deleting set: "+domain+"-"+set)
+			delete local_settings.domains[domain.toString()].sets[set.toString()];
+		}
+
+        console.log('new settings:')
+        console.log(local_settings)
+		//- rewrite storage with local
+		chrome.storage.sync.set({ 'settings': local_settings }, () => { });
+	});
 }

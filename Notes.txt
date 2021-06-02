@@ -21,6 +21,7 @@ TO DO:
 - align bins
 - hover on domains/SetList
 - expand arrow pointing down when expanded
++ activate/deactivate onClick
 - active/paused filters formating
     - line through
     - checkbox? slider / dot 
