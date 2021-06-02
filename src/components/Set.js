@@ -23,7 +23,7 @@ const Set = ({ set, saveChange, domainName, setSettings, deleteFilter }) => {
 
                 onClick={(e) => {
                     // saveChange function is in DomainList.js - updates storage settings
-                    saveChange(e, !setSettings.active, domainName, set )}  //event, newValue, domain, set
+                    saveChange(!setSettings.active, domainName, set )}  //event, newValue, domain, set
                 }
             >
 

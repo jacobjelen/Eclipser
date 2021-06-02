@@ -6,6 +6,7 @@ const DomainList = () => {
     // useState hook. mySettings is a variable. use setMySettins(new_value) to update it 
     const [mySettings, setMySetting] = useState([])
     
+    // THIS RUNS ALL THE TIME!! ???
     // useEffect hook. runs whenever app is rendered or something changes
     useEffect(() => {
         getDomainsObj()                                 // load settings from storage
@@ -36,7 +37,9 @@ function getDomainsObj() {
     return new Promise((resolve, reject) => {
 
         chrome.storage.sync.get('settings', (result) => {
-
+            console.log('storage settings result: ')
+            console.log(result)
+            
             if (result.settings.domains){
                 resolve(result.settings.domains)
             }else{
@@ -47,7 +50,7 @@ function getDomainsObj() {
 }
 
 // activate/deactivate domain or set
-function saveChange(e, newValue, domain, set=null) {   // e is the change event object
+function saveChange(newValue, domain, set=null) {   // e is the change event object
 	//- load storage to local settings
     chrome.storage.sync.get('settings', (from_storage) => {
 		let local_settings = from_storage.settings;

@@ -9,9 +9,18 @@ import Pophead from './components/Pophead';
 import Footer from './components/Footer';
 import DomainList from './components/DomainList';
 
+// import {useState, useEffect} from 'react'
+
 // POPUP WINDOW //////////////////////////////////////
 function App() {
  
+  // // ??? how to re-render when anything changes in storage settings
+  // const [allSettings, setAllSetting] = useState(1)
+  //   // useEffect hook. runs whenever app is rendered or something changes
+  //   useEffect(() => {
+  //     chrome.storage.onChanged.addListener( ()=>{setAllSetting(allSettings+1)} )
+  //   })
+
   return (
     <div className="body" >
       <Pophead />

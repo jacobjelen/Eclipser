@@ -43,7 +43,7 @@ const Domain = ({ domainName, domainSettings, saveChange, deleteFilter }) => {
                 <div className={domainSettings.active ? "domainName" : "domainName passive"}
 
                     onClick={(e) => {
-                        saveChange(e, !domainSettings.active, domainName)
+                        saveChange(!domainSettings.active, domainName)
                     }
                     }>
                     {domainName}
