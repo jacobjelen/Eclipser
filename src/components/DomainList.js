@@ -3,16 +3,34 @@ import Domain from './Domain';
 import { useState, useEffect } from 'react'
 
 const DomainList = ({ currentDomain }) => {
-    // useState hook. DomainArray is a variable. use setMySettins(new_value) to update it 
-    const [DomainArray, setDomainArray] = useState([])
+    // useState hook. domainArray is a variable. use setMySettins(new_value) to update it 
+    const [domainArray, setDomainArray] = useState([])
+
+    function reorderDomainList(currentDomain, domainListFromStorage){
+        console.log('currentDomain')
+        console.log(currentDomain)
+
+        console.log('domainListFromStorage')
+        console.log(domainListFromStorage)
+
+        const x = domainListFromStorage.filter(item => {
+            console.log(`${item[0]}==${currentDomain} result ${ item[0] == (currentDomain) }`)
+            return item[0] == (currentDomain)
+        } )
+        // .concat(domainListFromStorage.filter(item => item[0] != currentDomain)
+        // )  
+        
+        console.log(x)
+        return x
+    }
 
     // re-render DomainList when storage settings change
     useEffect(() => {
-
         // ON MOUNT ???? how to put it in useState constructor
         getDomainsObj()                                 // load settings from storage
             .then((result) => {
-                setDomainArray(Object.entries(result))  // save settings to state as an array
+                // update domainArray with other stored domains
+                setDomainArray( reorderDomainList( currentDomain, Object.entries(result) ) ); // [ [domainName, {settings}] ]
             })
             .catch((e) => console.log(e))
 
@@ -21,32 +39,44 @@ const DomainList = ({ currentDomain }) => {
         chrome.storage.onChanged.addListener(() => {
             getDomainsObj()                                 // load settings from storage
                 .then((result) => {
-                    setDomainArray(Object.entries(result))  // save settings to state as an array
-                })
-                .catch((e) => console.log(e))
+                    setDomainArray( reorderDomainList( currentDomain, Object.entries(result) ) ); // [ [domainName, {settings}] ]
+            })
+            .catch((e) => console.log(e))
         })
 
     }, [])
 
-    return (<div id="domainList">
-        {
-            DomainArray.map((item) => (    // MAP MUST BE ON ARRAY, NOT OBJECT!!!
-                // item = ['domainName', { domain settings object} ]
-                
-                // { true ? "hello" : 'bye'}  ????
+    
+    return (
+        <>
+            {/* {currentDomainItem != undefined &&
+                <div id="currentDomain" >
+                    <Domain
+                        domainName={currentDomainItem[0]}
+                        domainSettings={currentDomainItem[1]}
+                        saveChange={saveChange}
+                        deleteFilter={deleteFilter}
+                    />
+                </div>
+            } */}
 
-                <Domain
-                    domainName={item[0]}
-                    domainSettings={item[1]}
-                    saveChange={saveChange}
-                    deleteFilter={deleteFilter}
-                />
+            <div id="domainList">
             
-            
-                ))
-            
-        }
-    </div>)
+                {
+                    domainArray.map( (item) => (    // MAP MUST BE ON ARRAY, NOT OBJECT!!!
+                        // item = ['domainName', {domain settings object} ]
+                    
+                        <Domain
+                            domainName={item[0]}
+                            domainSettings={item[1]}
+                            saveChange={saveChange}
+                            deleteFilter={deleteFilter}
+                        />
+                    ))
+                }
+            </div>
+        </>
+    )
 }
 
 export default DomainList
@@ -104,6 +134,6 @@ function deleteFilter(domain, set = null) {
             delete local_settings.domains[domain.toString()].sets[set.toString()];
         }
         //- rewrite storage with local
-        chrome.storage.sync.set({ 'settings': local_settings }, () => {});
+        chrome.storage.sync.set({ 'settings': local_settings }, () => { });
     });
 }

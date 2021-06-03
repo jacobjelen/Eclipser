@@ -19,7 +19,9 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
   //'stop' button in the popup is clicked
   if (message == 'stop') stop_selecting();
 
-  if (message == 'domain') sendResponse(noWWW(window.location.hostname));
+  if (message == 'domain') {
+      sendResponse(noWWW(window.location.hostname));
+  }
 });
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////

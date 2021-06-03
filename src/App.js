@@ -38,7 +38,7 @@ useEffect(() => {
       setCurrentDomain(r)
     })
     .catch(e => {
-      setCurrentDomain(undefined)
+      setCurrentDomain('')
     });
 }, [])
 
@@ -55,10 +55,8 @@ useEffect(() => {
       }}>New Eclipser</button>
       <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
       <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset</button>
-
-      <DomainList 
-        currentDomain={currentDomain}
-        />
+      
+      <DomainList currentDomain={currentDomain} />
 
       <Footer />
 

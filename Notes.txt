@@ -19,19 +19,15 @@ ______________________________________________________________
 QUESTIONS ????
 
 - React structure - put functions in App.js or DomainList.js??
+
 - useEffect in domainList.js runs all the time!!
     - fixed by adding an event listener
     - BUT... how to run it the first time??? put into useEffect constructor
-
-- Re-render when storage changes??? App.js:17-22 useState, useEffect
-    - deleting domains OK, deleting sets not working?
-    - button
 
 ______________________________________________________________
 
 TO DO: 
 - understand async/await better
-
 
 - align bins
 - hover on domains/SetList
@@ -54,8 +50,6 @@ TO DO:
 - format overlay box
 
 - add default sets for Twitter, Netflix, Amazon...
-
-- restructure content_start.js - too many embeded conditions
 
 - time preferences ?
 - block this domain ?

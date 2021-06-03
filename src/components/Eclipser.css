@@ -96,6 +96,11 @@
 }
 
 /*  DOMAIN LIST */
+#currentDomain{
+  background-color: var(--green);
+}
+
+
 .domainList{
 }
 
