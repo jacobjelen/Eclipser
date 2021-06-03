@@ -2,17 +2,17 @@
 import Domain from './Domain';
 import { useState, useEffect } from 'react'
 
-const DomainList = () => {
-    // useState hook. mySettings is a variable. use setMySettins(new_value) to update it 
-    const [mySettings, setMySetting] = useState([])
+const DomainList = ({ currentDomain }) => {
+    // useState hook. DomainArray is a variable. use setMySettins(new_value) to update it 
+    const [DomainArray, setDomainArray] = useState([])
 
-    // THIS RUNS ALL THE TIME!! ???
+    // re-render DomainList when storage settings change
     useEffect(() => {
 
         // ON MOUNT ???? how to put it in useState constructor
         getDomainsObj()                                 // load settings from storage
             .then((result) => {
-                setMySetting(Object.entries(result))  // save settings to state as an array
+                setDomainArray(Object.entries(result))  // save settings to state as an array
             })
             .catch((e) => console.log(e))
 
@@ -21,7 +21,7 @@ const DomainList = () => {
         chrome.storage.onChanged.addListener(() => {
             getDomainsObj()                                 // load settings from storage
                 .then((result) => {
-                    setMySetting(Object.entries(result))  // save settings to state as an array
+                    setDomainArray(Object.entries(result))  // save settings to state as an array
                 })
                 .catch((e) => console.log(e))
         })
@@ -30,14 +30,20 @@ const DomainList = () => {
 
     return (<div id="domainList">
         {
-            mySettings.map((item) => (    // MAP MUST BE ON ARRAY, NOT OBJECT!!!
+            DomainArray.map((item) => (    // MAP MUST BE ON ARRAY, NOT OBJECT!!!
+                // item = ['domainName', { domain settings object} ]
+                
+                // { true ? "hello" : 'bye'}  ????
+
                 <Domain
                     domainName={item[0]}
                     domainSettings={item[1]}
                     saveChange={saveChange}
                     deleteFilter={deleteFilter}
                 />
-            ))
+            
+            
+                ))
             
         }
     </div>)
@@ -95,15 +101,9 @@ function deleteFilter(domain, set = null) {
         } else {
             // it is a set checkbox
             console.log("deleting set: " + domain + "-" + set)
-            console.log(local_settings.domains[domain.toString()].sets[set.toString()])
             delete local_settings.domains[domain.toString()].sets[set.toString()];
         }
-
-        console.log('new local_settings:')
-        console.log(local_settings)
         //- rewrite storage with local
-        chrome.storage.sync.set({ 'settings': local_settings }, () => { 
-            console.log('storage settings updated!')
-        });
+        chrome.storage.sync.set({ 'settings': local_settings }, () => {});
     });
 }

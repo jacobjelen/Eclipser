@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 //// LISTEN FOR COMMAND MESSAGES ////////////////////////////////////////////////
-chrome.extension.onMessage.addListener(function (message,sender,sendResponse) {
+chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
   // when a setting changes, we receive a message from background.js
-  if (message == 'refresh') set_elements_visibility();
+  if (message == 'refresh') {
+    set_elements_visibility();
+    console.log('refreshing')
+  }
 
   //'new' button in the popup is clicked
   if (message == 'new') select_elements();
@@ -16,65 +19,72 @@ chrome.extension.onMessage.addListener(function (message,sender,sendResponse) {
   //'stop' button in the popup is clicked
   if (message == 'stop') stop_selecting();
 
-  if (message == 'domain') sendResponse( noWWW(window.location.hostname) );
+  if (message == 'domain') sendResponse(noWWW(window.location.hostname));
 });
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
   // load settings from storage
   chrome.storage.sync.get("settings", function (result) {
+    let settings, domain;
 
-    // if Eclipser is active
+    // CHECK if Eclipser is active
     if (result.settings.general.active) {
-      let settings = result.settings;
+      settings = result.settings;
       console.log('1 - Eclipser Active -');
 
       //what site are we on
-      let domain = noWWW(window.location.hostname);
+      domain = noWWW(window.location.hostname);
+    } else { return }
 
-      //is the domain for current site stored in settings?
-      if (Object.keys(settings.domains).includes(domain)) {
-        console.log('2 - Domain Recognised -');
-        addEclipserStyle();
 
-        //is is the domain active 
-        if (settings.domains[domain].active) {
-          console.log('3 - Domain Active -');
-          
-          Object.keys(settings.domains[domain].sets).forEach((set) => {
-            console.log('4 - SET: '+set+' -');
-            //is is the set active 
-            if (settings.domains[domain].sets[set].active) {
-              // for each selector in the set
-              settings.domains[domain].sets[set].selectors.forEach(
-                (selector) => {
-                  console.log('6a - ECLIPSED: '+selector)
-                  
-                  document.querySelectorAll(selector).forEach((item) => {
-                    item.classList.add("eclipsed");
-                  })
+    // CHECK is the domain for current site stored in settings?
+    if (Object.keys(settings.domains).includes(domain)) {
+      console.log('2 - Domain Recognised -');
+      addEclipserStyle();
+    } else { return }
 
-                } //selector
-              ); //for each selector
 
-            } else {
-              console.log('5b - SET NOT ACTIVE -');
-              // for each selector in the set
-              settings.domains[domain].sets[set].selectors.forEach(
-                (selector) => {
-                  console.log('6b - UN-Hidden: '+selector)
-                  document.querySelectorAll(selector).forEach((item) => {
-                    item.classList.remove("eclipsed");
-                  })
+    // CHECK is the domain active 
+    if (!settings.domains[domain].active) {
+      removeEclipserStyle()
+      return
+    }
 
-                } //selector
-              ); //for each selector
+    console.log('3 - Domain Active -');
 
-            }
-          }); //object.keys forEach set
-        } else { removeEclipserStyle() } // if domain active
-      } // if domain stored
-    } // general active
+    Object.keys(settings.domains[domain].sets).forEach((set) => {
+      console.log('4 - SET: ' + set + ' -');
+      //is is the set active 
+      if (settings.domains[domain].sets[set].active) {
+        // for each selector in the set
+        settings.domains[domain].sets[set].selectors.forEach(
+          (selector) => {
+            console.log('6a - ECLIPSED: ' + selector)
+
+            document.querySelectorAll(selector).forEach((item) => {
+              item.classList.add("eclipsed");
+            })
+
+          } //selector
+        ); //for each selector
+
+      } else {
+        console.log('5b - SET NOT ACTIVE -');
+        // for each selector in the set
+        settings.domains[domain].sets[set].selectors.forEach(
+          (selector) => {
+            console.log('6b - UN-Hidden: ' + selector)
+            document.querySelectorAll(selector).forEach((item) => {
+              item.classList.remove("eclipsed");
+            })
+
+          } //selector
+        ); //for each selector
+
+      }
+    }); //object.keys forEach set
+
   }); // end of storage.get settings
 }
 
@@ -82,22 +92,22 @@ function set_elements_visibility() {
 function select_elements() {
   make_box(); // creates the overlay box div, add to body
   let last_el;
-  
+
   // New Set name & title
   let domain = noWWW(window.location.hostname);   //what site are we on
   let setKey, setName;
   let setNo = promiseLastSetNumber(noWWW(window.location.hostname));
-  
+
   setNo.then(lastNo => {
     // let nextNo = lastNo + 1;       // r (resolved) = last set number, next needs to be +1
-    setKey = 'set'+ (lastNo+1);
-    setName = 'Set '+ (lastNo+1);
-    console.log('New Set No: ' + (lastNo+1));
+    setKey = 'set' + (lastNo + 1);
+    setName = 'Set ' + (lastNo + 1);
+    console.log('New Set No: ' + (lastNo + 1));
   })
-  .catch(e =>{
-    setKey = 'error';
-    setName = 'error';
-  });
+    .catch(e => {
+      setKey = 'error';
+      setName = 'error';
+    });
 
 
   // if 'New' button in popup has been clicked
@@ -152,7 +162,7 @@ function select_elements() {
 
     //// save settings
     saveSelector(getSelector(el), domain, setKey, setName, set_elements_visibility); //??? calling main here
-  
+
   })
 
   // stop selecting on ESC
@@ -196,7 +206,7 @@ window.onload = function () {
 //// FUNCTIONS ///////////////////////////////////////////////////////////
 
 // creates the overlay box div, add to body
-function make_box(){
+function make_box() {
   box = $("<div id='eclipserBox' />").css(
     {
       display: "none",
@@ -234,7 +244,7 @@ function getSelector(el) { // from nukem
     if (el.hasAttribute('id') && el.id !== '') {
       stack.unshift(el.nodeName.toLowerCase() + '#' + el.id);
     } else if (sibCount > 1) {
-      stack.unshift(el.nodeName.toLowerCase() + ':nth-of-type(' + (sibIndex+1) + ')');
+      stack.unshift(el.nodeName.toLowerCase() + ':nth-of-type(' + (sibIndex + 1) + ')');
     } else {
       stack.unshift(el.nodeName.toLowerCase());
     }
@@ -329,33 +339,33 @@ function noWWW(s) {
 
 // returns highest set number for current domain
 function promiseLastSetNumber(domain) {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     let maxSetNumber = 0;
-    
+
     chrome.storage.sync.get('settings', (from_storage) => {					//get settings
-      
-      
-      if( from_storage.settings.domains[domain] === undefined ){
+
+
+      if (from_storage.settings.domains[domain] === undefined) {
         //domain not saved in storage (yet)
         resolve(maxSetNumber) // = 1
-      
-      }else{
+
+      } else {
         //domain in storage, check last set number
         Object.keys(from_storage.settings.domains[domain].sets).forEach((set) => {
-        
+
           let regex = /^set[0-9]+$/;  // regular expression: ^ must start with; 'set'; followed by number; + any amount of digits, $ then end 
-  
+
           if (regex.test(set)) {
             let numberSring = set.substr(3);
             let number = parseInt(numberSring);
             if (number > maxSetNumber) maxSetNumber = number;
           }
         });
-  
+
         resolve(maxSetNumber);
       }
-      
-      
+
+
     });
   });
-}  
+}

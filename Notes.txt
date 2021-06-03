@@ -47,13 +47,15 @@ TO DO:
     - confirmation 'Delete filter? Yes / No'?
 
 - current domain highlighted & expanded
-    - app level state holding the active/current domain?
+    + app level state holding the active/current domain
 
 - 2s top bar appearing on all filtered pages
 
 - format overlay box
 
 - add default sets for Twitter, Netflix, Amazon...
+
+- restructure content_start.js - too many embeded conditions
 
 - time preferences ?
 - block this domain ?
