@@ -4,23 +4,35 @@ _____________________________
 REACT COMPONENT STRUCTURE:
 App
     Pophead
+
+    (buttons)
     
     DomainList
-        DomainList
-            Domain
-                SetList
-                    Set
+        Domain 
+            SetList
+                Set
+
     Footer
 
+______________________________________________________________
 
-????
+QUESTIONS ????
+
 - React structure - put functions in App.js or DomainList.js??
 - useEffect in domainList.js runs all the time!!
+    - fixed by adding an event listener
+    - BUT... how to run it the first time??? put into useEffect constructor
+
 - Re-render when storage changes??? App.js:17-22 useState, useEffect
     - deleting domains OK, deleting sets not working?
+    - button
+
+______________________________________________________________
+
+TO DO: 
+- understand async/await better
 
 
-TO DO:
 - align bins
 - hover on domains/SetList
 - expand arrow pointing down when expanded
@@ -29,7 +41,9 @@ TO DO:
     - line through
     - checkbox? slider / dot 
 
-- delete set/domain onClick bin
+- rename set on double click
+
++ delete set/domain onClick bin
     - confirmation 'Delete filter? Yes / No'?
 
 - current domain highlighted & expanded
@@ -45,4 +59,3 @@ TO DO:
 - block this domain ?
 
 
-(this["webpackJsonpeclipser-react"]=this["webpackJsonpeclipser-react"]||[]).push([[0],{13:function(e,t,n){},14:function(e,t,n){},16:function(e,t,n){"use strict";n.r(t);var s=n(2),i=n.n(s),o=n(8),c=n.n(o),a=(n(13),n(7),n(14),n(1)),r=function(){return Object(a.jsxs)("div",{id:"pophead",onMouseOver:l,onMouseLeave:d,onClick:g,children:[Object(a.jsx)("div",{id:"logoDiv",children:Object(a.jsx)("img",{src:"imgs/Eclipser_logo.png",id:"logo",class:"shadow"})}),Object(a.jsx)("div",{id:"tagline",class:"shadow",children:" FOCUS IS A SUPERPOWER! "})]})},l=function(){var e=document.getElementById("pophead"),t=document.getElementById("logo"),n=document.getElementById("tagline");n.style.opacity="100%",t.style.opacity="100%",chrome.storage.sync.get("settings",(function(e){e.settings.general.active?(n.innerHTML="PAUSE",t.setAttribute("src","imgs/pause.png")):e.settings.general.active||(n.innerHTML="ACTIVATE!",t.setAttribute("src","imgs/play.png"))})),e.style.backgroundColor="var(--dark-green)"},g=function(){chrome.storage.sync.get("settings",(function(e){var t=e.settings;e.settings.general.active?e.settings.general.active&&(t.general.active=!1,chrome.storage.sync.set({settings:t},(function(){return d})),chrome.browserAction.setIcon({path:"imgs/128-paused.png"}),console.log("Eclipser Paused")):(t.general.active=!0,chrome.storage.sync.set({settings:t},(function(){return d})),chrome.browserAction.setIcon({path:"imgs/128.png"}),console.log("Eclipser Activated")),chrome.tabs.query({active:!0,currentWindow:!0},(function(e){chrome.tabs.reload(e[0].id)})),d()}))};function d(){var e=document.getElementById("pophead"),t=document.getElementById("logo"),n=document.getElementById("tagline");t.setAttribute("src","imgs/Eclipser_logo.png"),chrome.storage.sync.get("settings",(function(s){s.settings.general.active?(n.innerHTML="FOCUS IS A SUPERPOWER!",e.style.backgroundColor="var(--green)",n.style.opacity="100%",t.style.opacity="100%"):(n.innerHTML="PAUSED",n.style.opacity="50%",t.style.opacity="50%",e.style.backgroundColor="grey")}))}var u=function(){return Object(a.jsxs)("footer",{children:["Feature or bug? Let me know! ",Object(a.jsx)("a",{href:"https://twitter.com/intent/tweet?text=%40jacobjelen%20I%27ve%20been%20using%20your%20Eclipser%20Chrome%20Extension%20and...",target:"blank",children:"@jacobjelen"})]})},m=n(3),j=n(4),b=function(e){var t=e.set,n=e.saveChange,i=e.domainName,o=e.setSettings,c=e.deleteFilter,r=Object(s.useState)(!1),l=Object(m.a)(r,2),g=l[0],d=l[1];return Object(a.jsx)(a.Fragment,{children:Object(a.jsxs)("div",{className:"setLine",onMouseOver:function(){return d(!0)},onMouseLeave:function(){return d(!1)},onClick:function(e){n(!o.active,i,t)},children:[Object(a.jsx)("div",{className:"setName",children:t.toString()}),Object(a.jsx)("div",{class:"lineButtons",children:g&&Object(a.jsx)(j.a,{className:"bin",onClick:function(){console.log("set bin clicked!"),c(i,t)}})})]})})},v=function(e){var t=e.domainSettings,n=e.domainName,s=e.saveChange,i=e.deleteFilter,o=Object.keys(t.sets);return Object(a.jsx)("div",{className:"setList",children:o.map((function(e){return Object(a.jsx)(b,{set:e,setSettings:t.sets[e.toString()],domainName:n,saveChange:s,deleteFilter:i})}))})},h=n(5),f=function(e){var t=e.domainName,n=e.domainSettings,i=e.saveChange,o=e.deleteFilter,c=Object(s.useState)(!1),r=Object(m.a)(c,2),l=r[0],g=r[1],d=Object(s.useState)(!1),u=Object(m.a)(d,2),b=u[0],f=u[1];return Object(a.jsxs)("div",{className:"domainDiv",children:[Object(a.jsxs)("div",{className:"domainLine",onMouseOver:function(){return g(!0)},onMouseLeave:function(){return g(!1)},children:[Object(a.jsx)("div",{className:"domainArrowDiv",onClick:function(){return f(!b)},children:n.active?Object(a.jsx)(h.a,{className:"domainLine__arrow"}):Object(a.jsx)(h.a,{className:"domainLine__arrow passive"})}),Object(a.jsx)("div",{className:n.active?"domainName":"domainName passive",onClick:function(e){i(!n.active,t)},children:t}),Object(a.jsx)("div",{className:"lineButtons",children:l&&Object(a.jsx)(j.a,{className:"bin",domainName:t,onClick:function(){return o(t)}})})]}),b&&Object(a.jsx)(v,{domainName:t,domainSettings:n,saveChange:i,deleteFilter:o})]})},O=function(){var e=Object(s.useState)([]),t=Object(m.a)(e,2),n=t[0],i=t[1];return Object(s.useEffect)((function(){new Promise((function(e,t){chrome.storage.sync.get("settings",(function(n){n.settings.domains?e(n.settings.domains):t("error: no storage settings loaded")}))})).then((function(e){i(Object.entries(e))})).catch((function(e){return console.log(e)}))})),Object(a.jsx)("div",{id:"domainList",children:n.map((function(e){return Object(a.jsx)(f,{domainName:e[0],domainSettings:e[1],saveChange:p,deleteFilter:y})}))})};function p(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;chrome.storage.sync.get("settings",(function(s){var i=s.settings;void 0==n||null==n?i.domains[t.toString()].active=e:i.domains[t.toString()].sets[n.toString()].active=e,chrome.storage.sync.set({settings:i},(function(){}))}))}function y(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;chrome.storage.sync.get("settings",(function(n){var s=n.settings;void 0==t||null==t?(console.log("deleting domain: "+e),delete s.domains[e.toString()]):(console.log("deleting set: "+e+"-"+t),delete s.domains[e.toString()].sets[t.toString()]),console.log("new settings:"),console.log(s),chrome.storage.sync.set({settings:s},(function(){}))}))}var x=function(){return Object(a.jsxs)("div",{className:"body",children:[Object(a.jsx)(r,{}),Object(a.jsx)("button",{onClick:function(){S("new"),window.close()},children:"New Eclipser"}),Object(a.jsx)("button",{onClick:function(){S("stop")},children:"Stop"}),Object(a.jsx)("button",{onClick:function(){chrome.runtime.sendMessage("reset")},children:"Reset"}),Object(a.jsx)(O,{}),Object(a.jsx)(u,{})]})};function S(e){chrome.tabs.query({currentWindow:!0,active:!0},(function(t){chrome.tabs.sendMessage(t[0].id,e)}))}var C=function(e){e&&e instanceof Function&&n.e(3).then(n.bind(null,17)).then((function(t){var n=t.getCLS,s=t.getFID,i=t.getFCP,o=t.getLCP,c=t.getTTFB;n(e),s(e),i(e),o(e),c(e)}))};c.a.render(Object(a.jsx)(i.a.StrictMode,{children:Object(a.jsx)(x,{})}),document.getElementById("root")),C()},7:function(e,t,n){}},[[16,1,2]]]);

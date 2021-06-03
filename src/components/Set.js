@@ -19,15 +19,15 @@ const Set = ({ set, saveChange, domainName, setSettings, deleteFilter }) => {
         <>
             <div className="setLine"
                 onMouseOver={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
+                onMouseLeave={() => setHover(false)}                
+            >
 
+                <div className="setName"
                 onClick={(e) => {
                     // saveChange function is in DomainList.js - updates storage settings
                     saveChange(!setSettings.active, domainName, set )}  //event, newValue, domain, set
                 }
-            >
-
-                <div className="setName">
+                >
                     {set.toString()}
                 </div>
 

@@ -32,6 +32,7 @@ const Domain = ({ domainName, domainSettings, saveChange, deleteFilter }) => {
                 <div className="domainArrowDiv"
                     onClick={() => setExpanded(!expanded)}
                 >
+                    {/* do the active/passive text color with CSS on domainDiv ???  */}
                     {domainSettings.active ?
                         <BsCaretRightFill className="domainLine__arrow" />
                         :

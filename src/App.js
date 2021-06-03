@@ -9,17 +9,25 @@ import Pophead from './components/Pophead';
 import Footer from './components/Footer';
 import DomainList from './components/DomainList';
 
-// import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
  
-  // // ??? how to re-render when anything changes in storage settings
-  // const [allSettings, setAllSetting] = useState(1)
-  //   // useEffect hook. runs whenever app is rendered or something changes
+  // // state that holds allSettings
+  // const [allSettings, setAllSetting] = useState()
+    
+
+  // // Add event listener on chrome.storage -> this will run once when the App loads ('mounts') as we don't pass any inputs that trigger it again. []
+  // // Everytime something changes in storage -> update the allSettings state -> Entire app re-renders
   //   useEffect(() => {
-  //     chrome.storage.onChanged.addListener( ()=>{setAllSetting(allSettings+1)} )
-  //   })
+  //     chrome.storage.onChanged.addListener( ()=>{
+  //       getSettings()
+  //         .then( r => setAllSetting(r))
+  //         .catch( e => console.log(e) )
+  //     } )
+  //   },[])
+
 
   return (
     <div className="body" >
@@ -49,4 +57,18 @@ function messageCurrentTab(message){
   });//tabs query
 }
 
+function getSettings() {
+  return new Promise((resolve, reject) => {
 
+      chrome.storage.sync.get('settings', (result) => {
+          console.log('storage settings result: ')
+          console.log(result)
+          
+          if (result.settings){
+              resolve(result.settings)
+          }else{
+              reject('error: no storage settings loaded')
+          }  
+      });       
+  })
+}
