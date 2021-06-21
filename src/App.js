@@ -1,5 +1,3 @@
-// POPUP //
-
 /*global chrome*/    //enables Chrome API 
 // Alternatively /* eslint-disable no-undef */     // https://codepen.io/supernova_at/post/creating-a-browser-extension-with-create-react-app
 
@@ -14,52 +12,103 @@ import { useState, useEffect } from 'react'
 // POPUP WINDOW //////////////////////////////////////
 function App() {
 
-  // // state that holds allSettings
-  // const [allSettings, setAllSetting] = useState()
+  // state that holds allSettings
+  const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
+  const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
+
+  const [test, setTest] = useState(0)
 
 
-  // // Add event listener on chrome.storage -> this will run once when the App loads ('mounts') as we don't pass any inputs that trigger it again. []
-  // // Everytime something changes in storage -> update the allSettings state -> Entire app re-renders
-  //   useEffect(() => {
-  //     chrome.storage.onChanged.addListener( ()=>{
-  //       getSettings()
-  //         .then( r => setAllSetting(r))
-  //         .catch( e => console.log(e) )
-  //     } )
-  //   },[])
+  // load storage setting on App mount. up
+  useEffect(() => {
+    console.log('>> useEffect App')
 
+    // SETTINGS FROM STORAGE
+    getStorageSettings()
+      .then(r => {
+        console.log(r)
+        setLocalSettings(r)
+        console.log(localSettings)
+      })
+      .catch(
+        e => {
+          console.log(e)
+          setLocalSettings({})
+          console.log(localSettings)
+        })
 
-  // CURRENT DOMAIN //////////////////////////////////////////////////////////////////////
-const [currentDomain, setCurrentDomain] = useState('')
+    // // CURRENT DOMAIN    
+    promiseCurrentTabDomain()
+      .then(r => {
+        setCurrentDomain(r)
+      })
+      .catch(e => {
+        setCurrentDomain('')
+      });
 
-useEffect(() => {
-  promiseCurrentTabDomain()
+          // // TEST    
+    getStorageTest()
     .then(r => {
-      setCurrentDomain(r)
+      if(r != NaN){
+        setTest(r)
+      }  else {
+        setTest(0)
+      }
     })
     .catch(e => {
-      setCurrentDomain('')
+      setTest(0)
     });
-}, [])
 
-  
+  }, [])
+
+  // ??? is this like a listener
+  // update storage settings when local settings change
+    useEffect(() => {
+        console.log('local settings changed')
+        setStorageSettings(localSettings)
+    },[localSettings])
+
+
+    useEffect(() => {
+      console.log('test changed')
+      chrome.storage.sync.set({ 'test': test }, () => { });
+  },[test])
+
+
   return (
     <div className="body" >
       <Pophead />
-      
-      <div> {currentDomain} </div>
-      
+
+      {/* display domain of the current active tab */}
+      <div> { currentDomain !='' ? currentDomain : 'No Current Domain' } </div> 
+
       <button onClick={() => {
         messageCurrentTab('new');
         window.close()
       }}>New Eclipser</button>
       <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
       <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset</button>
-      
-      <DomainList currentDomain={currentDomain} />
+
+      {
+        <div>Test: {test}</div>
+      }
+
+      <button onClick={() => {
+        setTest(test+1)
+      }}>test +1</button>
+
+      <DomainList
+        currentDomain={currentDomain}
+        localSettings={localSettings}
+        setLocalSettings={setLocalSettings} 
+        setStorageSettings={setStorageSettings}
+
+        test = {test}
+        setTest = {setTest}
+
+        />
 
       <Footer />
-
     </div>
   );
 }
@@ -73,11 +122,14 @@ function messageCurrentTab(message) {
   });//tabs query
 }
 
-function getSettings() {
+// returns object with all Eclpser settings
+function getStorageSettings() {
+  console.log('>> getStorageSettings()')
+
   return new Promise((resolve, reject) => {
 
     chrome.storage.sync.get('settings', (result) => {
-      console.log('storage settings result: ')
+      console.log('storage settings loaded: ')
       console.log(result)
 
       if (result.settings) {
@@ -87,6 +139,29 @@ function getSettings() {
       }
     });
   })
+}
+
+
+function getStorageTest() {
+  console.log('>> getStorageSettings()')
+
+  return new Promise((resolve, reject) => {
+
+    chrome.storage.sync.get('settings', (result) => {
+      console.log('storage settings loaded: ')
+      console.log(result)
+
+      if (result.settings) {
+        resolve(result.test)
+      } else {
+        reject('error: no storage settings loaded')
+      }
+    });
+  })
+}
+
+function setStorageSettings(newSettings) {
+  chrome.storage.sync.set({ 'settings': newSettings }, () => { });
 }
 
 function promiseCurrentTabDomain() {
@@ -100,5 +175,62 @@ function promiseCurrentTabDomain() {
         }
       });
     });//tabs query
+  });
+}
+
+// return the 'domains' part of the settings object from chrome.storage
+function getDomainsObj() {
+  return new Promise((resolve, reject) => {
+
+      chrome.storage.sync.get('settings', (result) => {
+          console.log('storage settings result: ')
+          console.log(result)
+
+          if (result.settings.domains) {
+              resolve(result.settings.domains)
+          } else {
+              reject('error: no storage settings loaded')
+          }
+      });
+  })
+}
+
+// activate/deactivate domain or set
+function saveChange(newValue, domain, set = null) {   // e is the change event object
+  console.log('>> saveChange()')
+  //- load storage to local settings
+  chrome.storage.sync.get('settings', (from_storage) => {
+      let local_settings = from_storage.settings;
+
+      if (set == undefined || set == null) {
+          //if no 'set' => it is a domain checkbox
+          local_settings.domains[domain.toString()].active = newValue;
+      } else {
+          // it is a set checkbox
+          local_settings.domains[domain.toString()].sets[set.toString()].active = newValue;
+      }
+
+      //- rewrite storage with local
+      chrome.storage.sync.set({ 'settings': local_settings }, () => { });
+  });
+}
+
+// Delete domain or set
+function deleteFilter(domain, set = null) {
+  console.log('>> deleteFilter()')
+  chrome.storage.sync.get('settings', (from_storage) => {
+      let local_settings = from_storage.settings;
+
+      if (set == undefined || set == null) {
+          //if no 'set' => it is a domain checkbox
+          console.log("deleting domain: " + domain)
+          delete local_settings.domains[domain.toString()];
+      } else {
+          // it is a set checkbox
+          console.log("deleting set: " + domain + "-" + set)
+          delete local_settings.domains[domain.toString()].sets[set.toString()];
+      }
+      //- rewrite storage with local
+      chrome.storage.sync.set({ 'settings': local_settings }, () => { });
   });
 }

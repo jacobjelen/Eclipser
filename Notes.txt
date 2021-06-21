@@ -18,6 +18,10 @@ ______________________________________________________________
 
 QUESTIONS ????
 
+!!! Async calls in useEffect DON'T WORK
+https://levelup.gitconnected.com/react-hooks-gotchas-setstate-in-async-effects-d2fd84b02305
+
+
 - React structure - put functions in App.js or DomainList.js??
 
 - useEffect in domainList.js runs all the time!!

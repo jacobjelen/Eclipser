@@ -15,14 +15,21 @@ import {
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ domainName, domainSettings, saveChange, deleteFilter }) => {
+const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, setStorageSettings, test,setTest }) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(false)     // is the domain expanded = setList visible?
 
     return (
+        
+        
+
         <div className="domainDiv">
+                  <button onClick={() => {
+        setTest(test+1)
+      }}>test +1 (domain)</button>
+
             <div className="domainLine"
                 onMouseOver={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
@@ -44,7 +51,16 @@ const Domain = ({ domainName, domainSettings, saveChange, deleteFilter }) => {
                 <div className={domainSettings.active ? "domainName" : "domainName passive"}
 
                     onClick={(e) => {
-                        saveChange(!domainSettings.active, domainName)
+                        // toggle true/false 
+                        let ls = localSettings
+                        ls.domains[domainName].active = !ls.domains[domainName].active
+                        console.log('old:')
+                        console.log(localSettings)
+                        setLocalSettings(ls)
+                        console.log('new:')
+                        console.log(localSettings)
+                        // setStorageSettings(localSettings)  // why is useEffect in App.js not catching this ???
+                        console.log( localSettings.domains[domainName].active )
                     }
                     }>
                     {domainName}
@@ -57,22 +73,29 @@ const Domain = ({ domainName, domainSettings, saveChange, deleteFilter }) => {
                         <AiFillDelete
                             className="bin"
                             domainName={domainName}     // send down to set
-                            onClick={() => deleteFilter(domainName)} />}
-                            
+                            onClick={() => {
+                                let ls = localSettings
+                                console.log('delete clicked. old local settings:')
+                                console.log(ls)
+                                delete ls.domains[domainName]    // localSettings is the same before & after this ??? alredy deleted
+                                setLocalSettings(ls)
+                                // setStorageSettings(localSettings)
+                                console.log('new localSettings')
+                                console.log(localSettings)
+                            }} />}
                 </div>
-
             </div>
 
 
             {/* SET LIST
-              && means: if expanded == true render SetList */}
-            {expanded && 
+              && means if expanded == true render SetList */}
+            {/* {expanded && 
                 <SetList 
                     domainName={domainName} 
                     domainSettings={domainSettings} 
                     saveChange={saveChange} 
                     deleteFilter={deleteFilter}
-                    />}
+                    />} */}
 
         </div>
     )
