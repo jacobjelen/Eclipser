@@ -16,9 +16,6 @@ function App() {
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
 
-  const [test, setTest] = useState(0)
-
-
   // load storage setting on App mount. up
   useEffect(() => {
     console.log('>> useEffect App')
@@ -33,7 +30,6 @@ function App() {
       .catch(
         e => {
           console.log(e)
-          setLocalSettings({})
           console.log(localSettings)
         })
 
@@ -46,19 +42,6 @@ function App() {
         setCurrentDomain('')
       });
 
-          // // TEST    
-    getStorageTest()
-    .then(r => {
-      if(r != NaN){
-        setTest(r)
-      }  else {
-        setTest(0)
-      }
-    })
-    .catch(e => {
-      setTest(0)
-    });
-
   }, [])
 
   // ??? is this like a listener
@@ -67,12 +50,6 @@ function App() {
         console.log('local settings changed')
         setStorageSettings(localSettings)
     },[localSettings])
-
-
-    useEffect(() => {
-      console.log('test changed')
-      chrome.storage.sync.set({ 'test': test }, () => { });
-  },[test])
 
 
   return (
@@ -89,23 +66,10 @@ function App() {
       <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
       <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset</button>
 
-      {
-        <div>Test: {test}</div>
-      }
-
-      <button onClick={() => {
-        setTest(test+1)
-      }}>test +1</button>
-
       <DomainList
         currentDomain={currentDomain}
         localSettings={localSettings}
         setLocalSettings={setLocalSettings} 
-        setStorageSettings={setStorageSettings}
-
-        test = {test}
-        setTest = {setTest}
-
         />
 
       <Footer />
@@ -142,23 +106,7 @@ function getStorageSettings() {
 }
 
 
-function getStorageTest() {
-  console.log('>> getStorageSettings()')
 
-  return new Promise((resolve, reject) => {
-
-    chrome.storage.sync.get('settings', (result) => {
-      console.log('storage settings loaded: ')
-      console.log(result)
-
-      if (result.settings) {
-        resolve(result.test)
-      } else {
-        reject('error: no storage settings loaded')
-      }
-    });
-  })
-}
 
 function setStorageSettings(newSettings) {
   chrome.storage.sync.set({ 'settings': newSettings }, () => { });

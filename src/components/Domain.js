@@ -1,6 +1,7 @@
 import './Eclipser.css';
 import SetList from "./SetList";
 import { useState } from 'react'
+import {merge} from 'lodash' 
 
 //https://react-icons.github.io/react-icons/icons?name=ai   
 // https://tabler-icons.io/  - alternative icons?
@@ -15,20 +16,15 @@ import {
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, setStorageSettings, test,setTest }) => {
+const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings}) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(false)     // is the domain expanded = setList visible?
 
     return (
-        
-        
 
         <div className="domainDiv">
-                  <button onClick={() => {
-        setTest(test+1)
-      }}>test +1 (domain)</button>
 
             <div className="domainLine"
                 onMouseOver={() => setHover(true)}
@@ -52,15 +48,10 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, s
 
                     onClick={(e) => {
                         // toggle true/false 
-                        let ls = localSettings
+                        const ls = merge({}, localSettings)  // deep merge (lodash)
                         ls.domains[domainName].active = !ls.domains[domainName].active
-                        console.log('old:')
-                        console.log(localSettings)
-                        setLocalSettings(ls)
-                        console.log('new:')
-                        console.log(localSettings)
                         // setStorageSettings(localSettings)  // why is useEffect in App.js not catching this ???
-                        console.log( localSettings.domains[domainName].active )
+                        setLocalSettings(ls)
                     }
                     }>
                     {domainName}
@@ -74,14 +65,10 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, s
                             className="bin"
                             domainName={domainName}     // send down to set
                             onClick={() => {
-                                let ls = localSettings
-                                console.log('delete clicked. old local settings:')
+                                const ls = merge({}, localSettings)  // deep merge (lodash)
                                 console.log(ls)
                                 delete ls.domains[domainName]    // localSettings is the same before & after this ??? alredy deleted
                                 setLocalSettings(ls)
-                                // setStorageSettings(localSettings)
-                                console.log('new localSettings')
-                                console.log(localSettings)
                             }} />}
                 </div>
             </div>
@@ -89,13 +76,13 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, s
 
             {/* SET LIST
               && means if expanded == true render SetList */}
-            {/* {expanded && 
+            {expanded && 
                 <SetList 
                     domainName={domainName} 
                     domainSettings={domainSettings} 
-                    saveChange={saveChange} 
-                    deleteFilter={deleteFilter}
-                    />} */}
+                    localSettings={localSettings}
+                    setLocalSettings={setLocalSettings}
+                    />}
 
         </div>
     )

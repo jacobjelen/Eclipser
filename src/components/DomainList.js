@@ -1,26 +1,8 @@
 /*global chrome*/    //enables Chrome API 
 import Domain from './Domain';
 
-const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorageSettings, test, setTest }) => {
+const DomainList = ({ currentDomain, localSettings, setLocalSettings }) => {
     console.log(">> DomainList")
-
-    // function reorderDomainList(currentDomain, domainListFromStorage) {
-
-    //     // if no current domain or only 1 stored domain in the list, return unchanged domain list
-    //     if (currentDomain.length <= 0 || domainListFromStorage.length <= 1){ 
-    //         console.log('reorderDomainList returned early - no change')
-    //         return domainListFromStorage 
-    //     }  
-
-    //     // else... 
-    //     const newList = domainListFromStorage.filter( item => { return item[0] == currentDomain })
-    //         .concat( domainListFromStorage.filter(item => item[0] != currentDomain) )
-
-    //     console.log(newList)
-    //     return newList
-    // }
-
-    // const reorderedDomainList = reorderDomainList(currentDomain, localSettings.domains)
 
     return (
         <>
@@ -34,10 +16,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
                             domainSettings={item[1]}
                             localSettings={localSettings}           // ??? contans domainSettings too
                             setLocalSettings={setLocalSettings}
-                            setStorageSettings={setStorageSettings}
 
-                            test={test}
-                            setTest={setTest}
                         />
                     ))
             }
@@ -52,19 +31,14 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
                             domainSettings={item[1]}
                             localSettings={localSettings}
                             setLocalSettings={setLocalSettings}
-                            setStorageSettings={setStorageSettings}
 
-                            test={test}
-                            setTest={setTest}
                         />
                     ))
                 :
                 <div>No Domains Saved</div>
             }
 
-            <button onClick={() => {
-                setTest(test + 1)
-            }}>test +1 (domainList)</button>
+            
         </>
     )
 }

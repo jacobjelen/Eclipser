@@ -1,6 +1,6 @@
 import Set from "./Set"
 
-const SetList = ({domainSettings, domainName, saveChange, deleteFilter}) => {
+const SetList = ({domainSettings, domainName, localSettings, setLocalSettings}) => {
     let setsArray = Object.keys(domainSettings.sets)
     
     return (
@@ -11,8 +11,8 @@ const SetList = ({domainSettings, domainName, saveChange, deleteFilter}) => {
                     <Set set={set} 
                         setSettings={domainSettings.sets[set.toString()]} 
                         domainName={domainName}
-                        saveChange={saveChange}
-                        deleteFilter={deleteFilter}
+                        localSettings={localSettings}
+                        setLocalSettings={setLocalSettings}
                         />
                 )           
             )}

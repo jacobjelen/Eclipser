@@ -32,7 +32,7 @@ ______________________________________________________________
 
 TO DO: 
 - understand async/await better
-
+- re-run the content script when a filter is deleted
 - align bins
 - hover on domains/SetList
 - expand arrow pointing down when expanded
