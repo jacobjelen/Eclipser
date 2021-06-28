@@ -1,6 +1,6 @@
 import './Eclipser.css';
 import SetList from "./SetList";
-import Confirm from "./Confirm";
+import Delete from "./Delete";
 import { useState } from 'react'
 import { merge } from 'lodash'
 
@@ -19,14 +19,12 @@ import {
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setLocalSettings, messageCurrentTab  }) => {
+const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setLocalSettings, messageCurrentTab }) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(false)     // is the domain expanded = setList visible?
-    const [confirmVisible, setConfirmVisible] = useState(false)
-    const [newLocalSettings, setNewLocalSettings] = useState({})
-
+    
     return (
 
         <div className="domainDiv">
@@ -65,22 +63,12 @@ const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setL
                 {/* DELETE BUTTON */}
                 <div className="lineButtons" >
                     {hover &&
-                        <AiFillDelete
-                            className="bin"
-                            domainName={domainName}     // send down to set
-                            onClick={() => {
-                                setConfirmVisible(true)
-                                const newLocalSettings = merge({}, localSettings)  // deep merge (lodash)
-                                delete newLocalSettings.domains[domainName]    // localSettings is the same before & after this ??? alredy deleted
-                                setNewLocalSettings(newLocalSettings)
-                            }} />}
-
-
-                    {confirmVisible &&
-                        <Confirm
-                            newLocalSettings={newLocalSettings}
-                            setLocalSettings={setLocalSettings}
-                            setConfirmVisible={setConfirmVisible}
+                        <Delete
+                            action={() => {
+                                const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
+                                delete tempLocalSettings.domains[domainName] 
+                                setLocalSettings(tempLocalSettings)   
+                            }}
                         />
                     }
 
@@ -97,7 +85,7 @@ const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setL
                     domainSettings={domainSettings}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
-                    messageCurrentTab={messageCurrentTab} 
+                    messageCurrentTab={messageCurrentTab}
                 />}
 
         </div>

@@ -1,4 +1,5 @@
 import { merge } from 'lodash'
+import Delete from "./Delete";
 
 //ICONS
 import {
@@ -39,14 +40,14 @@ const Set = ({ set, saveChange, domainName, localSettings, setLocalSettings }) =
 
                 <div class="lineButtons">
                     {hover &&
-                        <AiFillDelete className="bin"
-                            onClick={() => {
-                                console.log('set bin clicked!')
-                                const ls = merge({}, localSettings)
-                                delete ls.domains[domainName].sets[set]
-                                setLocalSettings(ls)
-                            }}
-                        />}
+                        <Delete
+                        action={() => {
+                            const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
+                            delete tempLocalSettings.domains[domainName].sets[set]
+                            setLocalSettings(tempLocalSettings)   
+                        }}
+                    />
+                       }
                 </div>
 
             </div>
