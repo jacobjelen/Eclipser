@@ -51,7 +51,6 @@ function App() {
         setStorageSettings(localSettings)
     },[localSettings])
 
-
   return (
     <div className="body" >
       <Pophead />
@@ -64,12 +63,13 @@ function App() {
         window.close()
       }}>New Eclipser</button>
       <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
-      <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset</button>
+      <button onClick={() => { chrome.runtime.sendMessage('reset')}}>Reset</button>
 
       <DomainList
         currentDomain={currentDomain}
         localSettings={localSettings}
-        setLocalSettings={setLocalSettings} 
+        setLocalSettings={setLocalSettings}
+        messageCurrentTab={messageCurrentTab} 
         />
 
       <Footer />

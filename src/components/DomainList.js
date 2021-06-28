@@ -1,7 +1,7 @@
 /*global chrome*/    //enables Chrome API 
 import Domain from './Domain';
 
-const DomainList = ({ currentDomain, localSettings, setLocalSettings }) => {
+const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCurrentTab  }) => {
     console.log(">> DomainList")
 
     return (
@@ -16,6 +16,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings }) => {
                             domainSettings={item[1]}
                             localSettings={localSettings}           // ??? contans domainSettings too
                             setLocalSettings={setLocalSettings}
+                            messageCurrentTab={messageCurrentTab} 
 
                         />
                     ))
@@ -31,6 +32,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings }) => {
                             domainSettings={item[1]}
                             localSettings={localSettings}
                             setLocalSettings={setLocalSettings}
+                            messageCurrentTab={messageCurrentTab} 
 
                         />
                     ))

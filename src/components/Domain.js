@@ -1,13 +1,16 @@
 import './Eclipser.css';
 import SetList from "./SetList";
+import Confirm from "./Confirm";
 import { useState } from 'react'
-import {merge} from 'lodash' 
+import { merge } from 'lodash'
 
 //https://react-icons.github.io/react-icons/icons?name=ai   
 // https://tabler-icons.io/  - alternative icons?
 
 import {
     AiFillDelete,
+    AiFillCheckCircle,
+    AiFillCloseCircle,
     AiOutlineMenu,                 // menu
     AiOutlineSetting,                // settings
     AiOutlineCloseCircle,        //delete
@@ -16,11 +19,13 @@ import {
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings}) => {
+const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setLocalSettings, messageCurrentTab  }) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(false)     // is the domain expanded = setList visible?
+    const [confirmVisible, setConfirmVisible] = useState(false)
+    const [newLocalSettings, setNewLocalSettings] = useState({})
 
     return (
 
@@ -48,9 +53,8 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings}) 
 
                     onClick={(e) => {
                         // toggle true/false 
-                        const ls = merge({}, localSettings)  // deep merge (lodash)
+                        const ls = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
                         ls.domains[domainName].active = !ls.domains[domainName].active
-                        // setStorageSettings(localSettings)  // why is useEffect in App.js not catching this ???
                         setLocalSettings(ls)
                     }
                     }>
@@ -65,24 +69,36 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings}) 
                             className="bin"
                             domainName={domainName}     // send down to set
                             onClick={() => {
-                                const ls = merge({}, localSettings)  // deep merge (lodash)
-                                console.log(ls)
-                                delete ls.domains[domainName]    // localSettings is the same before & after this ??? alredy deleted
-                                setLocalSettings(ls)
+                                setConfirmVisible(true)
+                                const newLocalSettings = merge({}, localSettings)  // deep merge (lodash)
+                                delete newLocalSettings.domains[domainName]    // localSettings is the same before & after this ??? alredy deleted
+                                setNewLocalSettings(newLocalSettings)
                             }} />}
+
+
+                    {confirmVisible &&
+                        <Confirm
+                            newLocalSettings={newLocalSettings}
+                            setLocalSettings={setLocalSettings}
+                            setConfirmVisible={setConfirmVisible}
+                        />
+                    }
+
+
                 </div>
             </div>
 
 
             {/* SET LIST
               && means if expanded == true render SetList */}
-            {expanded && 
-                <SetList 
-                    domainName={domainName} 
-                    domainSettings={domainSettings} 
+            {expanded &&
+                <SetList
+                    domainName={domainName}
+                    domainSettings={domainSettings}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
-                    />}
+                    messageCurrentTab={messageCurrentTab} 
+                />}
 
         </div>
     )
