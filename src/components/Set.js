@@ -1,5 +1,6 @@
 import { merge } from 'lodash'
-import Delete from "./Delete";
+import Delete from "./Delete"
+import EditableTitle from "./EditableTitle"
 
 //ICONS
 import {
@@ -18,7 +19,7 @@ import { useState } from 'react'
 
 
 
-const Set = ({ set, saveChange, domainName, localSettings, setLocalSettings }) => {
+const Set = ({ set, domainName, localSettings, setLocalSettings }) => {
     const [hover, setHover] = useState(false)       // check if mouse is over the setLine => style and display buttons accordingly
 
     return (
@@ -28,15 +29,12 @@ const Set = ({ set, saveChange, domainName, localSettings, setLocalSettings }) =
                 onMouseLeave={() => setHover(false)}
             >
 
-                <div className="setName"
-                    onClick={(e) => {
-                        const ls = merge({}, localSettings)
-                        ls.domains[domainName].sets[set].active = !ls.domains[domainName].sets[set].active
-                        setLocalSettings(ls)
-                    }}
-                >
-                    {set.toString()}
-                </div>
+                <EditableTitle 
+                    localSettings={localSettings}
+                    setLocalSettings={setLocalSettings}
+                    domainName={domainName}
+                    set={set}
+                />
 
                 <div class="lineButtons">
                     {hover &&

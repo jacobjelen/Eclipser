@@ -101,7 +101,10 @@
 }
 
 
-.domainList{
+.setRename{
+  border: 0px;
+  font-family: inherit;
+
 }
 
 .domainDiv{

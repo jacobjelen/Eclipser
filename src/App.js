@@ -48,7 +48,9 @@ function App() {
   // update storage settings when local settings change
     useEffect(() => {
         console.log('local settings changed')
+        console.log(localSettings)
         setStorageSettings(localSettings)
+        
     },[localSettings])
 
   return (

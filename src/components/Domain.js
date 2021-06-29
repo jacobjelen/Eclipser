@@ -39,10 +39,11 @@ const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setL
                     onClick={() => setExpanded(!expanded)}
                 >
                     {/* do the active/passive text color with CSS on domainDiv ???  */}
-                    {domainSettings.active ?
-                        <BsCaretRightFill className="domainLine__arrow" />
-                        :
-                        <BsCaretRightFill className="domainLine__arrow passive" />}
+                    
+                        <BsCaretRightFill  
+                            className={domainSettings.active ? "domainLine__arrow" : "domainLine__arrow passive"} 
+                        />
+                        
 
                 </div>
 

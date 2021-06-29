@@ -41,10 +41,12 @@ TO DO:
     - line through
     - checkbox? slider / dot 
 
-- rename set on double click
++ rename set on double click
+    - automatically highlighted text at first can't be edited??
+    - save on click outside 
 
 + delete set/domain onClick bin
-    - confirmation 'Delete filter? Yes / No'?
+    + confirmation 'Delete filter? Yes / No'?
 
 - current domain highlighted & expanded
     + app level state holding the active/current domain
