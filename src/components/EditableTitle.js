@@ -8,17 +8,26 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
     const [title, setTitle] = useState(localSettings.domains[domainName].sets[set].title)  // filter(set) title
     const inputRef = useRef()    // close text input if we click anywhere outside of it
 
+    
+
     // close text input if we click anywhere outside of it
     // src: https://www.youtube.com/watch?v=eWO1b6EoCnQ
     useEffect(() => {
 
         // function to run when we click outside
         const outsideClickHandler = (event) => {
-            if (!inputRef.current.contains(event.target)) {    // if the 
-                setInputVisible(false)
-                console.log(inputRef)
+            console.log('event.target ',event.target)
+            if (inputRef.current!=undefined && !inputRef.current.contains(event.target)) {    // if the 
+                setInputVisible(false)      //hide input field
+                
+                // save new title to localStorage
+                const tempLocalSettings = merge({}, localSettings)                  // clone localSettings (deep-merge empty object and localSettings => new editable object)
+                tempLocalSettings.domains[domainName].sets[set].title = title       // edit new object
+                setLocalSettings(tempLocalSettings)                                 // update local settings
             }
         }
+
+        
 
         document.addEventListener("mousedown", outsideClickHandler)
 
@@ -36,7 +45,8 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                 setLocalSettings(ls)
             }}
 
-            onDoubleClick={() => {
+            onDoubleClick={(event) => {
+                event.target.value = ''
                 setInputVisible(true)
             }}
         >
@@ -46,32 +56,35 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                 :
                 <input
                     ref={inputRef}
+                    // data-id={domainName+'-'+set}
                     className="setRename"
                     type="text"
                     value={title}
 
                     onChange={(event) => {
-                        console.log('change')
+                        console.log('title: ', title)
                         setTitle(event.target.value)
                     }}
 
                     onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
+                        if (event.key === 'Enter') {    // save new title on Enter
                             // update localSettings
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                             tempLocalSettings.domains[domainName].sets[set].title = event.target.value
-                            console.log(tempLocalSettings)
-                            console.log(event.target.value)
                             setLocalSettings(tempLocalSettings)
 
                             setInputVisible(false)
-                            event.preventDefault()
+                            event.preventDefault()      //stop the key press from causing anything else
                             event.stopPropagation()
                         }
-                        else if (event.key === 'Escape') {
+                        else if (event.key === 'Escape') {  // discard on Esc
                             setInputVisible(false)
+                            setTitle(localSettings.domains[domainName].sets[set].title)                 // put b
                             event.preventDefault()
                             event.stopPropagation()
+                        } else {
+                            // console.log(event.key)
+                            // setTitle(event.target.value)  //preventing
                         }
                     }}
                 />

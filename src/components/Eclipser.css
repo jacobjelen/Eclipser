@@ -100,11 +100,11 @@
   background-color: var(--green);
 }
 
-
 .setRename{
-  border: 0px;
+  border: none;
+  outline: none;
   font-family: inherit;
-
+  padding: 0px
 }
 
 .domainDiv{

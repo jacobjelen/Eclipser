@@ -51,7 +51,7 @@ const default_settings = {
                     selectors:['#guide'],
                 },
                 info:{
-                    title:'Comments',
+                    title:'Video Info',
                     active:true,
                     selectors:['#info','#ticket-shelf','#merch-shelf'],
                 },
