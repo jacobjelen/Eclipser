@@ -9,7 +9,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCur
             {/* CURRENT DOMAIN  */}
             {   localSettings.domains && currentDomain &&       // the first && means 'and', the second means 'then' ???
                 Object.entries(localSettings.domains)          //Object.entries returns [ ['key1', {value1}],['key2', {value2}] ]
-                    .filter(item => item[0] == currentDomain)  // item[0] is the key, key is a domain. if it matches CurrentDomain, render..  
+                    .filter(item => item[0] === currentDomain)  // item[0] is the key, key is a domain. if it matches CurrentDomain, render..  
                     .map((item) => (
                         <Domain
                             domainName={item[0]}
@@ -25,7 +25,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCur
             {/*  ALL (OTHER) DOMAINS */}
             {localSettings.domains ?
                 Object.entries(localSettings.domains)            //Object.entries returns [ ['key1', {value1}],['key2', {value2}] ]
-                    .filter(item => item[0] != currentDomain)
+                    .filter(item => item[0] !== currentDomain)
                     .map((item) => (
                         <Domain
                             domainName={item[0]}

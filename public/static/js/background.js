@@ -1,19 +1,22 @@
-/* Listen to changes in settings and transmit to all open tabs for live update */
+// Runs in the browser background.
+
+/* Listen to changes in storage settings and transmit to all open tabs for live update */
 chrome.storage.onChanged.addListener((changes, namespace) => {
   console.log('changes:'+changes)
   console.log('namespace:'+namespace)
-  chrome.tabs.query({}, (tabs) => {
+  
+  chrome.tabs.query({}, (tabs) => { 
     tabs.forEach((tab) => {
       chrome.tabs.sendMessage(tab.id, 'refresh');
     });
   });
-  checkStorage()
+  checkStorage()    // loads settings from storage or uses defaults
 });
 
 // message listener
 chrome.runtime.onMessage.addListener(function (message) {
 
-  if (message == 'reset') {               //'reset' button in the popup is clicked
+  if (message === 'reset') {               //'reset' button in the popup is clicked
     removeSettings();
     checkStorage();
     // window.location.reload();
@@ -37,7 +40,7 @@ function checkStorage(){  //checks if settings are in storage
   let name = 'settings';
   chrome.storage.sync.get(name,function (result) {
    
-    if(result == undefined || Object.keys(result).length == 0){   //if no settings are stored
+    if(result === undefined || Object.keys(result).length === 0){   //if no settings are stored
       chrome.storage.sync.set({[name]:default_settings});         //save defaults to storage
       console.log('settings in storage set to default by background.js')
       console.log(result)
@@ -53,7 +56,7 @@ function setIcon(){
   chrome.storage.sync.get('settings', function (result) {
     console.log('setIcon:');
     console.log(result.settings.general.all_active)
-    if(result.settings.general.all_active == false){
+    if(result.settings.general.all_active === false){
       chrome.browserAction.setIcon({path : "imgs/128-paused.png"});
     }else{
       chrome.browserAction.setIcon({path : "imgs/128.png"});
@@ -64,14 +67,13 @@ function setIcon(){
 chrome.runtime.onInstalled.addListener(() => {
   // removeSettings();    // un-comment to restore defaults on extension reload
   checkStorage();
-  // setIcon();
+  setIcon();
 });
 
 // make sure settings are loaded or use defaults when browser opens
 chrome.runtime.onStartup.addListener(() => {
-  
-  // checkStorage(); 
-  // setIcon();
+  checkStorage(); 
+  setIcon();
 });
 
 

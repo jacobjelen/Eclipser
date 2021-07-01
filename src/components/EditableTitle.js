@@ -17,7 +17,7 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
         // function to run when we click outside
         const outsideClickHandler = (event) => {
             console.log('event.target ',event.target)
-            if (inputRef.current!=undefined && !inputRef.current.contains(event.target)) {    // if the 
+            if (inputRef.current!==undefined && !inputRef.current.contains(event.target)) {    // if clicked element is not the input field
                 setInputVisible(false)      //hide input field
                 
                 // save new title to localStorage
@@ -39,14 +39,18 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
 
     return (
         <div className="setName"
+            
+            // activate/deactive filter on click
             onClick={(event) => {
+                if(inputVisible) return  // prevents the filter/set going on/off with each click when the user is renaming it
+
                 const ls = merge({}, localSettings)
                 ls.domains[domainName].sets[set].active = !ls.domains[domainName].sets[set].active
                 setLocalSettings(ls)
             }}
 
             onDoubleClick={(event) => {
-                event.target.value = ''
+                console.log(event)
                 setInputVisible(true)
             }}
         >
@@ -82,10 +86,7 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                             setTitle(localSettings.domains[domainName].sets[set].title)                 // put b
                             event.preventDefault()
                             event.stopPropagation()
-                        } else {
-                            // console.log(event.key)
-                            // setTitle(event.target.value)  //preventing
-                        }
+                        } 
                     }}
                 />
             }

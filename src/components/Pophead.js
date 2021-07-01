@@ -7,7 +7,7 @@ const Pophead = () => {
 	return (
         <div id="pophead" onMouseOver={mouseOver} onMouseLeave={setPophead} onClick={popheadClick}>
             <div id="logoDiv">
-                <img src="imgs/Eclipser_logo.png" id="logo" class="shadow" />
+                <img src="imgs/Eclipser_logo.png" id="logo" class="shadow" alt="Eclipser Logo"/>
             </div>
             <div id="tagline" class="shadow"> FOCUS IS A SUPERPOWER! </div>
         </div>

@@ -2,18 +2,6 @@ import { merge } from 'lodash'
 import Delete from "./Delete"
 import EditableTitle from "./EditableTitle"
 
-//ICONS
-import {
-    AiFillDelete,
-    AiOutlineMenu,                 // menu
-    AiOutlineSetting,                // settings
-    AiOutlineCloseCircle,        //delete
-
-    AiOutlineClockCircle,       // clock
-} from "react-icons/ai";
-
-import { BsCaretRightFill } from "react-icons/bs";
-
 // HOOKS
 import { useState } from 'react'
 

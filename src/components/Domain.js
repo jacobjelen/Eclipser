@@ -4,19 +4,6 @@ import Delete from "./Delete";
 import { useState } from 'react'
 import { merge } from 'lodash'
 
-//https://react-icons.github.io/react-icons/icons?name=ai   
-// https://tabler-icons.io/  - alternative icons?
-
-import {
-    AiFillDelete,
-    AiFillCheckCircle,
-    AiFillCloseCircle,
-    AiOutlineMenu,                 // menu
-    AiOutlineSetting,                // settings
-    AiOutlineCloseCircle,        //delete
-    AiOutlineClockCircle,       // clock
-} from "react-icons/ai";
-
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
 const Domain = ({ domainName, domainSettings, currentDomain, localSettings, setLocalSettings, messageCurrentTab }) => {

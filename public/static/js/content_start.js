@@ -1,4 +1,6 @@
-let box, sel_span, el;
+// Runs on each tab/website opened
+
+let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('content_START');
@@ -8,18 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
 //// LISTEN FOR COMMAND MESSAGES ////////////////////////////////////////////////
 chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
   // when a setting changes, we receive a message from background.js
-  if (message == 'refresh') {
+  if (message === 'refresh') {
     set_elements_visibility();
     console.log('refreshing')
   }
 
   //'new' button in the popup is clicked
-  if (message == 'new') select_elements();
+  if (message === 'new') select_elements();
 
   //'stop' button in the popup is clicked
-  if (message == 'stop') stop_selecting();
+  if (message === 'stop') stop_selecting();
 
-  if (message == 'domain') {
+  if (message === 'domain') {
       sendResponse(noWWW(window.location.hostname));
   }
 });
@@ -103,7 +105,7 @@ function select_elements() {
   setNo.then(lastNo => {
     // let nextNo = lastNo + 1;       // r (resolved) = last set number, next needs to be +1
     setKey = 'set' + (lastNo + 1);
-    setName = 'Set ' + (lastNo + 1);
+    setName = 'Filter ' + (lastNo + 1);
     console.log('New Set No: ' + (lastNo + 1));
   })
     .catch(e => {
@@ -128,7 +130,7 @@ function select_elements() {
 
       if (el === last_el) return;                 // do nothing if it's the same element as before
 
-      if (el.id == 'eclipserBox' || el.id == 'sel_span') {      // if the overlay box gets selected as el, hide it and get the el below
+      if (el.id === 'eclipserBox' || el.id === 'sel_span') {      // if the overlay box gets selected as el, hide it and get the el below
         box.hide();
         el = document.elementFromPoint(pointer.clientX, pointer.clientY);
       };
@@ -170,7 +172,7 @@ function select_elements() {
   // stop selecting on ESC
   $('body').on('keydown.eclipser', (e) => {
     let k = e.keyCode || e.which;
-    if (k == 27) {   // ESC pressed
+    if (k === 27) {   // ESC pressed
       stop_selecting()
     }
   })
@@ -191,7 +193,7 @@ window.onload = function () {
   let bodyList = document.querySelector("body"),
     observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
-        if (oldHref != document.location.href) {
+        if (oldHref !== document.location.href) {
           oldHref = document.location.href;
           console.log("url change");
           set_elements_visibility();
@@ -227,7 +229,7 @@ function make_box() {
     .appendTo(box);
 }
 
-// Get selector
+// Get selector for element el
 function getSelector(el) { // from nukem
   let stack = []; // to hold each element in the path
 
@@ -236,7 +238,7 @@ function getSelector(el) { // from nukem
     let sibIndex = 0;
     for (let i = 0; i < el.parentNode.childNodes.length; i++) {
       let sib = el.parentNode.childNodes[i];
-      if (sib.nodeName == el.nodeName) {
+      if (sib.nodeName === el.nodeName) {
         if (sib === el) {
           sibIndex = sibCount;
         }
@@ -264,6 +266,7 @@ function getSelector(el) { // from nukem
   return sel   // return selector
 }
 
+// Save selector to storage under relevant domain and set
 function saveSelector(selector, domain, setKey, setName, callback) {
   console.log('setKey: ' + setKey);
   console.log('setName: ' + setName);

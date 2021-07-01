@@ -1,3 +1,5 @@
+// Default settings
+
 const default_settings = {
     general:{ 
         active: true,
