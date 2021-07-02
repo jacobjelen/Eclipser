@@ -6,8 +6,12 @@ import './fonts/DINPro.css';
 import Pophead from './components/Pophead';
 import Footer from './components/Footer';
 import DomainList from './components/DomainList';
+import Menu from './components/Menu';
+import Settings from './components/Settings';
 
 import { useState, useEffect } from 'react'
+
+
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
@@ -15,6 +19,7 @@ function App() {
   // state that holds allSettings
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
+  const [settingsVisible, setSettingsVisible] = useState(false)
 
   // load storage setting on App mount. up
   useEffect(() => {
@@ -44,34 +49,38 @@ function App() {
 
   }, [])  // if [] is empty, useEffect only runs once on component mount
 
- 
+
   // update storage settings when localSettings change
-    useEffect(() => {
-        console.log('local settings changed')
-        console.log(localSettings)
-        setStorageSettings(localSettings)
-    },[localSettings])  // runs every time localSettings change
+  useEffect(() => {
+    console.log('local settings changed')
+    console.log(localSettings)
+    setStorageSettings(localSettings)
+  }, [localSettings])  // runs every time localSettings change
 
   return (
     <div className="body" >
       <Pophead />
 
-      {/* display domain of the current active tab */}
-      <div> { currentDomain !=='' ? currentDomain : 'No Current Domain' } </div> 
+      <Menu
+        settingsVisible={settingsVisible}
+        setSettingsVisible={setSettingsVisible}
+        messageCurrentTab={messageCurrentTab}
+      />
 
-      <button onClick={() => {
-        messageCurrentTab('new');
-        window.close()
-      }}>New Eclipser</button>
-      <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
-      <button onClick={() => { chrome.runtime.sendMessage('reset')}}>Reset</button>
+      {settingsVisible &&
+        <Settings
+          messageCurrentTab={messageCurrentTab}
+        />}
+
+      {/* display domain of the current active tab */}
+      <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div>
 
       <DomainList
         currentDomain={currentDomain}
         localSettings={localSettings}
-        setLocalSettings={setLocalSettings}    
-        messageCurrentTab={messageCurrentTab} 
-        />
+        setLocalSettings={setLocalSettings}
+        messageCurrentTab={messageCurrentTab}
+      />
 
       <Footer />
     </div>

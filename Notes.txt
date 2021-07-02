@@ -33,27 +33,29 @@ ______________________________________________________________
 TO DO: 
 - understand async/await better
 - re-run the content script when a filter is deleted
-- align bins
-- hover on domains/SetList
-- expand arrow pointing down when expanded
-+ activate/deactivate onClick
-- active/paused filters formating
-    - line through
-    - checkbox? slider / dot 
+
+- format buttons
 
 + rename set on double click
-    - automatically highlighted text at first can't be edited??
-    - save on click outside 
+    + save on click outside 
 
 + delete set/domain onClick bin
     + confirmation 'Delete filter? Yes / No'?
 
-- current domain highlighted & expanded
++ current domain highlighted & expanded
     + app level state holding the active/current domain
 
 - 2s top bar appearing on all filtered pages
 
+CSS
 - format overlay box
+- align bins
+- bin - delete confirmation
+- hover on domains/SetList
+- expand arrow pointing down when expanded
+- active/paused filters formating
+    - line through
+    - checkbox? slider / dot 
 
 - add default sets for Twitter, Netflix, Amazon...
 
