@@ -3,7 +3,7 @@ import {
     MdSettings,            // settings
 } from "react-icons/md";
 
-const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
+const Menu = ({ localSettings, setLocalSettings, messageCurrentTab, settingsVisible, setSettingsVisible }) => {
     return (
         <div>
             <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>

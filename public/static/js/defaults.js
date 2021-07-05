@@ -3,6 +3,8 @@
 const default_settings = {
     general:{ 
         active: true,
+        activeFrom: '',
+        activeTo: '',
         show_bar: true,
     },
 

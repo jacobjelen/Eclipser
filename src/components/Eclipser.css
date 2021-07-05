@@ -1,27 +1,3 @@
-/* HTML STRUCTURE 
-.body
-  #pophead
-    #logo
-    #tagline
-  
-  .domainList
-      domainDiv (facebook.com)
-          domainLine
-              domainName
-              buttons
-                  toggle
-                  delete
-                  expand/close
-          setList
-              SetLine
-                  setName
-                  buttons
-                      toggle
-                      delete 
-
-  footer
-*/
-
 /* GENERAL */
     :root{
       --green: rgb(19, 235, 163);
@@ -253,7 +229,21 @@ text-decoration: line-through;
   color: var(--grey);
 }
 
+#settingsMenu{
+  padding: 0px 7px
+}
 
+input[type="time"][class="timeInput"]{
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 10pt;
+  padding: 0px
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+}
 
 /* Slider Inputs */
 /* SRC: https://www.youtube.com/watch?v=BQSNBa3gZJU */

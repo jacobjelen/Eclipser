@@ -62,6 +62,8 @@ function App() {
       <Pophead />
 
       <Menu
+        localSettings={localSettings}
+        setLocalSettings={setLocalSettings}
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
