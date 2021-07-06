@@ -31,16 +31,15 @@ https://levelup.gitconnected.com/react-hooks-gotchas-setstate-in-async-effects-d
 ______________________________________________________________
 
 TO DO: 
-- No default_settings loaded after reinstall (background.js)
++ No default_settings loaded after reinstall (background.js)
 - re-run the content script when a filter is deleted
 
 - 2s top bar appearing on all filtered pages
-
 - add default sets for Twitter, Netflix, Amazon...
 
 Settings:
-- show 2s reminder on filtered pages
 - eclipser active time ?
+- show 2s reminder on filtered pages
 - reset all settings and domain
 
 - block this domain ?

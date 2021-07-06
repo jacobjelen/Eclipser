@@ -1,3 +1,6 @@
+/*global chrome*/               //enables Chrome API 
+/*global default_settings*/    //linked in manifest.json
+
 // Runs in the browser background.
 
 /* Listen to changes in storage settings and transmit to all open tabs for live update */
@@ -47,11 +50,10 @@ function checkStorage(callback) {  //checks if settings are in storage
       console.log('settings in storage set to default by background.js')
       console.log(result)
     }
-    if (callback) callback()  //only run callback function when available
+    if (callback) callback()  //avoid error when no callback is passed in
   });
   console.log('storage checked')
 }
-
 
 
 function setIcon() {

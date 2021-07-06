@@ -61,9 +61,13 @@ function App() {
     <div className="body" >
       <Pophead />
 
+      <button
+      onClick={() => {
+        console.log(localSettings)
+      }}
+      >Log settings</button>
+
       <Menu
-        localSettings={localSettings}
-        setLocalSettings={setLocalSettings}
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
@@ -71,6 +75,8 @@ function App() {
 
       {settingsVisible &&
         <Settings
+          localSettings={localSettings}
+          setLocalSettings={setLocalSettings}
           messageCurrentTab={messageCurrentTab}
         />}
 

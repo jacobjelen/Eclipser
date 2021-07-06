@@ -3,8 +3,8 @@
 const default_settings = {
     general:{ 
         active: true,
-        activeFrom: '',
-        activeTo: '',
+        activeFrom: '08:00',
+        activeTo: '17;30',
         show_bar: true,
     },
 
