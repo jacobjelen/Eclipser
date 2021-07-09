@@ -3,11 +3,15 @@
 
 // Runs in the browser background.
 
-/* Listen to changes in storage settings and transmit to all open tabs for live update */
+/* Listen to changes in storage settings */
 chrome.storage.onChanged.addListener((changes, namespace) => {
   console.log('changes:' + changes)
   console.log('namespace:' + namespace)
 
+  // activeTimeCheck
+  periodicTimeCheck()
+
+  // refresh all tabs
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       chrome.tabs.sendMessage(tab.id, 'refresh');
@@ -80,4 +84,53 @@ chrome.runtime.onStartup.addListener(() => {
   checkStorage(setIcon);      // setIcon is a callback
 });
 
+// check the time to see if Eclipser should be active
+// SRC: https://stackoverflow.com/questions/20186771/how-to-periodically-check-whether-a-tab-is-created-or-not-just-when-the-chrome
 
+function periodicTimeCheck() {
+  chrome.storage.sync.get('settings', function (result) {
+
+    if(!result.general.activeTimeCheck) return
+
+      // create new alarm/interval
+      const checkInterval = 1;
+      chrome.alarms.create("checkTime", {
+        delayInMinutes: checkInterval,
+        periodInMinutes: checkInterval
+      });
+
+      // listen for alarm
+      chrome.alarms.onAlarm.addListener(function (alarm) {
+        if (alarm.name === "checkTime") {
+
+          if (isNowActiveTime(result.general.activeTimeFrom, result.general.activeTimeTo)) {
+            console.log('active')
+          }
+        }
+      })
+    
+  })
+}
+
+// function to check if we're within the set time period
+function isNowActiveTime(timeFrom, timeTo){
+  const now = new Date();
+  const timeNow = now.getHours() + ":" + now.getMinutes()
+
+  if (timeFrom <= timeTo) {
+    //DAY
+    if (timeFrom <= timeNow && timeNow <= timeTo) {
+      return true
+    } else {
+      return false
+    }
+
+  } else {
+    //NIGHT
+    if (timeFrom <= timeNow && timeNow >= timeTo) {
+      return true
+    } else {
+      return false
+    }
+  }
+}

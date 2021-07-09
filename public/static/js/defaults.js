@@ -3,9 +3,10 @@
 const default_settings = {
     general:{ 
         active: true,
-        activeFrom: '08:00',
-        activeTo: '17;30',
-        show_bar: true,
+        activeTimeCheck: false,
+        activeTimeFrom: '08:00',
+        activeTimeTo: '17:30',
+        showReminderBar: true,
     },
 
     domains: {

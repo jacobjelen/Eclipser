@@ -1,39 +1,28 @@
 /*global chrome*/    //enables Chrome API 
 import { merge } from 'lodash'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const Settings = ({ localSettings, setLocalSettings }) => {
 
-    const [timeFrom, setTimeFrom] = useState(localSettings.general.activeFrom)
-    const [timeTo, setTimeTo] = useState(localSettings.general.activeTo)
- 
-    const isNowActiveTime = (timeFrom, timeTo) =>{
+    const [timeFrom, setTimeFrom] = useState(localSettings.general.activeTimeFrom)
+    const [timeTo, setTimeTo] = useState(localSettings.general.activeTimeTo)
+
+    const isNowActiveTime = (timeFrom, timeTo) => {
         const now = new Date();
-        //const timeNow = now.getHours()+":"+now.getMinutes()
+        const timeNow = now.getHours() + ":" + now.getMinutes()
 
-        if (timeFrom < timeTo) {
+        if (timeFrom <= timeTo) {
             //DAY
-            // hours between from and to
-            if (timeFrom.split(":")[0] <= now.getHours() && now.getHours() <= timeTo.split(":")[0]) {
-
-                // minutes between from and to
-                if (timeFrom.split(":")[1] <= now.getMinutes() && now.getMinutes() <= timeTo.split(":")[1]) {
-                    return true
-                }
+            if (timeFrom <= timeNow && timeNow <= timeTo) {
+                return true
             } else {
                 return false
             }
 
         } else {
             //NIGHT
-
-            // hours between from and to
-            if (timeFrom.split(":")[0] <= now.getHours() && now.getHours() >= timeTo.split(":")[0]) {
-
-                // minutes between from and to
-                if (timeFrom.split(":")[1] <= now.getMinutes() && now.getMinutes() <= timeTo.split(":")[1]) {
-                    return true
-                }
+            if (timeFrom <= timeNow && timeNow >= timeTo) {
+                return true
             } else {
                 return false
             }
@@ -42,18 +31,31 @@ const Settings = ({ localSettings, setLocalSettings }) => {
 
     return (
         <div id="settingsMenu">
-            <div>Eclipser Active Time</div>
+            <div>
+                <input type="checkbox" id="activeTimeCheck" className=""
+                    checked={localSettings.general.activeTimeCheck}
+                    onChange={(event) => {
+                        const temp_localSettings = merge({}, localSettings)
+                        temp_localSettings.general.activeTimeCheck = event.target.checked
+                        setLocalSettings(temp_localSettings)
+                    }}
+                        
+                ></input>
+
+                Eclipser Active Time
+
+            </div>
 
             <div className="settingsItem" id="timeActive">
 
                 <span>From</span>
-                <input type="time" id="activeFrom" className="timeInput"
+                <input type="time" id="activeTimeFrom" className="timeInput"
                     value={timeFrom}
                     onChange={(event) => setTimeFrom(event.target.value)}
                 ></input>
 
                 <span>to</span>
-                <input type="time" id="activeTo" className="timeInput"
+                <input type="time" id="activeTimeTo" className="timeInput"
                     value={timeTo}
                     onChange={(event) => setTimeTo(event.target.value)}
                 ></input>
@@ -62,10 +64,11 @@ const Settings = ({ localSettings, setLocalSettings }) => {
                     id="settingsTimeSubmit"
                     onClick={() => {
                         const temp_localSettings = merge({}, localSettings)
-                        temp_localSettings.general.activeFrom = timeFrom
-                        temp_localSettings.general.activeTo = timeTo
+                        temp_localSettings.general.activeTimeFrom = timeFrom
+                        temp_localSettings.general.activeTimeTo = timeTo
+                        console.log(isNowActiveTime(timeFrom, timeTo))
                         temp_localSettings.general.active = isNowActiveTime(timeFrom, timeTo)
-                        
+
                         setLocalSettings(temp_localSettings)
 
                     }}>Submit</button>

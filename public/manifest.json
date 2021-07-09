@@ -25,5 +25,5 @@
 		"persistent": true,
 		"scripts": [ "/static/js/defaults.js", "/static/js/background.js" ]
 	 },
-	"permissions": ["storage","tabs"]
+	"permissions": ["storage","tabs","alarms"]
 }

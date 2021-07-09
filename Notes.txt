@@ -21,17 +21,9 @@ QUESTIONS ????
 !!! Async calls in useEffect DON'T WORK
 https://levelup.gitconnected.com/react-hooks-gotchas-setstate-in-async-effects-d2fd84b02305
 
-
-- React structure - put functions in App.js or DomainList.js??
-
-- useEffect in domainList.js runs all the time!!
-    - fixed by adding an event listener
-    - BUT... how to run it the first time??? put into useEffect constructor
-
 ______________________________________________________________
 
 TO DO: 
-+ No default_settings loaded after reinstall (background.js)
 - re-run the content script when a filter is deleted
 
 - 2s top bar appearing on all filtered pages
@@ -39,6 +31,9 @@ TO DO:
 
 Settings:
 - eclipser active time ?
+    - check time in content script
+    - setIcon and Pophead accordingly - keep checking time in background.js
+
 - show 2s reminder on filtered pages
 - reset all settings and domain
 
