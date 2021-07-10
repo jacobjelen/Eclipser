@@ -34,13 +34,13 @@ Settings:
     - check time in content script
     - setIcon and Pophead accordingly - keep checking time in background.js
 
-- show 2s reminder on filtered pages
 - reset all settings and domain
 
 - block this domain ?
 
 CSS
 - format overlay box
+- reminder bar
 - align bins
 - bin - delete confirmation
 - menu buttons: text aligned with icon

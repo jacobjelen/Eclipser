@@ -5,8 +5,8 @@
 
 /* Listen to changes in storage settings */
 chrome.storage.onChanged.addListener((changes, namespace) => {
-  console.log('changes:' + changes)
-  console.log('namespace:' + namespace)
+  // console.log('changes:' + changes)
+  // console.log('namespace:' + namespace)
 
   // activeTimeCheck
   periodicTimeCheck()
@@ -26,8 +26,6 @@ chrome.runtime.onMessage.addListener(function (message) {
   if (message === 'reset') {               //'reset' button in the popup is clicked
     removeSettings();
     checkStorage(refreshCurrentTab);    // refreshCurrentTab is a callback function
-
-
   }
 });
 

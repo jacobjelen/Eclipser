@@ -76,6 +76,23 @@ const Settings = ({ localSettings, setLocalSettings }) => {
 
             <hr></hr>
 
+            <div>
+                <input type="checkbox" id="showReminderBar" className=""
+                    checked={localSettings.general.showReminderBar}
+                    onChange={(event) => {
+                        const temp_localSettings = merge({}, localSettings)
+                        temp_localSettings.general.showReminderBar = event.target.checked
+                        setLocalSettings(temp_localSettings)
+                    }}
+                        
+                ></input>
+
+                Show Reminder Bar
+
+            </div>
+
+            <hr></hr>
+            
             <div className="settingsItem" id="settingsItem__reset">
                 <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset All Settings and Domains</button>
 

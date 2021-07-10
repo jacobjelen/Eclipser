@@ -1,3 +1,4 @@
+/*global chrome*/               //enables Chrome API 
 // Runs on each tab/website opened
 
 let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
@@ -22,7 +23,7 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
   if (message === 'stop') stop_selecting();
 
   if (message === 'domain') {
-      sendResponse(noWWW(window.location.hostname));
+    sendResponse(noWWW(window.location.hostname));
   }
 });
 
@@ -53,6 +54,34 @@ function set_elements_visibility() {
     if (!settings.domains[domain].active) {
       removeEclipserStyle()
       return
+    }
+
+    // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
+    if (settings.general.showReminderBar) {
+      let reminder = $("<div id='eclipserReminder' />")
+      .css(
+        {
+          position: "absolute",
+          top: "0%",
+          width: "100%",
+          height: "50px",
+          zIndex: 99999,
+          background: "rgba(255, 0, 0, .9)",
+
+          color: "white",
+          fontSize: "15px",
+          fontFamily: "'DINPro', sans-serif",
+          fontWeight: "500",
+          padding: "10px 0px",
+          textAlign: "center"
+        })
+        .text("Filtered by Eclipser 2.0")
+        .appendTo("body");
+
+      setTimeout(() => { 
+        reminder.slideUp(500)
+        // reminder.hide() 
+      }, 2000);  // miliseconds to wait
     }
 
     console.log('3 - Domain Active -');
