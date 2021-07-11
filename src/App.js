@@ -11,8 +11,6 @@ import Settings from './components/Settings';
 
 import { useState, useEffect } from 'react'
 
-
-
 // POPUP WINDOW //////////////////////////////////////
 function App() {
 
@@ -21,41 +19,30 @@ function App() {
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
 
-  // load storage setting on App mount. up
-  useEffect(() => {
+  
+  useEffect(() => {   //runs once when app loads
     console.log('>> useEffect App')
-
-    // SETTINGS FROM STORAGE
+    // SETTINGS
+    // storage settings -> set local settings
     getStorageSettings()
-      .then(r => {
-        console.log(r)
-        setLocalSettings(r)
-        console.log(localSettings)
-      })
-      .catch(
-        e => {
-          console.log(e)
-          console.log(localSettings)
-        })
+      .then(r => { setLocalSettings(r) })
+      .catch(e => {console.log(e)})
 
-    // // CURRENT DOMAIN    
+    // when something changes in storage, storage settings -> set local settings   
+    // chrome.storage.onChanged.addListener(() => {
+    //   console.log('storage Changed')
+    //   getStorageSettings()
+    //   .then(r => { setLocalSettings(r)})
+    //   .catch(e => {console.log(e)})
+    // })
+
+    // CURRENT DOMAIN    
     promiseCurrentTabDomain()
-      .then(r => {
-        setCurrentDomain(r)
-      })
-      .catch(e => {
-        setCurrentDomain('')
-      });
+      .then(r => { setCurrentDomain(r) })
+      .catch(e => { setCurrentDomain('') });
 
   }, [])  // if [] is empty, useEffect only runs once on component mount
 
-
-  // update storage settings when localSettings change
-  useEffect(() => {
-    console.log('local settings changed')
-    console.log(localSettings)
-    setStorageSettings(localSettings)
-  }, [localSettings])  // runs every time localSettings change
 
   return (
     <div className="body" >
@@ -77,6 +64,7 @@ function App() {
         <Settings
           localSettings={localSettings}
           setLocalSettings={setLocalSettings}
+          setStorageSettings={setStorageSettings}
           messageCurrentTab={messageCurrentTab}
         />}
 
@@ -87,6 +75,7 @@ function App() {
         currentDomain={currentDomain}
         localSettings={localSettings}
         setLocalSettings={setLocalSettings}
+        setStorageSettings={setStorageSettings}
         messageCurrentTab={messageCurrentTab}
       />
 
@@ -99,6 +88,7 @@ export default App;
 
 // FUNCTIONS //////////////////////////////////////
 function messageCurrentTab(message) {
+  console.log('message current tab')
   chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
     chrome.tabs.sendMessage(tabs[0].id, message);
   });//tabs query
@@ -123,11 +113,8 @@ function getStorageSettings() {
   })
 }
 
-
-
-
 function setStorageSettings(newSettings) {
-  chrome.storage.sync.set({ 'settings': newSettings }, () => { });
+  chrome.storage.sync.set({ 'settings': newSettings }, () => { console.log('storage settings updated') });
 }
 
 function promiseCurrentTabDomain() {

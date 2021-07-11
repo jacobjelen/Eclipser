@@ -2,13 +2,11 @@ import './Eclipser.css';
 import { useState, useEffect, useRef } from 'react'
 import { merge } from 'lodash'
 
-const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => {
+const EditableTitle = ({ localSettings, setLocalSettings, setStorageSettings, domainName, currentDomain, set, messageCurrentTab }) => {
 
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
     const [title, setTitle] = useState(localSettings.domains[domainName].sets[set].title)  // filter(set) title
     const inputRef = useRef()    // close text input if we click anywhere outside of it
-
-    
 
     // close text input if we click anywhere outside of it
     // src: https://www.youtube.com/watch?v=eWO1b6EoCnQ
@@ -23,11 +21,10 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                 // save new title to localStorage
                 const tempLocalSettings = merge({}, localSettings)                  // clone localSettings (deep-merge empty object and localSettings => new editable object)
                 tempLocalSettings.domains[domainName].sets[set].title = title       // edit new object
-                setLocalSettings(tempLocalSettings)                                 // update local settings
+                setStorageSettings(tempLocalSettings)                                 // update local settings
+                setLocalSettings(tempLocalSettings)
             }
         }
-
-        
 
         document.addEventListener("mousedown", outsideClickHandler)
 
@@ -46,9 +43,15 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
 
                 const ls = merge({}, localSettings)
                 ls.domains[domainName].sets[set].active = !ls.domains[domainName].sets[set].active
+                setStorageSettings(ls)
                 setLocalSettings(ls)
+                if(domainName === currentDomain){
+                    messageCurrentTab('refresh')
+                }
+                
             }}
 
+            // show text input on double click
             onDoubleClick={(event) => {
                 console.log(event)
                 setInputVisible(true)
@@ -60,7 +63,6 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                 :
                 <input
                     ref={inputRef}
-                    // data-id={domainName+'-'+set}
                     className="setRename"
                     type="text"
                     value={title}
@@ -75,7 +77,7 @@ const EditableTitle = ({ localSettings, setLocalSettings, domainName, set }) => 
                             // update localSettings
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                             tempLocalSettings.domains[domainName].sets[set].title = event.target.value
-                            setLocalSettings(tempLocalSettings)
+                            setStorageSettings(tempLocalSettings)
 
                             setInputVisible(false)
                             event.preventDefault()      //stop the key press from causing anything else

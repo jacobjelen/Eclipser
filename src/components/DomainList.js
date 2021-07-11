@@ -1,7 +1,7 @@
 /*global chrome*/    //enables Chrome API 
 import Domain from './Domain';
 
-const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCurrentTab  }) => {
+const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab  }) => {
     console.log(">> DomainList")
 
     return (
@@ -12,11 +12,13 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCur
                     .filter(item => item[0] === currentDomain)  // item[0] is the key, key is a domain. if it matches CurrentDomain, render..  
                     .map((item) => (
                         <Domain
+                            currentDomain={currentDomain}
                             expand={true}
                             domainName={item[0]}
                             domainSettings={item[1]}
                             localSettings={localSettings}           // ??? contans domainSettings too
                             setLocalSettings={setLocalSettings}
+                            setStorageSettings={setStorageSettings}
                             messageCurrentTab={messageCurrentTab} 
 
                         />
@@ -30,10 +32,12 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, messageCur
                     .sort()                                         //sort alphabetically
                     .map((item) => (                                
                         <Domain
+                            currentDomain={currentDomain}
                             domainName={item[0]}
                             domainSettings={item[1]}
                             localSettings={localSettings}
                             setLocalSettings={setLocalSettings}
+                            setStorageSettings={setStorageSettings}
                             messageCurrentTab={messageCurrentTab} 
 
                         />

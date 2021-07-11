@@ -3,21 +3,25 @@
 
 // Runs in the browser background.
 
+// LISTENERS --------------------------------------------
+
 /* Listen to changes in storage settings */
-chrome.storage.onChanged.addListener((changes, namespace) => {
-  // console.log('changes:' + changes)
-  // console.log('namespace:' + namespace)
+chrome.storage.onChanged.addListener(() => {
+  console.log('storage change')
 
   // activeTimeCheck
-  periodicTimeCheck()
+  // periodicTimeCheck()
 
+  // refreshCurrentTab()
   // refresh all tabs
-  chrome.tabs.query({}, (tabs) => {
-    tabs.forEach((tab) => {
-      chrome.tabs.sendMessage(tab.id, 'refresh');
-    });
-  });
-  checkStorage()    // loads settings from storage or uses defaults
+  // chrome.tabs.query({}, (tabs) => {
+  //   tabs.forEach((tab) => {
+  //     chrome.tabs.sendMessage(tab.id, 'refresh');
+  //   });
+  // });
+
+
+  // checkStorage()    // loads settings from storage or uses defaults
 });
 
 // message listener
@@ -28,6 +32,22 @@ chrome.runtime.onMessage.addListener(function (message) {
     checkStorage(refreshCurrentTab);    // refreshCurrentTab is a callback function
   }
 });
+
+chrome.runtime.onInstalled.addListener(() => {
+  console.log('onInstall')
+  // removeSettings();        // un-comment to restore defaults on extension reload
+  checkStorage(setIcon);      // setIcon is a callback
+});
+
+// make sure settings are loaded or use defaults when browser opens
+chrome.runtime.onStartup.addListener(() => {
+  console.log('onStartup')
+  checkStorage(setIcon);      // setIcon is a callback
+});
+
+
+
+// FUNCTIONS --------------------------------------------
 
 function refreshCurrentTab() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -69,18 +89,6 @@ function setIcon() {
     }
   });
 }
-
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('onInstall')
-  // removeSettings();        // un-comment to restore defaults on extension reload
-  checkStorage(setIcon);      // setIcon is a callback
-});
-
-// make sure settings are loaded or use defaults when browser opens
-chrome.runtime.onStartup.addListener(() => {
-  console.log('onStartup')
-  checkStorage(setIcon);      // setIcon is a callback
-});
 
 // check the time to see if Eclipser should be active
 // SRC: https://stackoverflow.com/questions/20186771/how-to-periodically-check-whether-a-tab-is-created-or-not-just-when-the-chrome

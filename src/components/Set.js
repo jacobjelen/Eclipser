@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 
 
-const Set = ({ set, domainName, localSettings, setLocalSettings }) => {
+const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
     const [hover, setHover] = useState(false)       // check if mouse is over the setLine => style and display buttons accordingly
 
     return (
@@ -20,8 +20,11 @@ const Set = ({ set, domainName, localSettings, setLocalSettings }) => {
                 <EditableTitle 
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
+                    setStorageSettings={setStorageSettings}
                     domainName={domainName}
+                    currentDomain={currentDomain}
                     set={set}
+                    messageCurrentTab={messageCurrentTab}
                 />
 
                 <div class="lineButtons">
@@ -30,7 +33,11 @@ const Set = ({ set, domainName, localSettings, setLocalSettings }) => {
                         action={() => {
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                             delete tempLocalSettings.domains[domainName].sets[set]
-                            setLocalSettings(tempLocalSettings)   
+                            setStorageSettings(tempLocalSettings)
+                            setLocalSettings(tempLocalSettings)
+                            if(domainName === currentDomain){
+                                messageCurrentTab('refresh')
+                            }
                         }}
                     />
                        }

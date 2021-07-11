@@ -2,7 +2,7 @@
 import { merge } from 'lodash'
 import { useState } from 'react'
 
-const Settings = ({ localSettings, setLocalSettings }) => {
+const Settings = ({ localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
 
     const [timeFrom, setTimeFrom] = useState(localSettings.general.activeTimeFrom)
     const [timeTo, setTimeTo] = useState(localSettings.general.activeTimeTo)
@@ -37,7 +37,8 @@ const Settings = ({ localSettings, setLocalSettings }) => {
                     onChange={(event) => {
                         const temp_localSettings = merge({}, localSettings)
                         temp_localSettings.general.activeTimeCheck = event.target.checked
-                        setLocalSettings(temp_localSettings)
+                        console.log(event.target.checked)
+                        setStorageSettings(temp_localSettings)
                     }}
                         
                 ></input>
@@ -69,7 +70,7 @@ const Settings = ({ localSettings, setLocalSettings }) => {
                         console.log(isNowActiveTime(timeFrom, timeTo))
                         temp_localSettings.general.active = isNowActiveTime(timeFrom, timeTo)
 
-                        setLocalSettings(temp_localSettings)
+                        setStorageSettings(temp_localSettings)
 
                     }}>Submit</button>
             </div>
@@ -82,7 +83,7 @@ const Settings = ({ localSettings, setLocalSettings }) => {
                     onChange={(event) => {
                         const temp_localSettings = merge({}, localSettings)
                         temp_localSettings.general.showReminderBar = event.target.checked
-                        setLocalSettings(temp_localSettings)
+                        setStorageSettings(temp_localSettings)
                     }}
                         
                 ></input>

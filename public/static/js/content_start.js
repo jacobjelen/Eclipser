@@ -2,9 +2,11 @@
 // Runs on each tab/website opened
 
 let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
+let lastDomain;
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('content_START');
+  // console.log('content_START');
   set_elements_visibility();
 })
 
@@ -13,7 +15,7 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
   // when a setting changes, we receive a message from background.js
   if (message === 'refresh') {
     set_elements_visibility();
-    console.log('refreshing')
+    // console.log('refreshing')
   }
 
   //'new' button in the popup is clicked
@@ -36,7 +38,7 @@ function set_elements_visibility() {
     // CHECK if Eclipser is active
     if (result.settings.general.active) {
       settings = result.settings;
-      console.log('1 - Eclipser Active -');
+      // console.log('1 - Eclipser Active -');
 
       //what site are we on
       domain = noWWW(window.location.hostname);
@@ -45,7 +47,7 @@ function set_elements_visibility() {
 
     // CHECK is the domain for current site stored in settings?
     if (Object.keys(settings.domains).includes(domain)) {
-      console.log('2 - Domain Recognised -');
+      // console.log('2 - Domain Recognised -');
       addEclipserStyle();
     } else { return }
 
@@ -57,8 +59,10 @@ function set_elements_visibility() {
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
-    if (settings.general.showReminderBar) {
-      let reminder = $("<div id='eclipserReminder' />")
+    if (settings.general.showReminderBar  && lastDomain != domain) {
+      lastDomain = domain;     // to only show the reminder when the page loads the firs time
+
+      const reminder = $("<div id='eclipserReminder' />")
       .css(
         {
           position: "absolute",
@@ -84,16 +88,16 @@ function set_elements_visibility() {
       }, 2000);  // miliseconds to wait
     }
 
-    console.log('3 - Domain Active -');
+    // console.log('3 - Domain Active -');
 
     Object.keys(settings.domains[domain].sets).forEach((set) => {
-      console.log('4 - SET: ' + set + ' -');
+      // console.log('4 - SET: ' + set + ' -');
       //is is the set active 
       if (settings.domains[domain].sets[set].active) {
         // for each selector in the set
         settings.domains[domain].sets[set].selectors.forEach(
           (selector) => {
-            console.log('6a - ECLIPSED: ' + selector)
+            // console.log('6a - ECLIPSED: ' + selector)
 
             document.querySelectorAll(selector).forEach((item) => {
               item.classList.add("eclipsed");
@@ -103,11 +107,11 @@ function set_elements_visibility() {
         ); //for each selector
 
       } else {
-        console.log('5b - SET NOT ACTIVE -');
+        // console.log('5b - SET NOT ACTIVE -');
         // for each selector in the set
         settings.domains[domain].sets[set].selectors.forEach(
           (selector) => {
-            console.log('6b - UN-Hidden: ' + selector)
+            // console.log('6b - UN-Hidden: ' + selector)
             document.querySelectorAll(selector).forEach((item) => {
               item.classList.remove("eclipsed");
             })
@@ -135,7 +139,7 @@ function select_elements() {
     // let nextNo = lastNo + 1;       // r (resolved) = last set number, next needs to be +1
     setKey = 'set' + (lastNo + 1);
     setName = 'Filter ' + (lastNo + 1);
-    console.log('New Set No: ' + (lastNo + 1));
+    // console.log('New Set No: ' + (lastNo + 1));
   })
     .catch(e => {
       setKey = 'error';
@@ -224,7 +228,7 @@ window.onload = function () {
       mutations.forEach(function (mutation) {
         if (oldHref !== document.location.href) {
           oldHref = document.location.href;
-          console.log("url change");
+          // console.log("url change");
           set_elements_visibility();
         }
       });
@@ -297,8 +301,8 @@ function getSelector(el) { // from nukem
 
 // Save selector to storage under relevant domain and set
 function saveSelector(selector, domain, setKey, setName, callback) {
-  console.log('setKey: ' + setKey);
-  console.log('setName: ' + setName);
+  // console.log('setKey: ' + setKey);
+  // console.log('setName: ' + setName);
   //- load storage to local settings
   chrome.storage.sync.get('settings', (from_storage) => {					//get settings
     let local_settings = from_storage.settings; 					        //save settings in a local variable
@@ -325,8 +329,8 @@ function saveSelector(selector, domain, setKey, setName, callback) {
 
     //- rewrite storage with local
     chrome.storage.sync.set({ 'settings': local_settings }, () => {
-      console.log('New Eclipser saved. Current settings: ')
-      console.log(local_settings)
+      // console.log('New Eclipser saved. Current settings: ')
+      // console.log(local_settings)
       callback() // set_elements_visibility() should be used as a callback
     });
 
@@ -354,7 +358,7 @@ function addEclipserStyle() {
   style.setAttribute("id", "eclipserStyle");
   style.appendChild(document.createTextNode(eclipserStyle));
   document.head.appendChild(style);
-  console.log("eclipser style added");
+  // console.log("eclipser style added");
 }
 
 function removeEclipserStyle() {

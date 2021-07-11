@@ -18,9 +18,8 @@ ______________________________________________________________
 
 QUESTIONS ????
 
-!!! Async calls in useEffect DON'T WORK
-https://levelup.gitconnected.com/react-hooks-gotchas-setstate-in-async-effects-d2fd84b02305
-
+how to hide the content before it loads.
+- content script: replace document.addEventListener('DOMContentLoaded'
 ______________________________________________________________
 
 TO DO: 
@@ -37,6 +36,7 @@ Settings:
 - reset all settings and domain
 
 - block this domain ?
+    - show warning = 30sec unloc time
 
 CSS
 - format overlay box

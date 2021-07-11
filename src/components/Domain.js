@@ -6,14 +6,13 @@ import { merge } from 'lodash'
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, messageCurrentTab, expand }) => {
+const Domain = ({ currentDomain, domainName, domainSettings, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(expand)     // is the domain expanded = setList visible?
     
     return (
-
         <div className="domainDiv">
 
             <div className="domainLine"
@@ -30,8 +29,6 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, m
                         <BsCaretRightFill  
                             className={domainSettings.active ? "domainLine__arrow" : "domainLine__arrow passive"} 
                         />
-                        
-
                 </div>
 
                 {/* DOMAIN NAME */}
@@ -39,9 +36,13 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, m
 
                     onClick={(e) => {
                         // toggle true/false 
-                        const ls = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
-                        ls.domains[domainName].active = !ls.domains[domainName].active
-                        setLocalSettings(ls)
+                        const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
+                        tempLocalSettings.domains[domainName].active = !tempLocalSettings.domains[domainName].active
+                        setStorageSettings(tempLocalSettings)
+                        setLocalSettings(tempLocalSettings)
+                        if(currentDomain === domainName){
+                            messageCurrentTab('refresh') 
+                        } 
                     }
                     }>
                     {domainName}
@@ -55,7 +56,11 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, m
                             action={() => {
                                 const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                                 delete tempLocalSettings.domains[domainName] 
-                                setLocalSettings(tempLocalSettings)   
+                                setStorageSettings(tempLocalSettings)
+                                setLocalSettings(tempLocalSettings)
+                                if(currentDomain === domainName){
+                                    messageCurrentTab('refresh') 
+                                }  
                             }}
                         />
                     }
@@ -69,10 +74,12 @@ const Domain = ({ domainName, domainSettings, localSettings, setLocalSettings, m
               && means if expanded == true render SetList */}
             {expanded &&
                 <SetList
+                    currentDomain={currentDomain}
                     domainName={domainName}
                     domainSettings={domainSettings}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
+                    setStorageSettings={setStorageSettings}
                     messageCurrentTab={messageCurrentTab}
                 />}
 
