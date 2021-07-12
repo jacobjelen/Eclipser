@@ -23,19 +23,34 @@ how to hide the content before it loads???
 
 - deteling sets works on backend BUT does not rerender the UI right
 
+BACKGROUND.JS:
+- import lodash from npm: https://nkaushik.com/javascript/solved-cannot-use-import-statement-outside-module/
+
+background.js how to verify creating/deleting of alarm with alarms.get or getAll
+- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/alarms/get
+- it throws 'no matching signature'
+
 reload popup when I reset the settings - using react???
 - settings.js:101 
+
+- same functions in background.js and App.js??
+    - utils.js?
+
+- periodic alarm in background.js - is there a better way?
+
 ______________________________________________________________
 
 TO DO: 
-- re-run the content script when a filter is deleted
 
-- 2s top bar appearing on all filtered pages
+- remove submit button from active time settings
+- re-run the content script when a filter is deleted
+- rewrite pophead.js
 - add default sets for Twitter, Netflix, Amazon...
+- block domains
+    - unlock time period
 
 Settings:
 - eclipser active time ?
-    - check time in content script
     - setIcon and Pophead accordingly - keep checking time in background.js
 
 - reset all settings and domain

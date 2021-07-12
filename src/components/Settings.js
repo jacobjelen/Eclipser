@@ -51,7 +51,10 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <span>From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"
                     value={timeFrom}
-                    onChange={(event) => setTimeFrom(event.target.value)}
+                    onChange={(event) => {
+                        setTimeFrom(event.target.value)
+                        }
+                    }
                 ></input>
 
                 <span>to</span>

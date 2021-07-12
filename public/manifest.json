@@ -23,7 +23,7 @@
 	},
 	"background": {
 		"persistent": true,
-		"scripts": [ "/static/js/defaults.js", "/static/js/background.js" ]
+		"scripts": [ "/static/js/lodash.js", "/static/js/defaults.js", "/static/js/background.js" ]
 	 },
 	"permissions": ["storage","tabs","alarms"]
 }
