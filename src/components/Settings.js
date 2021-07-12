@@ -2,7 +2,7 @@
 import { merge } from 'lodash'
 import { useState } from 'react'
 
-const Settings = ({ localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
+const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 
     const [timeFrom, setTimeFrom] = useState(localSettings.general.activeTimeFrom)
     const [timeTo, setTimeTo] = useState(localSettings.general.activeTimeTo)
@@ -31,7 +31,8 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings, message
 
     return (
         <div id="settingsMenu">
-            <div>
+            <div className="settingsItem" id="timeActive">
+                
                 <input type="checkbox" id="activeTimeCheck" className=""
                     checked={localSettings.general.activeTimeCheck}
                     onChange={(event) => {
@@ -39,16 +40,14 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings, message
                         temp_localSettings.general.activeTimeCheck = event.target.checked
                         console.log(event.target.checked)
                         setStorageSettings(temp_localSettings)
+                        setLocalSettings(temp_localSettings)
                     }}
                         
                 ></input>
-
                 Eclipser Active Time
-
             </div>
 
-            <div className="settingsItem" id="timeActive">
-
+            <div >
                 <span>From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"
                     value={timeFrom}
@@ -71,6 +70,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings, message
                         temp_localSettings.general.active = isNowActiveTime(timeFrom, timeTo)
 
                         setStorageSettings(temp_localSettings)
+                        setLocalSettings(temp_localSettings)
 
                     }}>Submit</button>
             </div>
@@ -84,6 +84,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings, message
                         const temp_localSettings = merge({}, localSettings)
                         temp_localSettings.general.showReminderBar = event.target.checked
                         setStorageSettings(temp_localSettings)
+                        setLocalSettings(temp_localSettings)
                     }}
                         
                 ></input>
@@ -95,8 +96,11 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings, message
             <hr></hr>
             
             <div className="settingsItem" id="settingsItem__reset">
-                <button onClick={() => { chrome.runtime.sendMessage('reset') }}>Reset All Settings and Domains</button>
-
+                <button onClick={() => { 
+                    chrome.runtime.sendMessage('reset') 
+                    window.location.reload()
+                    }}>Reset All Settings and Domains</button>
+                
             </div>
 
             <hr></hr>

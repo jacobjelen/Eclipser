@@ -1,7 +1,7 @@
 import Set from "./Set"
 
-const SetList = ({currentDomain, domainSettings, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab}) => {
-    let setsArray = Object.keys(domainSettings.sets)
+const SetList = ({currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab}) => {
+    let setsArray = Object.keys(localSettings.domains[domainName].sets)
     
     return (
         <div className="setList">
@@ -9,9 +9,9 @@ const SetList = ({currentDomain, domainSettings, domainName, localSettings, setL
                 (
                     // <Component prop={prop_value} />
                     <Set set={set} 
-                        currentDomain={currentDomain}
-                        setSettings={domainSettings.sets[set.toString()]} 
+                        setSettings={localSettings.domains[domainName].sets[set.toString()]} 
                         domainName={domainName}
+                        currentDomain={currentDomain}
                         localSettings={localSettings}
                         setLocalSettings={setLocalSettings}
                         setStorageSettings={setStorageSettings}

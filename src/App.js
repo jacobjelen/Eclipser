@@ -9,7 +9,9 @@ import DomainList from './components/DomainList';
 import Menu from './components/Menu';
 import Settings from './components/Settings';
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+
+export const updated = React.createContext()
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
@@ -19,22 +21,12 @@ function App() {
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
 
-  
   useEffect(() => {   //runs once when app loads
     console.log('>> useEffect App')
     // SETTINGS
-    // storage settings -> set local settings
     getStorageSettings()
       .then(r => { setLocalSettings(r) })
       .catch(e => {console.log(e)})
-
-    // when something changes in storage, storage settings -> set local settings   
-    // chrome.storage.onChanged.addListener(() => {
-    //   console.log('storage Changed')
-    //   getStorageSettings()
-    //   .then(r => { setLocalSettings(r)})
-    //   .catch(e => {console.log(e)})
-    // })
 
     // CURRENT DOMAIN    
     promiseCurrentTabDomain()
@@ -130,4 +122,5 @@ function promiseCurrentTabDomain() {
     });//tabs query
   });
 }
+
 

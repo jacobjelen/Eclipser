@@ -18,8 +18,13 @@ ______________________________________________________________
 
 QUESTIONS ????
 
-how to hide the content before it loads.
+how to hide the content before it loads???
 - content script: replace document.addEventListener('DOMContentLoaded'
+
+- deteling sets works on backend BUT does not rerender the UI right
+
+reload popup when I reset the settings - using react???
+- settings.js:101 
 ______________________________________________________________
 
 TO DO: 

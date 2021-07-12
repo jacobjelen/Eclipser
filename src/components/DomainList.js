@@ -15,7 +15,6 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
                             currentDomain={currentDomain}
                             expand={true}
                             domainName={item[0]}
-                            domainSettings={item[1]}
                             localSettings={localSettings}           // ??? contans domainSettings too
                             setLocalSettings={setLocalSettings}
                             setStorageSettings={setStorageSettings}
@@ -34,7 +33,6 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
                         <Domain
                             currentDomain={currentDomain}
                             domainName={item[0]}
-                            domainSettings={item[1]}
                             localSettings={localSettings}
                             setLocalSettings={setLocalSettings}
                             setStorageSettings={setStorageSettings}

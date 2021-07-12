@@ -2,7 +2,9 @@ import './Eclipser.css';
 import { useState, useEffect, useRef } from 'react'
 import { merge } from 'lodash'
 
-const EditableTitle = ({ localSettings, setLocalSettings, setStorageSettings, domainName, currentDomain, set, messageCurrentTab }) => {
+const EditableTitle = ({ 
+    localSettings, setLocalSettings, setStorageSettings, 
+    domainName, currentDomain, set, messageCurrentTab }) => {
 
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
     const [title, setTitle] = useState(localSettings.domains[domainName].sets[set].title)  // filter(set) title

@@ -31,6 +31,7 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                     {hover &&
                         <Delete
                         action={() => {
+                            console.log("domain name: ", domainName, " set: ", set)
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                             delete tempLocalSettings.domains[domainName].sets[set]
                             setStorageSettings(tempLocalSettings)

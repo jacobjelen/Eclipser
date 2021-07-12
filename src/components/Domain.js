@@ -6,7 +6,7 @@ import { merge } from 'lodash'
 
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
-const Domain = ({ currentDomain, domainName, domainSettings, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
+const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
 
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
@@ -27,12 +27,12 @@ const Domain = ({ currentDomain, domainName, domainSettings, localSettings, setL
                     {/* do the active/passive text color with CSS on domainDiv ???  */}
                     
                         <BsCaretRightFill  
-                            className={domainSettings.active ? "domainLine__arrow" : "domainLine__arrow passive"} 
+                            className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"} 
                         />
                 </div>
 
                 {/* DOMAIN NAME */}
-                <div className={domainSettings.active ? "domainName" : "domainName passive"}
+                <div className={localSettings.domains[domainName].active ? "domainName" : "domainName passive"}
 
                     onClick={(e) => {
                         // toggle true/false 
@@ -76,7 +76,6 @@ const Domain = ({ currentDomain, domainName, domainSettings, localSettings, setL
                 <SetList
                     currentDomain={currentDomain}
                     domainName={domainName}
-                    domainSettings={domainSettings}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
                     setStorageSettings={setStorageSettings}
