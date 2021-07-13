@@ -28,7 +28,7 @@
     #pophead{
       width: 250px;
       height: 80px;
-      background-color: var(--green);
+      
       font-family: 'DINPro', sans-serif;
       padding: 10px 0px;
       text-align: center
@@ -36,6 +36,18 @@
 
     #pophead:hover{
       background-color: var(--dark-green);
+    }  
+
+    .popheadActive{
+      background-color: var(--green);
+    }  
+
+    .popheadPaused{
+      background-color: var(--grey);
+    }  
+
+    .halfOpacity{
+      opacity: 0.5;
     }  
 
     #logo{

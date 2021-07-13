@@ -61,20 +61,20 @@ const EditableTitle = ({
         >
 
             {!inputVisible ?
-                title.toString()
+                localSettings.domains[domainName].sets[set].title.toString()
                 :
                 <input
                     ref={inputRef}
                     className="setRename"
                     type="text"
-                    value={title}
+                    value={localSettings.domains[domainName].sets[set].title.toString()}
 
                     onChange={(event) => {
                         console.log('title: ', title)
                         setTitle(event.target.value)
                     }}
 
-                    onKeyDown={(event) => {
+                    onKeyUp={(event) => {
                         if (event.key === 'Enter') {    // save new title on Enter
                             // update localSettings
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)

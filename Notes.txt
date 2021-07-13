@@ -43,8 +43,12 @@ QUESTIONS ????
 ______________________________________________________________
 
 TO DO: 
-- rewrite pophead.js
-    - Y U NO WORKING!? 
++ rewrite pophead.js - 
+- fix delete bin
+    - it's triggering events all the time, limit hover
+- fix EditableTitle
+    - rewrite it from scratch? 
+    - somehow it is getting title from other instances of the set component
 - remove submit button from active time settings
 - re-run the content script when a filter is deleted
 - add default sets for Twitter, Netflix, Amazon...
