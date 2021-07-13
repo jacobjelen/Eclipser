@@ -26,7 +26,7 @@ function App() {
     // SETTINGS
     getStorageSettings()
       .then(r => { setLocalSettings(r) })
-      .catch(e => {console.log(e)})
+      .catch(e => { console.log(e) })
 
     // CURRENT DOMAIN    
     promiseCurrentTabDomain()
@@ -38,12 +38,19 @@ function App() {
 
   return (
     <div className="body" >
-      <Pophead />
+
+      {localSettings.general &&
+        <Pophead
+          localSettings={localSettings}
+          setLocalSettings={setLocalSettings}
+          setStorageSettings={setStorageSettings}
+        />
+      }
 
       <button
-      onClick={() => {
-        console.log(localSettings)
-      }}
+        onClick={() => {
+          console.log(localSettings)
+        }}
       >Log settings</button>
 
       <Menu
