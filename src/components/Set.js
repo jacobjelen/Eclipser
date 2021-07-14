@@ -13,8 +13,8 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
     return (
         <>
             <div className="setLine"
-                onMouseOver={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
+                onMouseOver={() =>  {if(!hover) setHover(true)} }
+                onMouseLeave={() => setHover(false) }
             >
 
                 <div className="setName">{set}</div>

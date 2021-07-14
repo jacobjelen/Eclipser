@@ -16,7 +16,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
         <div className="domainDiv">
 
             <div className="domainLine"
-                onMouseOver={() => setHover(true)}
+                onMouseOver={() => { if(!hover)setHover(true) } }
                 onMouseLeave={() => setHover(false)}
             >
 
@@ -39,10 +39,10 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                         const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
                         tempLocalSettings.domains[domainName].active = !tempLocalSettings.domains[domainName].active
                         setStorageSettings(tempLocalSettings)
-                        setLocalSettings(tempLocalSettings)
                         if(currentDomain === domainName){
                             messageCurrentTab('refresh') 
                         } 
+                        setLocalSettings(tempLocalSettings)
                     }
                     }>
                     {domainName}
@@ -57,10 +57,12 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                                 const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                                 delete tempLocalSettings.domains[domainName] 
                                 setStorageSettings(tempLocalSettings)
-                                setLocalSettings(tempLocalSettings)
                                 if(currentDomain === domainName){
+                                    console.log('domains match')
                                     messageCurrentTab('refresh') 
-                                }  
+                                } 
+                                setLocalSettings(tempLocalSettings)
+                                 
                             }}
                         />
                     }

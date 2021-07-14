@@ -23,6 +23,9 @@ QUESTIONS ????
     - how to hide the content before it loads???
         content script: replace document.addEventListener('DOMContentLoaded'
 
+    - re-run the content script when a filter is deleted
+        - not working. content script runs but nothing changes on the tab
+
     - Deteling sets works on backend BUT does not rerender the UI right
 
     - BACKGROUND.JS:
@@ -43,14 +46,12 @@ QUESTIONS ????
 ______________________________________________________________
 
 TO DO: 
-+ rewrite pophead.js - 
-- fix delete bin
-    - it's triggering events all the time, limit hover
+
 - fix EditableTitle
     - rewrite it from scratch? 
     - somehow it is getting title from other instances of the set component
 - remove submit button from active time settings
-- re-run the content script when a filter is deleted
+
 - add default sets for Twitter, Netflix, Amazon...
 - block this domain ?
     - show warning = 30sec unloc time
