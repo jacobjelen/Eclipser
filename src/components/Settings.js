@@ -32,8 +32,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     return (
         <div id="settingsMenu">
             <div className="settingsItem" id="timeActive">
-                
-                <input type="checkbox" id="activeTimeCheck" className=""
+                Eclipser Active Time
+
+                <input type="checkbox" id="activeTimeCheck" className="toggle"
                     checked={localSettings.general.activeTimeCheck}
                     onChange={(event) => {
                         const temp_localSettings = merge({}, localSettings)
@@ -42,9 +43,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                         setStorageSettings(temp_localSettings)
                         setLocalSettings(temp_localSettings)
                     }}
-                        
+
                 ></input>
-                Eclipser Active Time
+
             </div>
 
             <div >
@@ -53,7 +54,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                     value={timeFrom}
                     onChange={(event) => {
                         setTimeFrom(event.target.value)
-                        }
+                    }
                     }
                 ></input>
 
@@ -81,7 +82,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             <hr></hr>
 
             <div>
-                <input type="checkbox" id="showReminderBar" className=""
+                Show Reminder Bar
+
+                <input type="checkbox" id="showReminderBar" className="toggle"
                     checked={localSettings.general.showReminderBar}
                     onChange={(event) => {
                         const temp_localSettings = merge({}, localSettings)
@@ -89,21 +92,18 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                         setStorageSettings(temp_localSettings)
                         setLocalSettings(temp_localSettings)
                     }}
-                        
                 ></input>
-
-                Show Reminder Bar
 
             </div>
 
             <hr></hr>
-            
+
             <div className="settingsItem" id="settingsItem__reset">
-                <button onClick={() => { 
-                    chrome.runtime.sendMessage('reset') 
+                <button onClick={() => {
+                    chrome.runtime.sendMessage('reset')
                     window.location.reload()
-                    }}>Reset All Settings and Domains</button>
-                
+                }}>Reset All Settings and Domains</button>
+
             </div>
 
             <hr></hr>

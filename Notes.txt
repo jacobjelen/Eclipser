@@ -17,8 +17,6 @@ App
 ______________________________________________________________
 
 QUESTIONS ????
-
-    - popup not working - 
     
     - how to hide the content before it loads???
         content script: replace document.addEventListener('DOMContentLoaded'
@@ -50,6 +48,7 @@ TO DO:
 - fix EditableTitle
     - rewrite it from scratch? 
     - somehow it is getting title from other instances of the set component
+
 - remove submit button from active time settings
 
 - add default sets for Twitter, Netflix, Amazon...
@@ -57,9 +56,9 @@ TO DO:
     - show warning = 30sec unloc time
 
 CSS
-- format overlay box
-- reminder bar
-- align bins
++ format overlay box
++ reminder bar
++ vertical align bins
 - bin - delete confirmation
 - menu buttons: text aligned with icon
 - hover on domains/SetList

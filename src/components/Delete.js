@@ -21,14 +21,18 @@ const Delete = ({ action }) => {
                     }} />
                 :
                 <div>
-                    <AiFillCheckCircle onClick={() => {
-                        action()
-                        setConfirmVisible(false)
-                    }} />
+                    <AiFillCheckCircle
+                        className="binCheck"
+                        onClick={() => {
+                            action()
+                            setConfirmVisible(false)
+                        }} />
 
-                    <AiFillCloseCircle onClick={() => {
-                        setConfirmVisible(false)
-                    }} />
+                    <AiFillCloseCircle
+                        className="binClose"
+                        onClick={() => {
+                            setConfirmVisible(false)
+                        }} />
                 </div>
             }
         </>

@@ -61,13 +61,10 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                                     console.log('domains match')
                                     messageCurrentTab('refresh') 
                                 } 
-                                setLocalSettings(tempLocalSettings)
-                                 
+                                setLocalSettings(tempLocalSettings)            
                             }}
                         />
                     }
-
-
                 </div>
             </div>
 

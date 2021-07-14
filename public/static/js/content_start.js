@@ -16,7 +16,6 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
 
   if (message == 'refresh') {
     set_elements_visibility();
-    console.log('refreshing')
   }
 
   //'new' button in the popup is clicked
@@ -69,9 +68,9 @@ function set_elements_visibility() {
           position: "absolute",
           top: "0%",
           width: "100%",
-          height: "50px",
+          height: "40px",
           zIndex: 99999,
-          background: "rgba(255, 0, 0, .9)",
+          background: "rgba(19, 235, 163, 1)",
 
           color: "white",
           fontSize: "15px",
@@ -176,6 +175,7 @@ function select_elements() {
 
         // make the box fit the element
         box.show();
+        sel_span.show();
         box.css({
           width: $el.outerWidth() - 1,
           height: $el.outerHeight() - 1,
@@ -218,6 +218,7 @@ function stop_selecting() {
   $('body').off("keydown.eclipser");
   el = null;
   box.hide();
+  sel_span.hide();
 }
 
 //// MUTATION SCRIPT ///////////////////////////////////////////////////////////
@@ -250,7 +251,7 @@ function make_box() {
       display: "none",
       position: "absolute",
       zIndex: 99999,
-      background: "rgba(0, 255, 0, .3)",
+      background: "rgba(19, 235, 163, .3)",
 
       color: "black",
       fontSize: "10pt",
@@ -258,9 +259,17 @@ function make_box() {
     }).appendTo("body");
 
   // selector span
-  sel_span = $("<span id='sel_span' />")
-    .css({ background: "rgba(0, 255, 0, 1)" })
-    .appendTo(box);
+  sel_span = $("<div id='sel_span' />")
+    .css({ 
+      display: "none",
+      position: "fixed",
+      bottom: "0%",
+      width: "100%",
+      padding: "2px 5px",
+      fontFamily: "'DINPro', sans-serif" ,
+      background: "rgba(19, 235, 163, 1)" 
+    })
+    .appendTo("body");
 }
 
 // Get selector for element el
