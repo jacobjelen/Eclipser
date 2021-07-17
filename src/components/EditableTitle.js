@@ -6,10 +6,9 @@ const EditableTitle = ({
     localSettings, setLocalSettings, setStorageSettings, 
     domainName, currentDomain, set, messageCurrentTab }) => {
     
-    console.log("EditableTitle")
+    console.log("R: EditableTitle - Set: ",set)
         
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
-    const [title, setTitle] = useState(localSettings.domains[domainName].sets[set].title)  // filter(set) title
     const inputRef = useRef()    // close text input if we click anywhere outside of it
 
     // close text input if we click anywhere outside of it
@@ -19,24 +18,28 @@ const EditableTitle = ({
         // function to run when we click outside
         const outsideClickHandler = (event) => {
             console.log('event.target ',event.target)
-            if (inputRef.current!==undefined && !inputRef.current.contains(event.target)) {    // if clicked element is not the input field
-                setInputVisible(false)      //hide input field
-                
-                // save new title to localStorage
-                const tempLocalSettings = merge({}, localSettings)                  // clone localSettings (deep-merge empty object and localSettings => new editable object)
-                tempLocalSettings.domains[domainName].sets[set].title = title       // edit new object
-                setStorageSettings(tempLocalSettings)                                 // update local settings
-                setLocalSettings(tempLocalSettings)
-            }
-        }
 
-        document.addEventListener("mousedown", outsideClickHandler)
+            if (inputRef.current !== null && 
+                inputRef.current !== undefined &&
+                !inputRef.current.contains(event.target)) {    // if clicked element is not the input field
+                setInputVisible(false)      //hide input field
+            }}
+
+        document.addEventListener("click", outsideClickHandler)
 
         // clean up - remove the listener after we have clicked outside
         return () => {
-            document.removeEventListener("mousedown", outsideClickHandler)
+            document.removeEventListener("click", outsideClickHandler)
         }
     })
+
+    // function updating storage
+    const updateStorage = (eValue)=>{
+        const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
+        tempLocalSettings.domains[domainName].sets[set].title = eValue
+        setStorageSettings(tempLocalSettings)
+        setLocalSettings(tempLocalSettings)
+    }
 
     return (
         <div className="setName"
@@ -49,7 +52,8 @@ const EditableTitle = ({
                 ls.domains[domainName].sets[set].active = !ls.domains[domainName].sets[set].active
                 setStorageSettings(ls)
                 setLocalSettings(ls)
-                if(domainName === currentDomain){
+
+                if(domainName === currentDomain && localSettings.domains[domainName].active){
                     messageCurrentTab('refresh')
                 }
                 
@@ -72,27 +76,16 @@ const EditableTitle = ({
                     value={localSettings.domains[domainName].sets[set].title.toString()}
 
                     onChange={(event) => {
-                        console.log('title: ', title)
-                        setTitle(event.target.value)
+                        updateStorage(event.target.value) 
                     }}
 
                     onKeyUp={(event) => {
                         if (event.key === 'Enter') {    // save new title on Enter
-                            // update localSettings
-                            const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
-                            tempLocalSettings.domains[domainName].sets[set].title = event.target.value
-                            setStorageSettings(tempLocalSettings)
-
+                            updateStorage(event.target.value)
                             setInputVisible(false)
                             event.preventDefault()      //stop the key press from causing anything else
                             event.stopPropagation()
                         }
-                        else if (event.key === 'Escape') {  // discard on Esc
-                            setInputVisible(false)
-                            setTitle(localSettings.domains[domainName].sets[set].title)                 // put b
-                            event.preventDefault()
-                            event.stopPropagation()
-                        } 
                     }}
                 />
             }

@@ -45,7 +45,7 @@ ______________________________________________________________
 
 TO DO: 
 
-- fix EditableTitle
++ fix EditableTitle
     - rewrite it from scratch? 
     - somehow it is getting title from other instances of the set component
 

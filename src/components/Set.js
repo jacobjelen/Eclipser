@@ -20,8 +20,8 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                 onMouseLeave={() => setHover(false) }
             >
 
-                <div className="setName">{set}</div>
-                {/* <EditableTitle 
+                {/* <div className="setName">{set}</div> */}
+                <EditableTitle 
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
                     setStorageSettings={setStorageSettings}
@@ -29,7 +29,7 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                     currentDomain={currentDomain}
                     set={set}
                     messageCurrentTab={messageCurrentTab}
-                /> */}
+                />
 
                 <div class="lineButtons">
                     {hover &&

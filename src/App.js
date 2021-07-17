@@ -130,18 +130,5 @@ function setStorageSettings(newSettings) {
   chrome.storage.sync.set({ 'settings': newSettings }, () => { console.log('storage settings updated') });
 }
 
-function promiseCurrentTabDomain() {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
-      chrome.tabs.sendMessage(tabs[0].id, 'domain', (response) => {
-        if (response) {
-          resolve(response)
-        } else {
-          reject()
-        }
-      });
-    });//tabs query
-  });
-}
 
 
