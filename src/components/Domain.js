@@ -11,12 +11,12 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(expand)     // is the domain expanded = setList visible?
-    
+
     return (
         <div className="domainDiv">
 
             <div className="domainLine"
-                onMouseOver={() => { if(!hover)setHover(true) } }
+                onMouseOver={() => { if (!hover) setHover(true) }}
                 onMouseLeave={() => setHover(false)}
             >
 
@@ -25,10 +25,12 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                     onClick={() => setExpanded(!expanded)}
                 >
                     {/* do the active/passive text color with CSS on domainDiv ???  */}
-                    
-                        <BsCaretRightFill  
-                            className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"} 
+                    {hover &&
+                        <BsCaretRightFill
+                            className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"}
                         />
+                    }
+
                 </div>
 
                 {/* DOMAIN NAME */}
@@ -39,9 +41,9 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                         const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
                         tempLocalSettings.domains[domainName].active = !tempLocalSettings.domains[domainName].active
                         setStorageSettings(tempLocalSettings)
-                        if(currentDomain === domainName){
-                            messageCurrentTab('refresh') 
-                        } 
+                        if (currentDomain === domainName) {
+                            messageCurrentTab('refresh')
+                        }
                         setLocalSettings(tempLocalSettings)
                     }
                     }>
@@ -55,13 +57,13 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                         <Delete
                             action={() => {
                                 const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
-                                delete tempLocalSettings.domains[domainName] 
+                                delete tempLocalSettings.domains[domainName]
                                 setStorageSettings(tempLocalSettings)
-                                if(currentDomain === domainName){
+                                if (currentDomain === domainName) {
                                     console.log('domains match')
-                                    messageCurrentTab('refresh') 
-                                } 
-                                setLocalSettings(tempLocalSettings)            
+                                    messageCurrentTab('refresh')
+                                }
+                                setLocalSettings(tempLocalSettings)
                             }}
                         />
                     }

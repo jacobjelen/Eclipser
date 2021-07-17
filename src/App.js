@@ -29,7 +29,7 @@ function App() {
       .catch(e => { console.log(e) })
 
     // CURRENT DOMAIN    
-    promiseCurrentTabDomain()
+    messageCurrentTab('domain')
       .then(r => { setCurrentDomain(r) })
       .catch(e => { setCurrentDomain('') });
 
@@ -86,11 +86,25 @@ function App() {
 export default App;
 
 // FUNCTIONS //////////////////////////////////////
+// function messageCurrentTab(message) {
+//   console.log('message current tab')
+//   chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
+//     chrome.tabs.sendMessage(tabs[0].id, message);
+//   });//tabs query
+// }
+
 function messageCurrentTab(message) {
-  console.log('message current tab')
-  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
-    chrome.tabs.sendMessage(tabs[0].id, message);
-  });//tabs query
+  return new Promise((resolve, reject) => {
+    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
+      chrome.tabs.sendMessage(tabs[0].id, message, (response) => {
+        if (response) {
+          resolve(response)
+        } else {
+          reject()
+        }
+      });
+    });//tabs query
+  });
 }
 
 // returns object with all Eclpser settings

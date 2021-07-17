@@ -52,15 +52,16 @@ TO DO:
 - remove submit button from active time settings
 
 - add default sets for Twitter, Netflix, Amazon...
+
++ new filter / stop selecting
+
 - block this domain ?
     - show warning = 30sec unloc time
 
 CSS
-+ format overlay box
-+ reminder bar
-+ vertical align bins
-- bin - delete confirmation
-- menu buttons: text aligned with icon
+- overall design?
+- settings
+
 - hover on domains/SetList
 - expand arrow pointing down when expanded
 - active/paused filters formating

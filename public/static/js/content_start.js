@@ -3,7 +3,7 @@
 
 let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
 let lastDomain;
-
+let selecting = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('content_START');
@@ -23,6 +23,10 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
 
   //'stop' button in the popup is clicked
   if (message === 'stop') stop_selecting();
+
+  if (message === 'selecting') {
+    sendResponse(selecting);
+  }
 
   if (message === 'domain') {
     sendResponse(noWWW(window.location.hostname));
@@ -68,7 +72,7 @@ function set_elements_visibility() {
           position: "absolute",
           top: "0%",
           width: "100%",
-          height: "40px",
+          height: "20px",
           zIndex: 99999,
           background: "rgba(19, 235, 163, 1)",
 
@@ -127,6 +131,7 @@ function set_elements_visibility() {
 
 //// NEW ECLIPSER - PICK ELEMENTS TO HIDE //////////////////////////////////////////
 function select_elements() {
+  selecting = true;
   make_box(); // creates the overlay box div, add to body
   let last_el;
 
@@ -213,6 +218,7 @@ function select_elements() {
 } // select_elements()
 
 function stop_selecting() {
+  selecting = false;
   $("body").off("mousemove.eclipser");
   $("body").off("click.eclipser");
   $('body').off("keydown.eclipser");

@@ -1,28 +1,61 @@
+import { useState, useEffect } from "react";
 import {
     MdAddCircle,           // new filter
     MdSettings,            // settings
+    MdPlaylistAdd,
+    MdPlaylistAddCheck,
+    MdQueue,
+    MdCheckBox
 } from "react-icons/md";
 
 const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
     console.log("R: Menu")
 
+    const [selecting, setSelecting] = useState(false)
+    
+    useEffect(() => {
+            // SELECTING    
+    messageCurrentTab('selecting')
+    .then(r => { setSelecting(r); console.log('selecgting :', selecting) })
+    .catch(e => { console.log(e) });
+
+    }, [])
+
+
+
+
     return (
         <div>
-            <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>
+
 
             <div id="topMenu">
                 {/* NEW FILTER */}
-                <button
-                    id="buttonNew"
-                    className="topButton"
-                    onClick={() => {
-                        messageCurrentTab('new');
-                        window.close()
-                    }}
-                >
-                    <MdAddCircle className="buttonIcon" />
-                    <span> New Filter </span>
-                </button>
+
+                {selecting ?
+                    <button 
+                    id="buttonStop"
+                        className="topButton"
+                    onClick={() => { 
+                        messageCurrentTab('stop') 
+                        setSelecting(false)
+                    }}>
+                        <MdCheckBox className="buttonIcon" />
+                        <span> Done Filtering </span>
+                        </button>
+                    :
+                    <button
+                        id="buttonNew"
+                        className="topButton"
+                        onClick={() => {
+                            messageCurrentTab('new');
+                            window.close()
+                        }}
+                    >
+                        <MdAddCircle className="buttonIcon" />
+                        <span> New Filter </span>
+                    </button>
+                }
+
 
                 {/* SETTINGS */}
                 <button
