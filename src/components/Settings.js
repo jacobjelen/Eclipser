@@ -5,8 +5,6 @@ import { useState } from 'react'
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     console.log("R: Settings")
     
-    
-
     const isNowActiveTime = (timeFrom, timeTo) => {
         const now = new Date();
         const timeNow = now.getHours() + ":" + now.getMinutes()
@@ -30,13 +28,13 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     }
     
     let timeTo, timeFrom
-    const updateSettings = () => {
+    
+    
+    const updateTimeSettings = (timeFrom, timeTo) => {
         const temp_localSettings = merge({}, localSettings)
         temp_localSettings.general.activeTimeFrom = timeFrom
         temp_localSettings.general.activeTimeTo = timeTo
-        console.log(isNowActiveTime(timeFrom, timeTo))
         temp_localSettings.general.active = isNowActiveTime(timeFrom, timeTo)
-        console.log(temp_localSettings.general)
         setStorageSettings(temp_localSettings)
         setLocalSettings(temp_localSettings)
         
@@ -65,10 +63,10 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <span>From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"
                     value={localSettings.general.activeTimeFrom}
-                    onChange={(event) => {
-                        // setTimeFrom(event.target.value)
-                        timeFrom = event.target.value
-                        updateSettings()
+                    onChange={(event) => {                     
+                        updateTimeSettings(
+                            document.getElementById('activeTimeFrom').value, 
+                            document.getElementById('activeTimeTo').value)
                     }
                     }
                 ></input>
@@ -77,9 +75,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <input type="time" id="activeTimeTo" className="timeInput"
                     value={localSettings.general.activeTimeTo}
                     onChange={(event) => { 
-                        // setTimeTo(event.target.value) 
-                        timeTo = event.target.value;
-                        updateSettings()
+                        updateTimeSettings(
+                            document.getElementById('activeTimeFrom').value, 
+                            document.getElementById('activeTimeTo').value)
                     }}
                 ></input>
             </div>

@@ -2,7 +2,7 @@
 import { merge } from 'lodash'
 import { useState } from 'react'
 
-const Pophead = ({ localSettings, setLocalSettings, setStorageSettings }) => {
+const Pophead = ({ localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
 	console.log('R: Pophead')
 	const [mouseOver, setMouseOver] = useState(false)
 
@@ -39,6 +39,7 @@ const Pophead = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 				temp_localSettings.general.active = !temp_localSettings.general.active
 				setStorageSettings(temp_localSettings)
 				setLocalSettings(temp_localSettings)
+				messageCurrentTab('refresh')
 			}}
 		>
 

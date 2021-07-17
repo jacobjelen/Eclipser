@@ -44,6 +44,7 @@ function App() {
           localSettings={localSettings}
           setLocalSettings={setLocalSettings}
           setStorageSettings={setStorageSettings}
+          messageCurrentTab={messageCurrentTab}
         />
       }
 

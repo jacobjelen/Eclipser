@@ -19,10 +19,12 @@ chrome.runtime.onStartup.addListener(() => {
 
 // STORAGE CHANGE
 chrome.storage.onChanged.addListener(() => {
-  console.log('storage change')
+  console.log('BG storage change')
 
   getStorageSettings()
     .then(settings => {
+      console.log('active time check: ', settings.general.activeTimeCheck)
+      console.log('general active: ', settings.general.active)
       setPeriodicAlarm(settings.general.activeTimeCheck)   // keeping an eye on time, if active time settings are on
       setIcon(settings.general.active)
 
@@ -37,16 +39,22 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
     getStorageSettings()
       .then(settings => {
         if (!settings.general.activeTimeCheck) return
+        console.log('alarm bell: ')
         const tempActive = settings.general.active.toString()   // toString so that tempActive is a new value, not a pointer to result
 
         if (isNowActiveTime(settings.general.activeTimeFrom, settings.general.activeTimeTo)) {
+          console.log('- now is active ')
           settings.general.active = true    // Eclipser active
         } else {
+          console.log('- now is paused ')
           settings.general.active = false   // Eclipser paused
         }
 
         // only update settings if there is a change
         if (settings.general.active.toString() !== tempActive) {
+          
+          console.log("general active = ", settings.general.active.toString(), )
+          console.log('- - updating settings ')
           setStorageSettings(settings)
           refreshCurrentTab()
         }
@@ -125,17 +133,25 @@ function isNowActiveTime(timeFrom, timeTo) {              // function to check i
   const now = new Date();
   const timeNow = now.getHours() + ":" + now.getMinutes()
 
+  console.log("NOW: ", timeNow, " . From: ", timeFrom, " - To: ", timeTo )
+
   if (timeFrom <= timeTo) {
     //DAY
+    console.log('day setting')
+
     if (timeFrom <= timeNow && timeNow <= timeTo) {
+      console.log('isNowActive: YES')
       return true
     } else {
+      console.log('isNowActive: NO')
       return false
+      
     }
-
-  } else {
-    //NIGHT
-    if (timeFrom <= timeNow && timeNow >= timeTo) {
+  } 
+  else {
+    //NIGHT - timeFrom > timeTo => over midnight
+    // active time is when NOW is iether smaller than both (morning) or bigger than both (evening)
+    if ( (timeFrom <= timeNow && timeNow >= timeTo) || (timeFrom >= timeNow && timeNow <= timeTo)) {
       return true
     } else {
       return false
