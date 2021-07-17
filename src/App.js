@@ -15,7 +15,7 @@ export const updated = React.createContext()
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
-
+  console.log('R: App')
   // state that holds allSettings
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
@@ -47,12 +47,6 @@ function App() {
         />
       }
 
-      <button
-        onClick={() => {
-          console.log(localSettings)
-        }}
-      >Log settings</button>
-
       <Menu
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
@@ -68,7 +62,7 @@ function App() {
         />}
 
       {/* display domain of the current active tab */}
-      <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div>
+      {/* <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div> */}
 
       <DomainList
         currentDomain={currentDomain}
@@ -77,6 +71,12 @@ function App() {
         setStorageSettings={setStorageSettings}
         messageCurrentTab={messageCurrentTab}
       />
+
+      <button
+        onClick={() => {
+          console.log(localSettings)
+        }}
+      >Log settings</button>
 
       <Footer />
     </div>

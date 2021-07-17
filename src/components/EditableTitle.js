@@ -5,7 +5,9 @@ import { merge } from 'lodash'
 const EditableTitle = ({ 
     localSettings, setLocalSettings, setStorageSettings, 
     domainName, currentDomain, set, messageCurrentTab }) => {
-
+    
+    console.log("EditableTitle")
+        
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
     const [title, setTitle] = useState(localSettings.domains[domainName].sets[set].title)  // filter(set) title
     const inputRef = useRef()    // close text input if we click anywhere outside of it

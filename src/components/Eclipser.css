@@ -1,4 +1,4 @@
-/* GENERAL */
+/*  GENERAL /////////////////////////////////////////////////*/
 :root{
   --green: rgb(19, 235, 163);
   --dark-green: rgb(27, 167, 120);
@@ -25,6 +25,8 @@
   overflow: hidden; /* Hide scrollbars */
 
 }
+
+/*  POPHEAD /////////////////////////////////////////////////*/
 
 #pophead{
   width: 250px;
@@ -64,6 +66,9 @@
   font-size: 10pt;
 }
 
+
+/*  MENU /////////////////////////////////////////////////*/
+
 #topMenu{
   width:100%;
   display: flex;
@@ -98,30 +103,19 @@
   vertical-align: middle
 }
 
-/* .shadow{
-  filter: drop-shadow(2px 2px 8px grey);
+
+
+/* SETTINGS /////////////////////////////////////////////////*/
+
+/* #settingsMenu{
+  
+  
 } */
 
-footer{
-  width:100%;
-  position: absolute;
-  bottom: 0px;
-  text-align: left;
-  font-family: 'DINPro', sans-serif;
-  background-color: var(--light-gray);
-  padding: 5px 10px ;
-  width: 100%;
-  font-size: 8pt;
-  color: gray;
-}
 
-footer > a{
-  color:var(--dark-green);
-  text-align: right;
-  width: 100%;
-}
 
-/*  DOMAIN LIST */
+
+/*  DOMAIN LIST /////////////////////////////////////////////////*/
 #currentDomain{
   background-color: var(--green);
 }
@@ -135,7 +129,7 @@ footer > a{
 .domainLine{
   width:100%;
   display:grid;
-  grid-template-columns: 10% 70% 20% ;
+  grid-template-columns: 10% 75% 15% ;
   margin: 5px 10px;
   padding: 2px 0px;
   vertical-align: middle;
@@ -179,43 +173,8 @@ footer > a{
   transition: var(--hover-transition);
 }
 
-.lineButtons{
-  justify-content: left;
-  align-items: left;
-  bottom: 50%;
-  font-size: 9pt;
-}
 
-.bin{
-  bottom: 50%;
-  color: var(--grey);
-  transition: var(--hover-transition);
-  vertical-align: middle
-}
-
-.bin:hover{
-  bottom: 50%;
-  color: var(--orange);
-  transition: var(--hover-transition);
-}
-
-.binCheck{
-  bottom: 50%;
-  color: var(--orange);
-  
-  padding: 0px 3px;
-  transition: var(--hover-transition);
-  vertical-align: middle
-}
-
-.binClose{
-  bottom: 50%;
-  color: var(--grey);
-  transition: var(--hover-transition);
-  vertical-align: middle
-}
-
-/*  SET LIST */
+/*  SET LIST /////////////////////////////////////////////////*/
 .setList{
   width: 100%;
 }
@@ -223,7 +182,7 @@ footer > a{
 .setLine{
   width:100%;
   display:grid;
-  grid-template-columns: 80% 20% ;
+  grid-template-columns: 85% 15% ;
   margin: 1px 10px;
   padding: 2px 0px;
   vertical-align: middle;
@@ -252,9 +211,73 @@ footer > a{
 text-decoration: line-through;
 }
 
+/* DELETE BIN /////////////////////////////////////////////////*/ 
+
+.lineButtons{
+  justify-content: middle;
+  align-items: middle;
+  bottom: 50%;
+  font-size: 9pt;
+}
+
+.bin{
+  bottom: 50%;
+  color: var(--grey);
+  /* transition: var(--hover-transition); */
+  vertical-align: middle
+}
+
+.bin:hover{
+  bottom: 50%;
+  color: var(--orange);
+  /* transition: var(--hover-transition); */
+}
+
+.binCheck{
+  bottom: 50%;
+  color: var(--dark-green);
+  
+  /* padding: 0px 3px; */
+  /* transition: var(--hover-transition); */
+  vertical-align: middle
+}
+
+.binClose{
+  bottom: 50%;
+  color: var(--grey);
+  /* transition: var(--hover-transition); */
+  vertical-align: middle
+}
 
 
-/*  OTHER */
+
+
+
+
+/* FOOTER /////////////////////////////////////////////////*/ 
+
+footer{
+  width:100%;
+  position: absolute;
+  bottom: 0px;
+  text-align: left;
+  font-family: 'DINPro', sans-serif;
+  background-color: var(--light-gray);
+  padding: 5px 10px ;
+  width: 100%;
+  font-size: 8pt;
+  color: gray;
+}
+
+footer > a{
+  color:var(--dark-green);
+  text-align: right;
+  width: 100%;
+}
+
+
+
+/*  OTHER /////////////////////////////////////////////////*/
 .hidden{
   display: none !important;
   visibility: hidden !important;
@@ -290,6 +313,7 @@ input[class="toggle"]{
   background: #c6c6c6;
   outline: none;
   border-radius: 10px;
+  vertical-align: middle;
   /* box-shadow: inset 0 0 5px rgba(0,0,0,.2); */
   /* transition: .5s; */
 }

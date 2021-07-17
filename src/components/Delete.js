@@ -8,7 +8,7 @@ import {
 } from "react-icons/ai";
 
 const Delete = ({ action }) => {
-
+    console.log('R: Delete')
     const [confirmVisible, setConfirmVisible] = useState(false) // false-> bin visible; true -> ok or stop visible
 
     return (
@@ -17,24 +17,19 @@ const Delete = ({ action }) => {
                 <AiFillDelete
                     className="bin"
                     onClick={() => {
+                        
                         setConfirmVisible(true)
+                        console.log('bin clicked, confirmVisible: ',confirmVisible)
                     }} />
                 :
-                <div>
                     <AiFillCheckCircle
                         className="binCheck"
                         onClick={() => {
+                            ('bin clicked again')
                             action()
                             setConfirmVisible(false)
                         }} />
-
-                    <AiFillCloseCircle
-                        className="binClose"
-                        onClick={() => {
-                            setConfirmVisible(false)
-                        }} />
-                </div>
-            }
+          }
         </>
     )
 }

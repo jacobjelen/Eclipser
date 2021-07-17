@@ -2,7 +2,7 @@
 import Domain from './Domain';
 
 const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab  }) => {
-    console.log(">> DomainList")
+    console.log("R: DomainList")
 
     return (
         <>

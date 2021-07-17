@@ -4,6 +4,8 @@ import {
 } from "react-icons/md";
 
 const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
+    console.log("R: Menu")
+
     return (
         <div>
             <button onClick={() => { messageCurrentTab('stop') }}>Stop</button>

@@ -7,7 +7,7 @@ import { merge } from 'lodash'
 import { BsCaretRightFill } from "react-icons/bs";  // expand arrow
 
 const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
-
+    console.log('R: Domain')
     // HOOKS
     const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(expand)     // is the domain expanded = setList visible?

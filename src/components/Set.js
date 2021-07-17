@@ -8,6 +8,9 @@ import { useState } from 'react'
 
 
 const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
+    console.log("R: Set")
+
+   
     const [hover, setHover] = useState(false)       // check if mouse is over the setLine => style and display buttons accordingly
 
     return (

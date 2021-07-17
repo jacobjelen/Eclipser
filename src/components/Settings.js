@@ -3,7 +3,8 @@ import { merge } from 'lodash'
 import { useState } from 'react'
 
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
-
+    console.log("R: Settings")
+    
     const [timeFrom, setTimeFrom] = useState(localSettings.general.activeTimeFrom)
     const [timeTo, setTimeTo] = useState(localSettings.general.activeTimeTo)
 
