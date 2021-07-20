@@ -1,21 +1,3 @@
-POPUP (App.js):
-
-_____________________________
-REACT COMPONENT STRUCTURE:
-App
-    Pophead
-
-    (buttons)
-    
-    DomainList
-        Domain 
-            SetList
-                Set
-
-    Footer
-
-______________________________________________________________
-
 QUESTIONS ????
     
     - how to hide the content before it loads???
@@ -24,7 +6,10 @@ QUESTIONS ????
     - re-run the content script when a filter is deleted
         - not working. content script runs but nothing changes on the tab
 
-    - Deteling sets works on backend BUT does not rerender the UI right
+    - when changing modes, currentDomain is lost => no refresh of current page
+
+    - hide scroll bar but still scroll
+
 
     - BACKGROUND.JS:
         - import lodash from npm: https://nkaushik.com/javascript/solved-cannot-use-import-statement-outside-module/
@@ -46,17 +31,20 @@ ______________________________________________________________
 TO DO: 
 
 + fix EditableTitle
-    - rewrite it from scratch? 
-    - somehow it is getting title from other instances of the set component
+    + removed the title state, stored title is updated with each character
 
-- remove submit button from active time settings
-
-- add default sets for Twitter, Netflix, Amazon...
++ remove submit button from active time settings
+    + removed timeFrom, timeTo states, stored time settins updated with each change
 
 + new filter / stop selecting
+    + variable called selecting in content script represents if we are currently selecting elemet or not
+    menu sends 'selecting' message to content scritp, gets a response true/false
 
 - block this domain ?
     - show warning = 30sec unloc time
+
+- add default sets for Twitter, Netflix, Amazon...
+
 
 CSS
 - overall design?

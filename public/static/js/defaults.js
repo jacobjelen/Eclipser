@@ -13,6 +13,7 @@ const default_settings = {
         'facebook.com': {
             url: ['facebook.com', 'fb.com'],
             active: true,
+            blocked: true,
             sets: {
                 feed:{
                     title:'Feed',
@@ -44,6 +45,7 @@ const default_settings = {
         'youtube.com': {
             url: ['youtube.com', 'youtu.be'],
             active: true,
+            blocked: false,
             sets: {
                 recommended:{
                     title:'Recommended Videos',
@@ -74,6 +76,7 @@ const default_settings = {
         },
         'brainjar.com': {
             active: true,
+            blocked: false,
             sets: {
                 set1:{
                     title:'Set 1',

@@ -21,6 +21,8 @@ function App() {
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
 
+  const myDiv = <h1>HELLO</h1>
+
   useEffect(() => {   //runs once when app loads
     console.log('>> useEffect App')
     // SETTINGS
@@ -31,7 +33,7 @@ function App() {
     // CURRENT DOMAIN    
     messageCurrentTab('domain')
       .then(r => { setCurrentDomain(r) })
-      .catch(e => { setCurrentDomain('') });
+      .catch(e => { console.log(e); setCurrentDomain('') });
 
   }, [])  // if [] is empty, useEffect only runs once on component mount
 
@@ -47,7 +49,6 @@ function App() {
           messageCurrentTab={messageCurrentTab}
         />
       }
-
       <Menu
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
@@ -63,21 +64,24 @@ function App() {
         />}
 
       {/* display domain of the current active tab */}
-      {/* <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div> */}
+      <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div>
 
-      <DomainList
-        currentDomain={currentDomain}
-        localSettings={localSettings}
-        setLocalSettings={setLocalSettings}
-        setStorageSettings={setStorageSettings}
-        messageCurrentTab={messageCurrentTab}
-      />
+      {currentDomain &&
+            <DomainList
+            currentDomain={currentDomain}
+            localSettings={localSettings}
+            setLocalSettings={setLocalSettings}
+            setStorageSettings={setStorageSettings}
+            messageCurrentTab={messageCurrentTab}
+          />
+      }
 
-      <button
+
+      {/* <button
         onClick={() => {
           console.log(localSettings)
         }}
-      >Log settings</button>
+      >Log settings</button> */}
 
       <Footer />
     </div>

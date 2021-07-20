@@ -14,23 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('Message Received: ', message)
 
-  if (message == 'refresh') {
-    set_elements_visibility();
-  }
-
-  //'new' button in the popup is clicked
-  if (message === 'new') select_elements();
-
-  //'stop' button in the popup is clicked
-  if (message === 'stop') stop_selecting();
-
-  if (message === 'selecting') {
-    sendResponse(selecting);
-  }
-
-  if (message === 'domain') {
-    sendResponse(noWWW(window.location.hostname));
-  }
+  if (message === 'refresh') set_elements_visibility(); 
+  if (message === 'new') select_elements();   //'new' button in the popup is clicked
+  if (message === 'stop') stop_selecting();   //'stop' button in the popup is clicked
+  if (message === 'selecting') sendResponse(selecting) ;
+  if (message === 'domain') sendResponse(noWWW(window.location.hostname)); 
 });
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
@@ -60,6 +48,16 @@ function set_elements_visibility() {
     if (!settings.domains[domain].active) {
       removeEclipserStyle()
       return
+    }
+
+    if (settings.domains[domain].blocked){
+      document.body.innerHTML =`
+          <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: red">
+            <p style="position: relative; top: 40%; display: block; font-size: 66px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">
+              The website ${domain} successfully blocked !
+            </p>
+          </div>
+    `;
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content

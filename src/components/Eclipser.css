@@ -2,14 +2,14 @@
 :root{
   --green: rgb(19, 235, 163);
   --dark-green: rgb(27, 167, 120);
-  --light-gray: #f1f1f1;
+  --light-gray: #A3B1C0;
   --orange: #ff4b1e;
   --grey: #808080;
-  --dark-grey: #313438;
-  --black: #242729;
+  --dark-grey: #2F374C;
+  --dark-grey2: #313438;
+  --black: #202738;
+  --black1: #242729;
   --black2: #1D2226;
-
- 
 
   --hover-transition: 0.3s;
 
@@ -21,14 +21,13 @@
   height: 600px;
   margin: 0;
   padding: 0;
-  /* background-color: var(--black);   */
+  background-color: var(--black);  
   font-family: 'DINPro', sans-serif;
   font-weight: 400;
-  color: gray;
-
-  overflow: hidden; /* Hide scrollbars */
-
+  color: white;
 }
+
+
 
 /*  POPHEAD /////////////////////////////////////////////////*/
 
@@ -42,15 +41,15 @@
 }
 
 #pophead:hover{
-  background-color: var(--dark-green);
+  color: var(--dark-green);
 }  
 
 .popheadActive{
-  background-color: var(--green);
+  color: var(--green);
 }  
 
 .popheadPaused{
-  background-color: var(--grey);
+  color: var(--grey);
 }  
 
 .halfOpacity{
@@ -127,19 +126,20 @@
 }
 
 .domainDiv{
-  background-color: var(--light-gray);
-  
-  margin: 0px 5px; 
+  background-color: var(--dark-grey);
+  color: white;
+  margin: 0px 0px 0px 10px; 
+  border-radius: 5px 0px 0px 5px;
 }
 
 .domainLine{
   width:100%;
   display:grid;
-  grid-template-columns: 10% 80% 15% ;
+  grid-template-columns: 80% 20% ;
   margin: 5px 0px;
-  padding: 2px 0px;
+  padding: 4px 0px;
   /* vertical-align: middle; */
-  color: var(--black);
+  color: white;
 }
 
 .domainArrowDiv{
@@ -163,8 +163,19 @@
 
 .domainLine__arrow:hover{
   color: var(--dark-green);
-  transform: rotate(90deg);
-  transition: var(--hover-transition);
+  /* transform: rotate(90deg); */
+  /* transition: var(--hover-transition); */
+}
+
+.domainIconNameDiv{
+  display: grid;
+  grid-template-columns: 20% 80% ;
+  /* transition: var(--hover-transition); */
+}
+
+.domainNameDiv:hover{
+  color: var(--dark-green);
+  /* transition: var(--hover-transition); */
 }
 
 .domainName{
@@ -172,15 +183,39 @@
   font-size: 10pt;
   display: inline-block;
   vertical-align: middle;
-  transition: var(--hover-transition);
+  padding-bottom: 1px;
+  margin-left: 2px;
+  /* transition: var(--hover-transition); */
   /* margin: 2px 10px 8px; */
 }
 
-.domainName:hover{
-  color: var(--dark-green);
-  transition: var(--hover-transition);
+
+/* STATUS ICON */
+.statusIconDiv{
+  padding: 0px 5px;
 }
 
+.statusIcon{
+  vertical-align: middle;
+}
+
+#iconBlocked{
+  transform: rotate(95deg);
+  /* transition: var(--hover-transition); */
+
+}
+
+#iconFiltered{
+  color: inherit;
+  /* transition: var(--hover-transition); */
+
+}
+
+#iconPasive{
+  color: var(--light-gray);
+  /* transition: var(--hover-transition); */
+
+}
 
 /*  SET LIST /////////////////////////////////////////////////*/
 .setList{
@@ -191,10 +226,10 @@
 .setLine{
   width:100%;
   display:grid;
-  grid-template-columns: 85% 15% ;
+  grid-template-columns: 75% 25% ;
   padding: 0px 0px 2px 10px;
   vertical-align: middle;
-  color: var(--black);
+  color: white;
 }
 
 .setRename{
@@ -222,15 +257,18 @@ text-decoration: line-through;
 /* DELETE BIN /////////////////////////////////////////////////*/ 
 
 .lineButtons{
-  justify-content: middle;
-  align-items: middle;
   bottom: 50%;
   font-size: 9pt;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-around;
 }
 
 .bin{
   bottom: 50%;
-  color: var(--grey);
+  color: white;
+  margin-right: 8px;
   /* transition: var(--hover-transition); */
   vertical-align: middle
 }
@@ -267,18 +305,18 @@ text-decoration: line-through;
 footer{
   width:100%;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   text-align: left;
-  font-family: 'DINPro', sans-serif;
-  background-color: var(--light-gray);
-  padding: 5px 10px ;
+  font-family: "DINPro",sans-serif;
+  background-color: var(--dark-grey);
+  padding: 5px 10px;
   width: 100%;
   font-size: 9pt;
-  color: gray;
+  color: var(--light-gray);
 }
 
 footer > a{
-  color:var(--dark-green);
+  color:white;
   text-align: right;
   width: 100%;
 }
@@ -286,13 +324,18 @@ footer > a{
 
 
 /*  OTHER /////////////////////////////////////////////////*/
+
+.blockFilterButton{
+  stroke-width: 2;
+}
+
 .hidden{
   display: none !important;
   visibility: hidden !important;
 }
 
 .passive{
-  color: var(--grey);
+  color: var(--light-gray);
 }
 
 #settingsMenu{
