@@ -10,6 +10,10 @@ QUESTIONS ????
 
     - hide scroll bar but still scroll
 
+    - Will everyone see DIN Pro Font??
+
+
+
 
     - BACKGROUND.JS:
         - import lodash from npm: https://nkaushik.com/javascript/solved-cannot-use-import-statement-outside-module/

@@ -66,7 +66,6 @@ function App() {
       {/* display domain of the current active tab */}
       <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div>
 
-      {currentDomain &&
             <DomainList
             currentDomain={currentDomain}
             localSettings={localSettings}
@@ -74,7 +73,7 @@ function App() {
             setStorageSettings={setStorageSettings}
             messageCurrentTab={messageCurrentTab}
           />
-      }
+      
 
 
       {/* <button
@@ -91,12 +90,6 @@ function App() {
 export default App;
 
 // FUNCTIONS //////////////////////////////////////
-// function messageCurrentTab(message) {
-//   console.log('message current tab')
-//   chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {			// message the current website / active tab
-//     chrome.tabs.sendMessage(tabs[0].id, message);
-//   });//tabs query
-// }
 
 function messageCurrentTab(message) {
   return new Promise((resolve, reject) => {

@@ -2,9 +2,14 @@
 import { merge } from 'lodash'
 import { useState } from 'react'
 
+import {
+    FiCheckCircle,
+    FiCircle,       // empty circle
+} from "react-icons/fi";
+
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     console.log("R: Settings")
-    
+
     const isNowActiveTime = (timeFrom, timeTo) => {
         const now = new Date();
         const timeNow = now.getHours() + ":" + now.getMinutes()
@@ -26,10 +31,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             }
         }
     }
-    
-    let timeTo, timeFrom
-    
-    
+
     const updateTimeSettings = (timeFrom, timeTo) => {
         const temp_localSettings = merge({}, localSettings)
         temp_localSettings.general.activeTimeFrom = timeFrom
@@ -37,13 +39,25 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
         temp_localSettings.general.active = isNowActiveTime(timeFrom, timeTo)
         setStorageSettings(temp_localSettings)
         setLocalSettings(temp_localSettings)
-        
     }
 
     return (
-        <div id="settingsMenu">
+        <div id="settings">
+
             <div className="settingsItem" id="timeActive">
-                Eclipser Active Time
+
+                <div className="statusIconDiv">
+                    {localSettings.general.activeTimeCheck ?
+                        <FiCheckCircle />
+                        :
+                        <FiCircle />
+                    }
+                </div>
+
+
+                <span>Eclipser Active Time </span>
+
+
 
                 <input type="checkbox" id="activeTimeCheck" className="toggle"
                     checked={localSettings.general.activeTimeCheck}
@@ -63,9 +77,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <span>From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"
                     value={localSettings.general.activeTimeFrom}
-                    onChange={(event) => {                     
+                    onChange={(event) => {
                         updateTimeSettings(
-                            document.getElementById('activeTimeFrom').value, 
+                            document.getElementById('activeTimeFrom').value,
                             document.getElementById('activeTimeTo').value)
                     }
                     }
@@ -74,9 +88,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <span>to</span>
                 <input type="time" id="activeTimeTo" className="timeInput"
                     value={localSettings.general.activeTimeTo}
-                    onChange={(event) => { 
+                    onChange={(event) => {
                         updateTimeSettings(
-                            document.getElementById('activeTimeFrom').value, 
+                            document.getElementById('activeTimeFrom').value,
                             document.getElementById('activeTimeTo').value)
                     }}
                 ></input>
@@ -84,7 +98,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 
             <hr></hr>
 
-            <div>
+            <div className="settingsItem">
                 Show Reminder Bar
 
                 <input type="checkbox" id="showReminderBar" className="toggle"
@@ -102,10 +116,10 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             <hr></hr>
 
             <div className="settingsItem" id="settingsItem__reset">
-                <button onClick={() => {
+                <span onClick={() => {
                     chrome.runtime.sendMessage('reset')
                     window.location.reload()
-                }}>Reset All Settings and Domains</button>
+                }}>Reset All Settings and Domains</span>
 
             </div>
 

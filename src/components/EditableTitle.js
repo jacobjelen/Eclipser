@@ -11,6 +11,14 @@ const EditableTitle = ({
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
     const inputRef = useRef()    // close text input if we click anywhere outside of it
 
+    const title = (() => {
+        if( localSettings.domains[domainName].sets[set].title.toString().length <=25){
+            return localSettings.domains[domainName].sets[set].title.toString()
+        }else{
+            return localSettings.domains[domainName].sets[set].title.toString().substring(1,25) + "..."
+        }  
+    })()
+
     // close text input if we click anywhere outside of it
     // src: https://www.youtube.com/watch?v=eWO1b6EoCnQ
     useEffect(() => {
@@ -42,7 +50,7 @@ const EditableTitle = ({
     }
 
     return (
-        <div className="setName"
+        <div className={ localSettings.domains[domainName].sets[set].active ? "setName" : "setName passive"}
             
             // activate/deactive filter on click
             onClick={(event) => {
@@ -55,8 +63,7 @@ const EditableTitle = ({
 
                 if(domainName === currentDomain && localSettings.domains[domainName].active){
                     messageCurrentTab('refresh')
-                }
-                
+                } 
             }}
 
             // show text input on double click
@@ -67,7 +74,7 @@ const EditableTitle = ({
         >
 
             {!inputVisible ?
-                localSettings.domains[domainName].sets[set].title.toString()
+                title
                 :
                 <input
                     ref={inputRef}

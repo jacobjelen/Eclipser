@@ -17,6 +17,11 @@ import {
 
 } from "react-icons/ri";
 
+import {
+    FiTrash2,
+    FiCheckCircle
+
+} from "react-icons/fi";
 
 
 const Delete = ({ action }) => {
@@ -32,7 +37,7 @@ const Delete = ({ action }) => {
                         setConfirmVisible(true)
                         console.log('bin clicked, confirmVisible: ', confirmVisible)
                     }} >
-                    <RiDeleteBin2Fill />
+                    <FiTrash2 />
                 </div>
                 :
                 <div
@@ -42,7 +47,7 @@ const Delete = ({ action }) => {
                         action()
                         setConfirmVisible(false)
                     }}>
-                    <RiCheckboxCircleFill />
+                    <FiCheckCircle />
                 </div>
             }
         </>

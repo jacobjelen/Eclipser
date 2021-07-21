@@ -38,8 +38,6 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                             console.log("domain name: ", domainName, " set: ", set)
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
                             delete tempLocalSettings.domains[domainName].sets[set]
-                            // console.log(localSettings)
-                            // console.log(tempLocalSettings)
                             setStorageSettings(tempLocalSettings)
                             setLocalSettings(tempLocalSettings)
                             if(domainName === currentDomain){

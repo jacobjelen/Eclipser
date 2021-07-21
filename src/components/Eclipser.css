@@ -2,18 +2,28 @@
 :root{
   --green: rgb(19, 235, 163);
   --dark-green: rgb(27, 167, 120);
-  --light-gray: #A3B1C0;
-  --orange: #ff4b1e;
+  --light-grey: #A3B1C0;
+  --orange: #ff7300;
   --grey: #808080;
   --dark-grey: #2F374C;
-  --dark-grey2: #313438;
   --black: #202738;
-  --black1: #242729;
-  --black2: #1D2226;
+
+  --block-margin: 0px 0px 0px 10px;
+  --border-radius:5px 0px 0px 5px;
 
   --hover-transition: 0.3s;
 
-  margin:0
+  margin:0;
+  background-color: var(--black);  
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 .body{
@@ -21,7 +31,6 @@
   height: 600px;
   margin: 0;
   padding: 0;
-  background-color: var(--black);  
   font-family: 'DINPro', sans-serif;
   font-weight: 400;
   color: white;
@@ -110,15 +119,27 @@
   background-color: #ff4b1e;
 }
 
-/* SETTINGS /////////////////////////////////////////////////*/
-
-/* #settingsMenu{
-  
-  
-} */
 
 
+/* SETTINGS /////////////////////////////////////////////////*/ 
 
+#settings{
+  background-color: var(--dark-grey);
+  color: #fff;
+  margin: var(--block-margin);
+  border-radius: var(--border-radius);
+}
+
+.settingsItem{
+  margin: 5px 0px;
+  padding: 4px 0px;
+  font-weight: 500;
+  font-size: 10pt;
+}
+
+#settingsItem__reset:hover{
+color: var(--orange);
+}
 
 /*  DOMAIN LIST /////////////////////////////////////////////////*/
 #currentDomain{
@@ -128,17 +149,16 @@
 .domainDiv{
   background-color: var(--dark-grey);
   color: white;
-  margin: 0px 0px 0px 10px; 
-  border-radius: 5px 0px 0px 5px;
+  margin: var(--block-margin);
+  border-radius: var(--border-radius);
 }
 
 .domainLine{
   width:100%;
   display:grid;
-  grid-template-columns: 80% 20% ;
+  grid-template-columns: 83% 7% 10% ;
   margin: 5px 0px;
   padding: 4px 0px;
-  /* vertical-align: middle; */
   color: white;
 }
 
@@ -162,7 +182,7 @@
 }
 
 .domainLine__arrow:hover{
-  color: var(--dark-green);
+  color: var(--green);
   /* transform: rotate(90deg); */
   /* transition: var(--hover-transition); */
 }
@@ -170,21 +190,23 @@
 .domainIconNameDiv{
   display: grid;
   grid-template-columns: 20% 80% ;
+ 
   /* transition: var(--hover-transition); */
 }
 
 .domainNameDiv:hover{
-  color: var(--dark-green);
+  color: var(--green);
   /* transition: var(--hover-transition); */
 }
 
 .domainName{
   font-weight: 500;
   font-size: 10pt;
-  display: inline-block;
+  white-space: nowrap;
   vertical-align: middle;
   padding-bottom: 1px;
   margin-left: 2px;
+
   /* transition: var(--hover-transition); */
   /* margin: 2px 10px 8px; */
 }
@@ -226,7 +248,7 @@
 .setLine{
   width:100%;
   display:grid;
-  grid-template-columns: 75% 25% ;
+  grid-template-columns: 79% 21% ;
   padding: 0px 0px 2px 10px;
   vertical-align: middle;
   color: white;
@@ -238,20 +260,23 @@
   font-family: inherit;
   font-weight: 300;
   font-size: 10pt;
-  padding: 0px
+  padding: 0px;
+  color: white;
+  background-color: var(--black);
 }
 
 .setName{
   font-weight: 300;
   font-size: 10pt;
-  color: black;
   position: relative;
   margin: 0px 15px 2px;
   /* padding-left: 22px; */
 }
 
 .setName:hover{
-text-decoration: line-through;
+text-decoration: underline;
+/* color: var(--light-grey); */
+/* padding-left: 4px; */
 }
 
 /* DELETE BIN /////////////////////////////////////////////////*/ 
@@ -262,7 +287,7 @@ text-decoration: line-through;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .bin{
@@ -281,21 +306,12 @@ text-decoration: line-through;
 
 .binCheck{
   bottom: 50%;
-  color: var(--dark-green);
-  
+  color: var(--green);
+  margin-right: 8px;
   /* padding: 0px 3px; */
   /* transition: var(--hover-transition); */
   vertical-align: middle
 }
-
-.binClose{
-  bottom: 50%;
-  color: var(--grey);
-  /* transition: var(--hover-transition); */
-  vertical-align: middle
-}
-
-
 
 
 
@@ -304,15 +320,15 @@ text-decoration: line-through;
 
 footer{
   width:100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   text-align: left;
   font-family: "DINPro",sans-serif;
   background-color: var(--dark-grey);
   padding: 5px 10px;
-  width: 100%;
   font-size: 9pt;
   color: var(--light-gray);
+  border-top: var(--black) solid 2px;
 }
 
 footer > a{
@@ -325,9 +341,6 @@ footer > a{
 
 /*  OTHER /////////////////////////////////////////////////*/
 
-.blockFilterButton{
-  stroke-width: 2;
-}
 
 .hidden{
   display: none !important;
@@ -335,12 +348,10 @@ footer > a{
 }
 
 .passive{
-  color: var(--light-gray);
+  color: var(--grey);
 }
 
-#settingsMenu{
-  padding: 0px 7px
-}
+
 
 input[type="time"][class="timeInput"]{
   border: none;
@@ -348,7 +359,9 @@ input[type="time"][class="timeInput"]{
   font-family: inherit;
   font-weight: 300;
   font-size: 10pt;
-  padding: 0px
+  padding: 0px;
+  color: white;
+  background-color: var(--dark-grey);
 }
 input[type="time"]::-webkit-calendar-picker-indicator {
     background: none;

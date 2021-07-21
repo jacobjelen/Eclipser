@@ -11,6 +11,7 @@ import {
     FiCrosshair,
     FiSlash,        // block
     FiCircle,       // empty circle
+    FiChevronsDown
 } from "react-icons/fi";
 
 const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
@@ -80,7 +81,11 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                     </span>
 
                     <span className="domainName">
-                        {domainName[0].toUpperCase() + domainName.substring(1)}
+                        {domainName.length <= 25 ?
+                            domainName[0].toUpperCase() + domainName.substring(1)
+                            :
+                            domainName[0].toUpperCase() + domainName.substring(1,25) + "..."
+                        }
                     </span>
 
                 </div>
@@ -104,17 +109,18 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                             }}
                         />
                     }
+                </div>
 
-                    {/* EXPAND ARROW */}
-                    < div className="domainArrowDiv"
-                        onClick={() => setExpanded(!expanded)}
-                    >
-                        <BsCaretDownFill
-                            className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"}
-                        />
-                    </div>
+                {/* EXPAND ARROW */}
+                < div className="domainArrowDiv"
+                    onClick={() => setExpanded(!expanded)}
+                >
+                    <FiChevronsDown
+                        className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"}
+                    />
                 </div>
             </div>
+
 
 
             {/* SET LIST
