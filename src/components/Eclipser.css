@@ -8,6 +8,12 @@
   --dark-grey: #2F374C;
   --black: #202738;
 
+  --title-font-weight: 500;       /* domain name, main settings lines */
+  --title-font-size: 10pt;
+  
+  --subtitle-font-weight: 300;    /* sets, sub settings */
+  --subtitle-font-size: 10pt;
+
   --block-margin: 0px 0px 0px 10px;
   --border-radius:5px 0px 0px 5px;
 
@@ -36,7 +42,9 @@ html {
   color: white;
 }
 
-
+hr{
+  border: 2px solid var(--black)
+}
 
 /*  POPHEAD /////////////////////////////////////////////////*/
 
@@ -78,7 +86,6 @@ html {
   font-size: 10pt;
 }
 
-
 /*  MENU /////////////////////////////////////////////////*/
 
 #topMenu{
@@ -119,8 +126,6 @@ html {
   background-color: #ff4b1e;
 }
 
-
-
 /* SETTINGS /////////////////////////////////////////////////*/ 
 
 #settings{
@@ -130,14 +135,54 @@ html {
   border-radius: var(--border-radius);
 }
 
-.settingsItem{
-  margin: 5px 0px;
-  padding: 4px 0px;
-  font-weight: 500;
-  font-size: 10pt;
+.settingsMainLine{
+  font-weight: var(--title-font-weight);;
+  font-size: var(--title-font-size);
+  vertical-align: middle;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  margin: 5px 0;
+  padding: 4px 0;
+  color: #fff;
 }
 
-#settingsItem__reset:hover{
+.settingsMainLine:hover{
+  color: var(--green);
+}
+
+.settingsSub{
+  margin: 0px 0px 2px 25px;
+  padding: 4px 0;
+  color: #fff;
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
+}
+
+.timeLabel{
+  padding-right: 7px;
+}
+
+input[type="time"][class="timeInput"]{
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
+  padding: 0px;
+  color: inherit;
+  background-color: var(--dark-grey);
+}
+
+input[type="time"][class="timeInput"]:hover{
+  color:var(--green)
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+}
+
+#resetSettings:hover{
 color: var(--orange);
 }
 
@@ -200,8 +245,8 @@ color: var(--orange);
 }
 
 .domainName{
-  font-weight: 500;
-  font-size: 10pt;
+  font-weight: var(--title-font-weight);;
+  font-size: var(--title-font-size);
   white-space: nowrap;
   vertical-align: middle;
   padding-bottom: 1px;
@@ -258,16 +303,16 @@ color: var(--orange);
   border: none;
   outline: none;
   font-family: inherit;
-  font-weight: 300;
-  font-size: 10pt;
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
   padding: 0px;
   color: white;
   background-color: var(--black);
 }
 
 .setName{
-  font-weight: 300;
-  font-size: 10pt;
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
   position: relative;
   margin: 0px 15px 2px;
   /* padding-left: 22px; */
@@ -351,59 +396,8 @@ footer > a{
   color: var(--grey);
 }
 
-
-
-input[type="time"][class="timeInput"]{
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 10pt;
-  padding: 0px;
-  color: white;
-  background-color: var(--dark-grey);
-}
-input[type="time"]::-webkit-calendar-picker-indicator {
-    background: none;
-}
-
-/* Slider Inputs */
-/* SRC: https://www.youtube.com/watch?v=BQSNBa3gZJU */
-input[class="toggle"]{
-  position: relative;
-  width: 24px;
-  height: 12px;
-  -webkit-appearance: none;
-  background: #c6c6c6;
-  outline: none;
-  border-radius: 10px;
-  vertical-align: middle;
-  /* box-shadow: inset 0 0 5px rgba(0,0,0,.2); */
-  /* transition: .5s; */
-}
-
-input:checked[class="toggle"]{
-  background: var(--green);
-  vertical-align: middle;
-}
-
-input[class="toggle"]:before{
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 6px;
-  top: 0;
-  left: 0;
-  margin: 3px;
-  background: #fff;
-  /*transform: scale(1.1);
-  /*box-shadow: 0 2px 5px rgba(0,0,0,.2);*/
-  /* transition: .5s; */
-}
-
-input:checked[class="toggle"]:before{
-  left:12px;
+.orange{
+  color: var(--orange);
 }
 
 

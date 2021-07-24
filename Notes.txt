@@ -10,10 +10,9 @@ QUESTIONS ????
 
     - hide scroll bar but still scroll
 
+    - stop Netflix video... forEach does not go through all sets?? 
+
     - Will everyone see DIN Pro Font??
-
-
-
 
     - BACKGROUND.JS:
         - import lodash from npm: https://nkaushik.com/javascript/solved-cannot-use-import-statement-outside-module/
@@ -44,21 +43,26 @@ TO DO:
     + variable called selecting in content script represents if we are currently selecting elemet or not
     menu sends 'selecting' message to content scritp, gets a response true/false
 
-- block this domain ?
++ block this domain ?
     - show warning = 30sec unloc time
 
-- add default sets for Twitter, Netflix, Amazon...
+- check URL list, not domainName
+
+- add default sets for 
+    Twitter, 
+    Netflix, 
+    x Reddit
+    + Amazon...
+
+- load DIN font
+    
 
 
 CSS
-- overall design?
-- settings
+- blocked screen
+- menu button
+- pophead color
 
-- hover on domains/SetList
-- expand arrow pointing down when expanded
-- active/paused filters formating
-    - line through
-    - checkbox? slider / dot 
 
 
 

@@ -52,8 +52,8 @@ function set_elements_visibility() {
 
     if (settings.domains[domain].blocked){
       document.body.innerHTML =`
-          <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: red">
-            <p style="position: relative; top: 40%; display: block; font-size: 66px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">
+          <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #2F374C">
+            <p style="position: relative; top: 40%; display: block; font-family: 'DINPro', sans-serif; font-size: 66px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">
               The website ${domain} successfully blocked !
             </p>
           </div>
@@ -70,8 +70,8 @@ function set_elements_visibility() {
           position: "absolute",
           top: "0%",
           width: "100%",
-          height: "20px",
-          zIndex: 99999,
+          height: "40px",
+          zIndex: 99999999,
           background: "rgba(19, 235, 163, 1)",
 
           color: "white",
@@ -99,10 +99,20 @@ function set_elements_visibility() {
         // for each selector in the set
         settings.domains[domain].sets[set].selectors.forEach(
           (selector) => {
-            console.log('6a - ECLIPSED: ' + selector)
+            console.log('5a - ECLIPSED: ' + selector)
 
+            // ???
+            it = document.querySelector(selector)
+            if(it){
+              it.classList.add("eclipsed")
+              it.pause()  // will pause video/audio
+              it.trigger('pause')
+            }
+             
             document.querySelectorAll(selector).forEach((item) => {
               item.classList.add("eclipsed");
+              item.pause()  // will pause video/audio
+              item.trigger('pause')
             })
 
           } //selector
@@ -116,6 +126,7 @@ function set_elements_visibility() {
             console.log('6b - UN-Hidden: ' + selector)
             document.querySelectorAll(selector).forEach((item) => {
               item.classList.remove("eclipsed");
+              item.play()
             })
 
           } //selector
@@ -267,6 +278,7 @@ function make_box() {
     .css({ 
       display: "none",
       position: "fixed",
+      zIndex: 99999999,
       bottom: "0%",
       width: "100%",
       padding: "2px 5px",

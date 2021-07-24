@@ -55,26 +55,25 @@ function App() {
         messageCurrentTab={messageCurrentTab}
       />
 
-      {settingsVisible &&
+      {settingsVisible ?
         <Settings
           localSettings={localSettings}
           setLocalSettings={setLocalSettings}
           setStorageSettings={setStorageSettings}
           messageCurrentTab={messageCurrentTab}
-        />}
-
-      {/* display domain of the current active tab */}
-      <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div>
-
-            <DomainList
+        />
+      :
+      <DomainList
             currentDomain={currentDomain}
             localSettings={localSettings}
             setLocalSettings={setLocalSettings}
             setStorageSettings={setStorageSettings}
             messageCurrentTab={messageCurrentTab}
           />
-      
+      }
 
+      {/* display domain of the current active tab */}
+      {/* <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div> */}
 
       {/* <button
         onClick={() => {

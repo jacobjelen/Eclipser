@@ -13,7 +13,7 @@ const default_settings = {
         'facebook.com': {
             url: ['facebook.com', 'fb.com'],
             active: true,
-            blocked: true,
+            blocked: false,
             sets: {
                 feed:{
                     title:'Feed',
@@ -74,29 +74,52 @@ const default_settings = {
                 },
             },    
         },
-        'brainjar.com': {
+        'amazon.com': {
+            url: ["amazon.com.br", "amazon.ca", "amazon.com.mx", "amazon.com", "amazon.cn", "amazon.in", "amazon.co.jp", "amazon.sg", "amazon.ae", "amazon.sa", "amazon.fr", "amazon.de", "amazon.it", "amazon.nl", "amazon.pl", "amazon.es", "amazon.se", "amazon.com.tr", "amazon.co.uk", "amazon.com.au"],
             active: true,
             blocked: false,
             sets: {
-                set1:{
-                    title:'Set 1',
+                recomendations:{
+                    title:'All Recomendations',
                     active:true,
-                    selectors:['body>p'],
+                    selectors:['#gw-layout'],
                 },
-                set3:{
-                    title:'Set 3',
+                banner:{
+                    title:'Top Banner',
                     active:true,
-                    selectors:['body>p'],
+                    selectors:['#desktop-banner'],
                 },
-                set21:{
-                    title:'Set 21',
+                history:{
+                    title:'Inspired by your browsing',
                     active:true,
-                    selectors:['body>p'],
+                    selectors:['#rhf'],
                 },
-                set8:{
-                    title:'Set 8',
+                footer:{
+                    title:'Footer',
                     active:true,
-                    selectors:['body>p'],
+                    selectors:['#navFooter'],
+                },
+            }    
+        },
+        'netflix.com': {
+            url: ["netflix.vom"],
+            active: true,
+            blocked: false,
+            sets: {
+                trailer:{
+                    title:'Featured Trailer',
+                    active:true,
+                    selectors:['.billboard-row', '[aria-label="Featured Content"]'],
+                },
+                continue:{
+                    title:'Continue Watching',
+                    active:true,
+                    selectors:["[data-list-context='continueWatching']"],
+                },
+                recommended:{
+                    title:'Recomendations',
+                    active:true,
+                    selectors:["[data-list-context='genre']", '.lolomoRow'],
                 },
             }    
         }

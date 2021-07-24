@@ -57,12 +57,26 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
                 }
 
 
+                {/* FILTERS */}
+                <button
+                    id="buttonFilter"
+                    className="topButton"
+                    onClick={() => {
+                        setSettingsVisible(false)
+                    }}
+                >
+                    <MdSettings className="buttonIcon" />
+                    <span> Filters </span>
+                    <hr></hr>
+                </button>
+
+
                 {/* SETTINGS */}
                 <button
                     id="buttonSettings"
                     className="topButton"
                     onClick={() => {
-                        setSettingsVisible(!settingsVisible)
+                        setSettingsVisible(true)
                     }}
                 >
                     <MdSettings className="buttonIcon" />

@@ -11,7 +11,7 @@ import {
     FiCrosshair,
     FiSlash,        // block
     FiCircle,       // empty circle
-    FiChevronsDown
+    FiChevronsDown, FiChevronsUp
 } from "react-icons/fi";
 
 const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
@@ -112,12 +112,16 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                 </div>
 
                 {/* EXPAND ARROW */}
-                < div className="domainArrowDiv"
+                < div className={localSettings.domains[domainName].active ? "domainArrowDiv " : "domainArrowDiv  passive"}
                     onClick={() => setExpanded(!expanded)}
                 >
-                    <FiChevronsDown
-                        className={localSettings.domains[domainName].active ? "domainLine__arrow" : "domainLine__arrow passive"}
-                    />
+
+                    {expanded ? 
+                    <FiChevronsUp className="domainLine__arrow "/> 
+                    : 
+                    <FiChevronsDown className="domainLine__arrow "/>
+                    }
+                    
                 </div>
             </div>
 

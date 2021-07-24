@@ -5,10 +5,13 @@ import { useState } from 'react'
 import {
     FiCheckCircle,
     FiCircle,       // empty circle
+    FiAlertCircle
 } from "react-icons/fi";
 
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     console.log("R: Settings")
+
+    const [resetAction, setResetAction] = useState(false)
 
     const isNowActiveTime = (timeFrom, timeTo) => {
         const now = new Date();
@@ -44,7 +47,16 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     return (
         <div id="settings">
 
-            <div className="settingsItem" id="timeActive">
+            {/* ACTIVE TIME CHECK */}
+            <div className="settingsMainLine" id="timeActive"
+                onClick={(event) => {
+                    const temp_localSettings = merge({}, localSettings)
+                    temp_localSettings.general.activeTimeCheck = !temp_localSettings.general.activeTimeCheck
+                    console.log(event.target.checked)
+                    setStorageSettings(temp_localSettings)
+                    setLocalSettings(temp_localSettings)
+                }}
+            >
 
                 <div className="statusIconDiv">
                     {localSettings.general.activeTimeCheck ?
@@ -53,28 +65,11 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                         <FiCircle />
                     }
                 </div>
-
-
-                <span>Eclipser Active Time </span>
-
-
-
-                <input type="checkbox" id="activeTimeCheck" className="toggle"
-                    checked={localSettings.general.activeTimeCheck}
-                    onChange={(event) => {
-                        const temp_localSettings = merge({}, localSettings)
-                        temp_localSettings.general.activeTimeCheck = event.target.checked
-                        console.log(event.target.checked)
-                        setStorageSettings(temp_localSettings)
-                        setLocalSettings(temp_localSettings)
-                    }}
-
-                ></input>
-
+                <span className="settingName">Eclipser Active Time </span>
             </div>
 
-            <div >
-                <span>From</span>
+            <div className={localSettings.general.activeTimeCheck ? "settingsSub" : "settingsSub passive"} >
+                <span className="timeLabel">From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"
                     value={localSettings.general.activeTimeFrom}
                     onChange={(event) => {
@@ -85,7 +80,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                     }
                 ></input>
 
-                <span>to</span>
+                <span className="timeLabel">to</span>
                 <input type="time" id="activeTimeTo" className="timeInput"
                     value={localSettings.general.activeTimeTo}
                     onChange={(event) => {
@@ -98,32 +93,61 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 
             <hr></hr>
 
-            <div className="settingsItem">
-                Show Reminder Bar
+            {/* SHOW REMINEDER BAR */}
 
-                <input type="checkbox" id="showReminderBar" className="toggle"
-                    checked={localSettings.general.showReminderBar}
-                    onChange={(event) => {
-                        const temp_localSettings = merge({}, localSettings)
-                        temp_localSettings.general.showReminderBar = event.target.checked
-                        setStorageSettings(temp_localSettings)
-                        setLocalSettings(temp_localSettings)
-                    }}
-                ></input>
+            <div className="settingsMainLine"
+                onClick={(event) => {
+                    const temp_localSettings = merge({}, localSettings)
+                    temp_localSettings.general.showReminderBar = !temp_localSettings.general.showReminderBar
+                    console.log(event.target.checked)
+                    setStorageSettings(temp_localSettings)
+                    setLocalSettings(temp_localSettings)
+                }}
+            >
 
+                <div className="statusIconDiv">
+                    {localSettings.general.showReminderBar ?
+                        <FiCheckCircle />
+                        :
+                        <FiCircle />
+                    }
+                </div>
+                <span className="settingName">Show Reminder Bar </span>
             </div>
+
 
             <hr></hr>
 
-            <div className="settingsItem" id="settingsItem__reset">
-                <span onClick={() => {
-                    chrome.runtime.sendMessage('reset')
-                    window.location.reload()
-                }}>Reset All Settings and Domains</span>
+            {/* SHOW REMINEDER BAR */}
 
+            <div className="settingsMainLine" id="resetSettings"
+                onClick={(event) => {
+                    if (!resetAction) {
+                        setResetAction(true)
+                    } else {
+                        chrome.runtime.sendMessage('reset')
+                        window.location.reload()
+                    }
+
+                }}
+            >
+                <div className="statusIconDiv">
+                    {resetAction ?
+                        <FiAlertCircle />
+                        :
+                        <FiCircle />
+                    }
+                </div>
+                {!resetAction ?
+                    <span className="settingName" >
+                        Reset All Settings & Domains
+                    </span>
+                    :
+                    <span className="settingName orange" >
+                        Really? Click to confirm!
+                    </span>
+                }
             </div>
-
-            <hr></hr>
 
         </div>
     )
