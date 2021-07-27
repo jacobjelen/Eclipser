@@ -53,29 +53,37 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
 
                     onClick={(e) => {
                         // toggle true/false 
-                        const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
+                        const temp = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
 
-                        if (localSettings.domains[domainName].blocked) {                 // Is Blocked - Set to OFF
-                            tempLocalSettings.domains[domainName].active = false;
-                            tempLocalSettings.domains[domainName].blocked = false;
+                        if (localSettings.domains[domainName].blocked) {                 // Is Blocked - Set to OFF(unfiltered)
+                            temp.domains[domainName].active = false;
+                            temp.domains[domainName].blocked = false;
 
                         } else if (localSettings.domains[domainName].active) {          // is filtered - Set to BLOCK
-                            // tempLocalSettings.domains[domainName].active = true;
-                            tempLocalSettings.domains[domainName].blocked = true;
+                            // temp.domains[domainName].active = true;
+                            temp.domains[domainName].blocked = true;
 
-                        } else {                                                       // is off - Set to FILTER
-                            tempLocalSettings.domains[domainName].active = true;
-                            tempLocalSettings.domains[domainName].blocked = false;
+                        } else {                                                       // is off(unfiltered) - Set to FILTER
+                            temp.domains[domainName].active = true;
+                            temp.domains[domainName].blocked = false;
                         }
 
-                        setStorageSettings(tempLocalSettings)
+                        setStorageSettings(temp)
+                        setLocalSettings(temp)
                         console.log(currentDomain, " - ", domainName)
+
                         if (currentDomain === domainName) {
-                            messageCurrentTab('refresh')
+                            if(!temp.domains[domainName].active && !temp.domains[domainName].blocked){
+                                // blocked -> set to off(unfiltered) => reload the entire page
+                                messageCurrentTab('hardRefresh')
+                            }else{
+                                // rerun the setElementsVisibility()
+                                messageCurrentTab('refresh')
+                            }
                         }
-                        setLocalSettings(tempLocalSettings)
                     }
                     }>
+
                     <span className="statusIconDiv">
                         {statusIcon}
                     </span>
@@ -98,14 +106,14 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                     {hover &&
                         <Delete
                             action={() => {
-                                const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
-                                delete tempLocalSettings.domains[domainName]
-                                setStorageSettings(tempLocalSettings)
+                                const temp = merge({}, localSettings)  // deep merge (lodash)
+                                delete temp.domains[domainName]
+                                setStorageSettings(temp)
                                 if (currentDomain === domainName) {
                                     console.log('domains match')
-                                    messageCurrentTab('refresh')
+                                    messageCurrentTab('hardRefresh')
                                 }
-                                setLocalSettings(tempLocalSettings)
+                                setLocalSettings(temp)
                             }}
                         />
                     }

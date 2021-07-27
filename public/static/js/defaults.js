@@ -74,7 +74,7 @@ const default_settings = {
                 },
             },    
         },
-        'amazon.com': {
+        'amazon.co.uk': {
             url: ["amazon.com.br", "amazon.ca", "amazon.com.mx", "amazon.com", "amazon.cn", "amazon.in", "amazon.co.jp", "amazon.sg", "amazon.ae", "amazon.sa", "amazon.fr", "amazon.de", "amazon.it", "amazon.nl", "amazon.pl", "amazon.es", "amazon.se", "amazon.com.tr", "amazon.co.uk", "amazon.com.au"],
             active: true,
             blocked: false,

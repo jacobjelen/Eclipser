@@ -1,18 +1,18 @@
 QUESTIONS ????
     
+    - hide scroll bar but still scroll
+
+    - Will everyone see DIN Pro Font??
+        - base64 font
+        - include locally?
+
+    - stop Netflix video... forEach does not go through all sets?? 
+    
     - how to hide the content before it loads???
         content script: replace document.addEventListener('DOMContentLoaded'
 
     - re-run the content script when a filter is deleted
         - not working. content script runs but nothing changes on the tab
-
-    - when changing modes, currentDomain is lost => no refresh of current page
-
-    - hide scroll bar but still scroll
-
-    - stop Netflix video... forEach does not go through all sets?? 
-
-    - Will everyone see DIN Pro Font??
 
     - BACKGROUND.JS:
         - import lodash from npm: https://nkaushik.com/javascript/solved-cannot-use-import-statement-outside-module/
@@ -43,8 +43,11 @@ TO DO:
     + variable called selecting in content script represents if we are currently selecting elemet or not
     menu sends 'selecting' message to content scritp, gets a response true/false
 
-+ block this domain ?
-    - show warning = 30sec unloc time
++ block this domain 
+
+- content script: inject css in the head instead of attaching classes
+
+- popup bin showing with CSS visibility
 
 - check URL list, not domainName
 
@@ -55,10 +58,14 @@ TO DO:
     + Amazon...
 
 - load DIN font
-    
+
+- remove the periodic alarm??
+    - check the time in content script instead
 
 
 CSS
+- settings and domains - make margins/padding the same
+    - make settings background white?
 - blocked screen
 - menu button
 - pophead color

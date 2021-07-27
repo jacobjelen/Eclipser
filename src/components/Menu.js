@@ -67,7 +67,6 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
                 >
                     <MdSettings className="buttonIcon" />
                     <span> Filters </span>
-                    <hr></hr>
                 </button>
 
 

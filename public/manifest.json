@@ -11,7 +11,7 @@
 	},
   "content_scripts":[
 		{
-			"js": ["/static/js/jquery-3.6.0.min.js","static/js/content_start.js"],
+			"js": ["/static/js/jquery-3.6.0.min.js","static/js/content.js"],
 			"matches": [ "*://*/*" ],
 			"run_at": "document_start"
 		 }
