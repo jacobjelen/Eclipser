@@ -1,6 +1,7 @@
 /*global chrome*/    //enables Chrome API 
 import { merge } from 'lodash'
 import { useState } from 'react'
+import WeekdayButton from "./WeekdayButton";
 
 import {
     FiCheckCircle,
@@ -44,6 +45,9 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
         setLocalSettings(temp_localSettings)
     }
 
+    const weekdaysArray = Object.keys(localSettings.general.weekdays)
+    console.log(weekdaysArray)
+
     return (
         <div id="settings">
 
@@ -68,6 +72,25 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 <span className="settingName">Eclipser Active Time </span>
             </div>
 
+            {/* DAY OF THE WEEK */}
+            <div className={localSettings.general.activeTimeCheck ? "settingsSub" : "settingsSub passive"}
+                id="weekdays"
+            >
+                {weekdaysArray.map((weekday) => (
+
+                    <WeekdayButton
+                        weekday={weekday}
+                        localSettings={localSettings}
+                        setLocalSettings={setLocalSettings}
+                        setStorageSettings={setStorageSettings}
+                    />
+                ))
+                }
+
+
+            </div>
+
+            {/* TIME SETTINGS */}
             <div className={localSettings.general.activeTimeCheck ? "settingsSub" : "settingsSub passive"} >
                 <span className="timeLabel">From</span>
                 <input type="time" id="activeTimeFrom" className="timeInput"

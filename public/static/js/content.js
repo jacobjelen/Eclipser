@@ -37,6 +37,16 @@ function set_elements_visibility() {
       domain = noWWW(window.location.hostname);
     } else { return }
 
+    // CHECK WEEKDAY is active
+    const now = new Date();
+    if(!settings.general.weekdays[now.getDay()]){
+      return
+    }
+
+     // CHECK TIME is active
+    if(!isNowActiveTime(settings.general.activeTimeFrom, settings.general.activeTimeTo)) {
+      return
+    }
 
     // CHECK is the domain for current site stored in settings?
     if (Object.keys(settings.domains).includes(domain)) {
@@ -51,6 +61,7 @@ function set_elements_visibility() {
       return
     }
 
+    // CHECK is domain blocked
     if (settings.domains[domain].blocked){
       document.body.innerHTML =`
           <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #2F374C">
@@ -59,6 +70,7 @@ function set_elements_visibility() {
             </p>
           </div>
     `;
+    return
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
@@ -433,4 +445,34 @@ function promiseLastSetNumber(domain) {
 
     });
   });
+}
+
+function isNowActiveTime(timeFrom, timeTo) {              // function to check if we're within the set time period
+  const now = new Date();
+  const timeNow = now.getHours() + ":" + now.getMinutes()
+
+  console.log("NOW: ", timeNow, " . From: ", timeFrom, " - To: ", timeTo )
+
+  if (timeFrom <= timeTo) {
+    //DAY
+    console.log('day setting')
+
+    if (timeFrom <= timeNow && timeNow <= timeTo) {
+      console.log('isNowActive: YES')
+      return true
+    } else {
+      console.log('isNowActive: NO')
+      return false
+      
+    }
+  } 
+  else {
+    //NIGHT - timeFrom > timeTo => over midnight
+    // active time is when NOW is iether smaller than both (morning) or bigger than both (evening)
+    if ( (timeFrom <= timeNow && timeNow >= timeTo) || (timeFrom >= timeNow && timeNow <= timeTo)) {
+      return true
+    } else {
+      return false
+    }
+  }
 }

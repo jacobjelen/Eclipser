@@ -3,7 +3,7 @@ import Set from "./Set"
 const SetList = ({currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab}) => {
     console.log("R: SetList")
     
-    let setsArray = Object.keys(localSettings.domains[domainName].sets)
+    const setsArray = Object.keys(localSettings.domains[domainName].sets)
 
     return (
         <div className="setList">

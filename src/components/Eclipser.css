@@ -159,6 +159,22 @@ hr{
   font-size: var(--subtitle-font-size);
 }
 
+#weekdays{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 50px;
+}
+
+.weekday--active{
+  background-color: var(--green);
+  padding: 0 5px
+}
+
+.weekday--passive{
+  background-color: var(--black);
+  padding: 0 5px
+}
+
 .timeLabel{
   padding-right: 7px;
 }

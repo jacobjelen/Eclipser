@@ -6,6 +6,15 @@ const default_settings = {
         activeTimeCheck: false,
         activeTimeFrom: '08:00',
         activeTimeTo: '17:30',
+        weekdays: {
+            1: true,
+            2: true,
+            3: true,
+            4: true,
+            5: true,
+            6: true,
+            7: true,
+        },
         showReminderBar: true,
     },
 
