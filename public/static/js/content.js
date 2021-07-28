@@ -2,151 +2,94 @@
 // Runs on each tab/website opened
 
 let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
-let lastDomain;
+let domain, lastDomain;
 let selecting = false;
 
-document.addEventListener('DOMContentLoaded', () => {
-  // console.log('content_START');
-  set_elements_visibility();
-})
+set_elements_visibility();
 
 //// LISTEN FOR COMMAND MESSAGES ////////////////////////////////////////////////
 chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('Message Received: ', message)
 
   if (message === 'hardRefresh') window.location.reload();  // sometimes not working ??? 
-  if (message === 'refresh') set_elements_visibility(); 
+  if (message === 'refresh') set_elements_visibility(); //set_elements_visibility();
   if (message === 'new') select_elements();   //'new' button in the popup is clicked
   if (message === 'stop') stop_selecting();   //'stop' button in the popup is clicked
-  if (message === 'selecting') sendResponse(selecting) ;
-  if (message === 'domain') sendResponse(noWWW(window.location.hostname)); 
+  if (message === 'selecting') sendResponse(selecting);
+  if (message === 'domain') sendResponse(noWWW(window.location.hostname));
 });
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
+  console.log('0 - set_elements_visibility -');
+  // removeEclipserStyle()
+  let css = ''           //hold all the css that will be injected into head
+
   // load settings from storage
   chrome.storage.sync.get("settings", function (result) {
-    let settings, domain;
+    let settings;
 
     // CHECK if Eclipser is active
     if (result.settings.general.active) {
       settings = result.settings;
-      // console.log('1 - Eclipser Active -');
+      console.log('1 - Eclipser Active -');
 
       //what site are we on
       domain = noWWW(window.location.hostname);
     } else { return }
 
-    // CHECK WEEKDAY is active
-    const now = new Date();
-    if(!settings.general.weekdays[now.getDay()]){
-      return
+    // Active time and weekday settings check
+    if (settings.general.activeTimeCheck) {   // are we checking at all? 
+      const now = new Date();
+      if (!settings.general.weekdays[now.getDay()]) return      // CHECK WEEKDAY is active
+      if (!isNowActiveTime(settings.general.activeTimeFrom, settings.general.activeTimeTo)) return  // Time not active
     }
 
-     // CHECK TIME is active
-    if(!isNowActiveTime(settings.general.activeTimeFrom, settings.general.activeTimeTo)) {
-      return
-    }
-
-    // CHECK is the domain for current site stored in settings?
-    if (Object.keys(settings.domains).includes(domain)) {
-      // console.log('2 - Domain Recognised -');
-      addEclipserStyle();
-    } else { return }
-
-
-    // CHECK is the domain active 
-    if (!settings.domains[domain].active) {
-      removeEclipserStyle()
-      return
-    }
+    if (!Object.keys(settings.domains).includes(domain)) return    // domain not saved
+    if (!settings.domains[domain].active) return                    // domain not active
 
     // CHECK is domain blocked
-    if (settings.domains[domain].blocked){
-      document.body.innerHTML =`
+    if (settings.domains[domain].blocked) {
+      document.body.innerHTML = `
           <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #2F374C">
             <p style="position: relative; top: 40%; display: block; font-family: 'DINPro', sans-serif; font-size: 36px; font-weight: bold; color: #fff; margin: 50px auto; text-align: center">
               The website ${domain} successfully blocked !
             </p>
-          </div>
-    `;
-    return
+          </div>`;
+      return
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
-    if (settings.general.showReminderBar  && lastDomain != domain) {
-      lastDomain = domain;     // to only show the reminder when the page loads the firs time
-
-      const reminder = $("<div id='eclipserReminder' />")
-      .css(
-        {
-          position: "absolute",
-          top: "0%",
-          width: "100%",
-          height: "40px",
-          zIndex: 99999999,
-          background: "rgba(19, 235, 163, 1)",
-
-          color: "white",
-          fontSize: "15px",
-          fontFamily: "'DINPro', sans-serif",
-          fontWeight: "500",
-          padding: "10px 0px",
-          textAlign: "center"
-        })
-        .text("Filtered by Eclipser 2.0")
-        .appendTo("body");
-
-      setTimeout(() => { 
-        reminder.slideUp(500)
-        // reminder.hide() 
-      }, 2000);  // miliseconds to wait
+    console.log('lastDomain: ', lastDomain, ' domain: ', domain,)
+    if (settings.general.showReminderBar && (lastDomain !== domain)) {
+      showReminder()
     }
 
-    // console.log('3 - Domain Active -');
+    console.log('3 - Domain Active -');
 
     Object.keys(settings.domains[domain].sets).forEach((set) => {
-      // console.log('4 - SET: ' + set + ' -');
+      console.log('4 - SET: ' + set + ' -');
       //is is the set active 
       if (settings.domains[domain].sets[set].active) {
         // for each selector in the set
         settings.domains[domain].sets[set].selectors.forEach(
           (selector) => {
-            // console.log('5a - ECLIPSED: ' + selector)
-
-            // ???
-            it = document.querySelector(selector)
-            if(it){
-              it.classList.add("eclipsed")
-              it.pause()  // will pause video/audio
-              it.trigger('pause')
-            }
-             
-            document.querySelectorAll(selector).forEach((item) => {
-              item.classList.add("eclipsed");
-              item.pause()  // will pause video/audio
-              item.trigger('pause')
-            })
-
+            console.log('5 - ECLIPSED: ' + selector)
+            css += selector + `{ display: none !important; }
+            `
           } //selector
         ); //for each selector
-
-      } else {
-        // console.log('5b - SET NOT ACTIVE -');
-        // for each selector in the set
-        settings.domains[domain].sets[set].selectors.forEach(
-          (selector) => {
-            // console.log('6b - UN-Hidden: ' + selector)
-            document.querySelectorAll(selector).forEach((item) => {
-              item.classList.remove("eclipsed");
-              item.play()
-            })
-
-          } //selector
-        ); //for each selector
-
       }
     }); //object.keys forEach set
+
+    console.log(css)
+
+    // inject CSS into HEAD
+    var style = document.createElement('style');
+    style.setAttribute('id', 'eclipserStyle');
+    style.type = 'text/css';
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
 
   }); // end of storage.get settings
 }
@@ -166,7 +109,7 @@ function select_elements() {
     // let nextNo = lastNo + 1;       // r (resolved) = last set number, next needs to be +1
     setKey = 'set' + (lastNo + 1);
     setName = 'Filter ' + (lastNo + 1);
-    // console.log('New Set No: ' + (lastNo + 1));
+    console.log('New Set No: ' + (lastNo + 1));
   })
     .catch(e => {
       setKey = 'error';
@@ -258,7 +201,7 @@ window.onload = function () {
       mutations.forEach(function (mutation) {
         if (oldHref !== document.location.href) {
           oldHref = document.location.href;
-          // console.log("url change");
+          console.log("url change");
           set_elements_visibility();
         }
       });
@@ -271,6 +214,35 @@ window.onload = function () {
 };
 
 //// FUNCTIONS ///////////////////////////////////////////////////////////
+
+function showReminder() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const reminder = $("<div id='eclipserReminder' />")
+      .css(
+        {
+          position: "absolute",
+          top: "0%",
+          width: "100%",
+          height: "40px",
+          zIndex: 99999999,
+          background: "rgba(19, 235, 163, 1)",
+
+          color: "white",
+          fontSize: "15px",
+          fontFamily: "'DINPro', sans-serif",
+          fontWeight: "500",
+          padding: "10px 0px",
+          textAlign: "center"
+        })
+      .text("Filtered by Eclipser 2.0")
+      .appendTo("body");
+
+    setTimeout(() => {
+      reminder.slideUp(500)
+      lastDomain = domain;     // to only show the reminder when the page loads the firs time
+    }, 2000);  // miliseconds to wait
+  })
+}
 
 // creates the overlay box div, add to body
 function make_box() {
@@ -288,15 +260,15 @@ function make_box() {
 
   // selector span
   sel_span = $("<div id='sel_span' />")
-    .css({ 
+    .css({
       display: "none",
       position: "fixed",
       zIndex: 99999999,
       bottom: "0%",
       width: "100%",
       padding: "2px 5px",
-      fontFamily: "'DINPro', sans-serif" ,
-      background: "rgba(19, 235, 163, 1)" 
+      fontFamily: "'DINPro', sans-serif",
+      background: "rgba(19, 235, 163, 1)"
     })
     .appendTo("body");
 }
@@ -340,8 +312,6 @@ function getSelector(el) { // from nukem
 
 // Save selector to storage under relevant domain and set
 function saveSelector(selector, domain, setKey, setName, callback) {
-  // console.log('setKey: ' + setKey);
-  // console.log('setName: ' + setName);
   //- load storage to local settings
   chrome.storage.sync.get('settings', (from_storage) => {					//get settings
     let local_settings = from_storage.settings; 					        //save settings in a local variable
@@ -368,36 +338,11 @@ function saveSelector(selector, domain, setKey, setName, callback) {
 
     //- rewrite storage with local
     chrome.storage.sync.set({ 'settings': local_settings }, () => {
-      // console.log('New Eclipser saved. Current settings: ')
-      // console.log(local_settings)
+      console.log('New Eclipser saved. Current settings: ')
+      console.log(local_settings)
       callback() // set_elements_visibility() should be used as a callback
     });
-
   }); //get storage
-
-
-}
-
-//add style/class 'eclipsed'. when this class is added to an element, it hides it.
-function addEclipserStyle() {
-  if (document.getElementById("eclipserStyle")) {
-    return
-  }
-
-  // create the style to inject in the header
-  let eclipserStyle = `
-    .eclipsed{
-      display: none !important;
-      visibility: hidden !important;
-    }
-      `;
-
-  //inject updated style
-  let style = document.createElement("style");
-  style.setAttribute("id", "eclipserStyle");
-  style.appendChild(document.createTextNode(eclipserStyle));
-  document.head.appendChild(style);
-  // console.log("eclipser style added");
 }
 
 function removeEclipserStyle() {
@@ -421,7 +366,6 @@ function promiseLastSetNumber(domain) {
 
     chrome.storage.sync.get('settings', (from_storage) => {					//get settings
 
-
       if (from_storage.settings.domains[domain] === undefined) {
         //domain not saved in storage (yet)
         resolve(maxSetNumber) // = 1
@@ -441,8 +385,6 @@ function promiseLastSetNumber(domain) {
 
         resolve(maxSetNumber);
       }
-
-
     });
   });
 }
@@ -450,26 +392,18 @@ function promiseLastSetNumber(domain) {
 function isNowActiveTime(timeFrom, timeTo) {              // function to check if we're within the set time period
   const now = new Date();
   const timeNow = now.getHours() + ":" + now.getMinutes()
-
-  console.log("NOW: ", timeNow, " . From: ", timeFrom, " - To: ", timeTo )
-
   if (timeFrom <= timeTo) {
     //DAY
-    console.log('day setting')
-
     if (timeFrom <= timeNow && timeNow <= timeTo) {
-      console.log('isNowActive: YES')
       return true
     } else {
-      console.log('isNowActive: NO')
       return false
-      
     }
-  } 
+  }
   else {
     //NIGHT - timeFrom > timeTo => over midnight
     // active time is when NOW is iether smaller than both (morning) or bigger than both (evening)
-    if ( (timeFrom <= timeNow && timeNow >= timeTo) || (timeFrom >= timeNow && timeNow <= timeTo)) {
+    if ((timeFrom <= timeNow && timeNow >= timeTo) || (timeFrom >= timeNow && timeNow <= timeTo)) {
       return true
     } else {
       return false

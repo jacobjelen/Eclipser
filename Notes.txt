@@ -7,9 +7,6 @@ QUESTIONS ????
         - include locally?
 
     - stop Netflix video... forEach does not go through all sets?? 
-    
-    - how to hide the content before it loads???
-        content script: replace document.addEventListener('DOMContentLoaded'
 
     - re-run the content script when a filter is deleted
         - not working. content script runs but nothing changes on the tab
@@ -45,9 +42,10 @@ TO DO:
 
 + block this domain 
 
-- content script: inject css in the head instead of attaching classes
++ content script: inject css in the head instead of attaching classes
 
-- popup bin showing with CSS visibility
+- re-run the content script when a filter is deleted
+    - not working. content script runs but nothing changes on the tab
 
 - check URL list, not domainName
 
@@ -58,9 +56,6 @@ TO DO:
     + Amazon...
 
 - load DIN font
-
-- remove the periodic alarm??
-    - check the time in content script instead
 
 
 CSS
