@@ -17,7 +17,6 @@ import {
 const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab, expand }) => {
     console.log('R: Domain')
     // HOOKS
-    const [hover, setHover] = useState(false)       // check if mouse is over the domain div => style and display buttons accordingly
     const [expanded, setExpanded] = useState(expand)     // is the domain expanded = setList visible?
 
     const statusIcon = (() => {
@@ -42,11 +41,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
     return (
         <div className="domainDiv">
 
-            <div className="domainLine"
-                onMouseOver={() => { if (!hover) setHover(true) }}
-                onMouseLeave={() => setHover(false)}
-            >
-
+            <div className="domainLine">
 
                 {/* DOMAIN NAME */}
                 <div className={localSettings.domains[domainName].active ? "domainNameDiv" : "domainNameDiv passive"}
@@ -103,7 +98,6 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                 <div className="lineButtons" >
 
                     {/* DELETE BIN */}
-                    {hover &&
                         <Delete
                             action={() => {
                                 const temp = merge({}, localSettings)  // deep merge (lodash)
@@ -116,7 +110,6 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                                 setLocalSettings(temp)
                             }}
                         />
-                    }
                 </div>
 
                 {/* EXPAND ARROW */}

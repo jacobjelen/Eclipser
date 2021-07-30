@@ -32,7 +32,7 @@ const Delete = ({ action }) => {
         <>
             {!confirmVisible ?
                 <div
-                    className="bin"
+                    className="bin" id="bin"
                     onClick={() => {
                         setConfirmVisible(true)
                         console.log('bin clicked, confirmVisible: ', confirmVisible)
@@ -41,7 +41,7 @@ const Delete = ({ action }) => {
                 </div>
                 :
                 <div
-                    className="binCheck"
+                    className="bin" id="binCheck"
                     onClick={() => {
                         console.log('bin clicked again')
                         action()

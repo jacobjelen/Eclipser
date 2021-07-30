@@ -2,23 +2,13 @@ import { merge } from 'lodash'
 import Delete from "./Delete"
 import EditableTitle from "./EditableTitle"
 
-// HOOKS
-import { useState } from 'react'
-
-
 
 const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
     console.log("R: Set")
 
-   
-    const [hover, setHover] = useState(false)       // check if mouse is over the setLine => style and display buttons accordingly
-
     return (
         <>
-            <div className="setLine"
-                onMouseOver={() =>  {if(!hover) setHover(true)} }
-                onMouseLeave={() => setHover(false) }
-            >
+            <div className="setLine">
 
                 {/* <div className="setName">{set}</div> */}
                 <EditableTitle 
@@ -32,7 +22,6 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                 />
 
                 <div class="lineButtons">
-                    {hover &&
                         <Delete
                         action={() => {
                             console.log("domain name: ", domainName, " set: ", set)
@@ -45,7 +34,6 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                             }
                         }}
                     />
-                       }
                 </div>
 
             </div>

@@ -21,8 +21,7 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
-  console.log('0 - set_elements_visibility -');
-  // removeEclipserStyle()
+  removeEclipserStyle()
   let css = ''           //hold all the css that will be injected into head
 
   // load settings from storage
@@ -32,7 +31,6 @@ function set_elements_visibility() {
     // CHECK if Eclipser is active
     if (result.settings.general.active) {
       settings = result.settings;
-      console.log('1 - Eclipser Active -');
 
       //what site are we on
       domain = noWWW(window.location.hostname);
@@ -60,21 +58,16 @@ function set_elements_visibility() {
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
-    console.log('lastDomain: ', lastDomain, ' domain: ', domain,)
     if (settings.general.showReminderBar && (lastDomain !== domain)) {
       showReminder()
     }
 
-    console.log('3 - Domain Active -');
-
     Object.keys(settings.domains[domain].sets).forEach((set) => {
-      console.log('4 - SET: ' + set + ' -');
-      //is is the set active 
-      if (settings.domains[domain].sets[set].active) {
-        // for each selector in the set
-        settings.domains[domain].sets[set].selectors.forEach(
+      
+      if (settings.domains[domain].sets[set].active) {              //is is the set active 
+
+        settings.domains[domain].sets[set].selectors.forEach(       // for each selector in the set
           (selector) => {
-            console.log('5 - ECLIPSED: ' + selector)
             css += selector + `{ display: none !important; }
             `
           } //selector

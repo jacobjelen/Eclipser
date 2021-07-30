@@ -272,7 +272,6 @@ color: var(--orange);
   /* margin: 2px 10px 8px; */
 }
 
-
 /* STATUS ICON */
 .statusIconDiv{
   padding: 0px 5px;
@@ -342,6 +341,32 @@ text-decoration: underline;
 
 /* DELETE BIN /////////////////////////////////////////////////*/ 
 
+div.domainLine > div.lineButtons > div.bin{
+  display: none;
+}
+
+div.domainLine:hover > div.lineButtons > div.bin{
+  display: unset;
+  bottom: 50%;
+  color: white;
+  margin-right: 8px;
+  /* transition: var(--hover-transition); */
+  vertical-align: middle
+}
+
+div.setLine > div.lineButtons > div.bin{
+  display: none;
+}
+
+div.setLine:hover > div.lineButtons > div.bin{
+  display: unset;
+  bottom: 50%;
+  color: white;
+  margin-right: 8px;
+  /* transition: var(--hover-transition); */
+  vertical-align: middle
+}
+
 .lineButtons{
   bottom: 50%;
   font-size: 9pt;
@@ -351,27 +376,12 @@ text-decoration: underline;
   /* justify-content: space-around; */
 }
 
-.bin{
-  bottom: 50%;
-  color: white;
-  margin-right: 8px;
-  /* transition: var(--hover-transition); */
-  vertical-align: middle
-}
-
-.bin:hover{
-  bottom: 50%;
+#bin:hover{
   color: var(--orange);
-  /* transition: var(--hover-transition); */
 }
 
-.binCheck{
-  bottom: 50%;
+#binCheck{
   color: var(--green);
-  margin-right: 8px;
-  /* padding: 0px 3px; */
-  /* transition: var(--hover-transition); */
-  vertical-align: middle
 }
 
 
