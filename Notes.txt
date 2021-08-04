@@ -36,11 +36,11 @@ TO DO:
 
 - add default sets for 
     Twitter, 
-    Netflix, 
+    + Netflix, 
     x Reddit
     + Amazon...
 
-- load DIN font
++ load DIN font
 
 
 CSS

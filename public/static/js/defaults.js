@@ -115,20 +115,30 @@ const default_settings = {
             active: true,
             blocked: false,
             sets: {
-                trailer:{
+                a:{
                     title:'Featured Trailer',
                     active:true,
                     selectors:['.billboard-row', '[aria-label="Featured Content"]'],
                 },
-                continue:{
+                b:{
                     title:'Continue Watching',
                     active:true,
                     selectors:["[data-list-context='continueWatching']"],
                 },
-                recommended:{
+                c:{
+                    title:'My List',
+                    active:true,
+                    selectors:["[data-list-context='queue']"],
+                },
+                d:{
+                    title:'Recently Added',
+                    active:true,
+                    selectors:["[data-list-context='recentlyAdded']"],
+                },
+                e:{
                     title:'Recomendations',
                     active:true,
-                    selectors:["[data-list-context='genre']", '.lolomoRow'],
+                    selectors:["[data-list-context='genre']", ".lolomoRow:not([data-list-context='recentlyAdded']):not([data-list-context='queue']):not([data-list-context='continueWatching'])"],
                 },
             }    
         }

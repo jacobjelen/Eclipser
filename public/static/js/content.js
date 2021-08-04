@@ -19,14 +19,6 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
   if (message === 'domain') sendResponse(noWWW(window.location.hostname));
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  $('<link rel="preload" as="font" href="chrome-extension://__MSG_@@extension_id__/static/css/fonts/DINPro-Regular.woff2" type="font/woff2" crossorigin="anonymous">')
-  .appendTo("head")
-  $('<link rel="preload" as="font" href="chrome-extension://__MSG_@@extension_id__/static/css/fonts/DINPro-Regular.woff" type="font/woff" crossorigin="anonymous">')
-  .appendTo("head")
-})
-
-
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
   removeEclipserStyle()
@@ -58,7 +50,7 @@ function set_elements_visibility() {
     if (settings.domains[domain].blocked) {
       document.body.innerHTML = `
           <div id="blockedPage">
-            <p>The website ${domain} was blocked by Eclipser 2.0</p>
+            <span>The website ${domain} was blocked by Eclipser 2.0</span>
           </div>`;
       return
     }
@@ -216,9 +208,9 @@ window.onload = function () {
 
 function showReminder() {
   document.addEventListener('DOMContentLoaded', () => {
-    const reminder = $("<div id='eclipserReminder' />")
-      .text("Filtered by Eclipser 2.0")
-      .appendTo("body");
+    const reminder = $(`<div id='eclipserReminder'>  
+    <span>Filtered by Eclipser 2.0</span>
+    </div>`).appendTo("body");
 
     setTimeout(() => {
       reminder.slideUp(500)
@@ -229,17 +221,7 @@ function showReminder() {
 
 // creates the overlay box div, add to body
 function make_box() {
-  box = $("<div id='eclipserBox' />").css(
-    {
-      display: "none",
-      position: "absolute",
-      zIndex: 99999,
-      background: "rgba(19, 235, 163, .3)",
-
-      color: "black",
-      fontSize: "10pt",
-      fontFamily: "DINPro",
-    }).appendTo("body");
+  box = $("<div id='eclipserBox' />").appendTo("body");
 
   // selector span
   selectionSpan = $("<div id='selectionSpan' />")
