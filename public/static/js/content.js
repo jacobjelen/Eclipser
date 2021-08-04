@@ -1,7 +1,7 @@
 /*global chrome*/               //enables Chrome API 
 // Runs on each tab/website opened
 
-let box, sel_span, el;   // box highlights elements when creating a new filter, sel_span displays it's selector, el holds the element itself
+let box, selectionSpan, el;   // box highlights elements when creating a new filter, selectionSpan displays it's selector, el holds the element itself
 let domain, lastDomain;
 let selecting = false;
 
@@ -18,6 +18,14 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse) 
   if (message === 'selecting') sendResponse(selecting);
   if (message === 'domain') sendResponse(noWWW(window.location.hostname));
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  $('<link rel="preload" as="font" href="chrome-extension://__MSG_@@extension_id__/static/css/fonts/DINPro-Regular.woff2" type="font/woff2" crossorigin="anonymous">')
+  .appendTo("head")
+  $('<link rel="preload" as="font" href="chrome-extension://__MSG_@@extension_id__/static/css/fonts/DINPro-Regular.woff" type="font/woff" crossorigin="anonymous">')
+  .appendTo("head")
+})
+
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
@@ -49,10 +57,8 @@ function set_elements_visibility() {
     // CHECK is domain blocked
     if (settings.domains[domain].blocked) {
       document.body.innerHTML = `
-          <div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #2F374C">
-            <p style="position: relative; top: 40%; display: block; font-family: 'DINPro', sans-serif; font-size: 36px; font-weight: bold; color: #fff; margin: 50px auto; text-align: center">
-              The website ${domain} successfully blocked !
-            </p>
+          <div id="blockedPage">
+            <p>The website ${domain} was blocked by Eclipser 2.0</p>
           </div>`;
       return
     }
@@ -63,7 +69,7 @@ function set_elements_visibility() {
     }
 
     Object.keys(settings.domains[domain].sets).forEach((set) => {
-      
+
       if (settings.domains[domain].sets[set].active) {              //is is the set active 
 
         settings.domains[domain].sets[set].selectors.forEach(       // for each selector in the set
@@ -126,7 +132,7 @@ function select_elements() {
 
       if (el === last_el) return;                 // do nothing if it's the same element as before
 
-      if (el.id === 'eclipserBox' || el.id === 'sel_span') {      // if the overlay box gets selected as el, hide it and get the el below
+      if (el.id === 'eclipserBox' || el.id === 'selectionSpan') {      // if the overlay box gets selected as el, hide it and get the el below
         box.hide();
         el = document.elementFromPoint(pointer.clientX, pointer.clientY);
       };
@@ -138,14 +144,14 @@ function select_elements() {
 
         // make the box fit the element
         box.show();
-        sel_span.show();
+        selectionSpan.show();
         box.css({
           width: $el.outerWidth() - 1,
           height: $el.outerHeight() - 1,
           left: offset.left,
           top: offset.top
         });
-        sel_span.text(getSelector(el));
+        selectionSpan.text(getSelector(el));
 
         last_el = el;
       }
@@ -182,7 +188,7 @@ function stop_selecting() {
   $('body').off("keydown.eclipser");
   el = null;
   box.hide();
-  sel_span.hide();
+  selectionSpan.hide();
 }
 
 //// MUTATION SCRIPT ///////////////////////////////////////////////////////////
@@ -211,22 +217,6 @@ window.onload = function () {
 function showReminder() {
   document.addEventListener('DOMContentLoaded', () => {
     const reminder = $("<div id='eclipserReminder' />")
-      .css(
-        {
-          position: "absolute",
-          top: "0%",
-          width: "100%",
-          height: "40px",
-          zIndex: 99999999,
-          background: "rgba(19, 235, 163, 1)",
-
-          color: "white",
-          fontSize: "15px",
-          fontFamily: "'DINPro', sans-serif",
-          fontWeight: "500",
-          padding: "10px 0px",
-          textAlign: "center"
-        })
       .text("Filtered by Eclipser 2.0")
       .appendTo("body");
 
@@ -248,21 +238,11 @@ function make_box() {
 
       color: "black",
       fontSize: "10pt",
-      fontFamily: "'Quicksand', sans-serif",
+      fontFamily: "DINPro",
     }).appendTo("body");
 
   // selector span
-  sel_span = $("<div id='sel_span' />")
-    .css({
-      display: "none",
-      position: "fixed",
-      zIndex: 99999999,
-      bottom: "0%",
-      width: "100%",
-      padding: "2px 5px",
-      fontFamily: "'DINPro', sans-serif",
-      background: "rgba(19, 235, 163, 1)"
-    })
+  selectionSpan = $("<div id='selectionSpan' />")
     .appendTo("body");
 }
 

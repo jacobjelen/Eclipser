@@ -13,7 +13,8 @@
 		{
 			"js": ["/static/js/jquery-3.6.0.min.js","static/js/content.js"],
 			"matches": [ "*://*/*" ],
-			"run_at": "document_start"
+			"run_at": "document_start",
+			"css": ["static/css/content.css"]
 		 }
 	],
   "browser_action": {
@@ -25,5 +26,18 @@
 		"persistent": true,
 		"scripts": ["/static/js/defaults.js", "/static/js/background.js" ]
 	 },
-	"permissions": ["storage","tabs","alarms"]
+	"permissions": ["storage","tabs","alarms"], 
+	"web_accessible_resources": [
+		"static/css/content.css", 
+		"static/css/fonts/DINPro-Bold.woff2",
+		"static/css/fonts/DINPro-Bold.woff",
+		"static/css/fonts/DINPro-Medium.woff2",
+		"static/css/fonts/DINPro-Medium.woff",
+		"static/css/fonts/DINPro-Regular.woff2",
+		"static/css/fonts/DINPro-Regular.woff",
+		"static/css/fonts/DINPro-Black.woff2",
+		"static/css/fonts/DINPro-Black.woff",
+		"static/css/fonts/DINPro-Light.woff2",
+		"static/css/fonts/DINPro-Light.woff"
+	]
 }
