@@ -35,7 +35,11 @@ TO DO:
 - check URL list, not domainName
 
 - add default sets for 
-    Twitter, 
+    + facebook
+    + youtube
+    + linkedIn
+    + ebay
+    - Twitter, 
     + Netflix, 
     x Reddit
     + Amazon...
