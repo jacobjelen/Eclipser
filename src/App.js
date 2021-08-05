@@ -21,8 +21,6 @@ function App() {
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
 
-  const myDiv = <h1>HELLO</h1>
-
   useEffect(() => {   //runs once when app loads
     console.log('>> useEffect App')
     // SETTINGS

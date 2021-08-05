@@ -197,8 +197,7 @@ const default_settings = {
                 b: {
                     title: 'Left Menu',
                     active: true,
-                    selectors: ['[role=banner]'
-                ],
+                    selectors: ['#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > header > div > div'],
                 },
                 c: {
                     title: 'Right Column',
@@ -211,7 +210,7 @@ const default_settings = {
                 d: {
                     title: 'Messages',
                     active: true,
-                    selectors: ['[testid="DMDrawer"]'],
+                    selectors: ['[testid="DMDrawer"]','#layers'],
                 },
             }
         },

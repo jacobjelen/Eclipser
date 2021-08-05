@@ -46,6 +46,7 @@ const Delete = ({ action }) => {
                         console.log('bin clicked again')
                         action()
                         setConfirmVisible(false)
+                        
                     }}>
                     <FiCheckCircle />
                 </div>

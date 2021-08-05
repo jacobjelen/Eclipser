@@ -1,16 +1,5 @@
 QUESTIONS ????
-    
-    - hide scroll bar but still scroll
-
-    - Will everyone see DIN Pro Font??
-        - base64 font
-        - include locally?
-
-    - stop Netflix video... forEach does not go through all sets?? 
-
-    - re-run the content script when a filter is deleted
-        - not working. content script runs but nothing changes on the tab
-
+      - stop Netflix video... forEach does not go through all sets?? 
 ______________________________________________________________
 
 TO DO: 
@@ -29,30 +18,30 @@ TO DO:
 
 + content script: inject css in the head instead of attaching classes
 
-- re-run the content script when a filter is deleted
-    - not working. content script runs but nothing changes on the tab
++ re-run the content script when a filter is deleted
 
 - check URL list, not domainName
 
-- add default sets for 
++ add default sets for 
     + facebook
     + youtube
     + linkedIn
     + ebay
-    - Twitter, 
+    + Twitter, 
     + Netflix, 
     x Reddit
     + Amazon...
 
 + load DIN font
 
++ hide scroll bar but still scroll
 
 CSS
-- settings and domains - make margins/padding the same
-    - make settings background white?
+
 - blocked screen
 - menu button
 - pophead color
+- pophead and menu fixed position when scrolling
 
 
 

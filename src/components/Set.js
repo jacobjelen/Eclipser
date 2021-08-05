@@ -29,9 +29,9 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                             delete tempLocalSettings.domains[domainName].sets[set]
                             setStorageSettings(tempLocalSettings)
                             setLocalSettings(tempLocalSettings)
-                            if(domainName === currentDomain){
+                            // if(domainName === currentDomain){
                                 messageCurrentTab('refresh')
-                            }
+                            // }
                         }}
                     />
                 </div>

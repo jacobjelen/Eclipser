@@ -1,7 +1,7 @@
 /*global chrome*/               //enables Chrome API 
 // Runs on each tab/website opened
 
-let box, selectionSpan, el;   // box highlights elements when creating a new filter, selectionSpan displays it's selector, el holds the element itself
+let selectionBox, selectionSpan, el;   // selectionBox highlights elements when creating a new filter, selectionSpan displays it's selector, el holds the element itself
 let domain, lastDomain;
 let selecting = false;
 
@@ -73,8 +73,6 @@ function set_elements_visibility() {
       }
     }); //object.keys forEach set
 
-    console.log(css)
-
     // inject CSS into HEAD
     var style = document.createElement('style');
     style.setAttribute('id', 'eclipserStyle');
@@ -88,7 +86,10 @@ function set_elements_visibility() {
 //// NEW ECLIPSER - PICK ELEMENTS TO HIDE //////////////////////////////////////////
 function select_elements() {
   selecting = true;
-  make_box(); // creates the overlay box div, add to body
+  
+  selectionBox = $("<div id='eclipserBox' />").appendTo("body");
+  selectionSpan = $("<div id='selectionSpan' />").appendTo("body");
+  
   let last_el;
 
   // New Set name & title
@@ -109,7 +110,7 @@ function select_elements() {
 
 
   // if 'New' button in popup has been clicked
-  // find the element under mouse pointer and overlay it with the 'box'
+  // find the element under mouse pointer and overlay it with the 'selectionBox'
   let wait = false;                               // throttling
   $("body").on('mousemove.eclipser', (pointer) => {
     if (!wait) {                                // throttling - limit how often this runs
@@ -117,15 +118,15 @@ function select_elements() {
       // element under the mouse pointer
       el = document.elementFromPoint(pointer.clientX, pointer.clientY);
 
-      if (el === null || el === undefined) {      // hide box if no element is found
-        box.hide();                               // box.css({display: "none",})
+      if (el === null || el === undefined) {      // hide selectionBox if no element is found
+        selectionBox.hide();                               // selectionBox.css({display: "none",})
         return;
       }
 
       if (el === last_el) return;                 // do nothing if it's the same element as before
 
-      if (el.id === 'eclipserBox' || el.id === 'selectionSpan') {      // if the overlay box gets selected as el, hide it and get the el below
-        box.hide();
+      if (el.id === 'eclipserBox' || el.id === 'selectionSpan') {      // if the overlay selectionBox gets selected as el, hide it and get the el below
+        selectionBox.hide();
         el = document.elementFromPoint(pointer.clientX, pointer.clientY);
       };
 
@@ -134,10 +135,10 @@ function select_elements() {
         let $el = $(el);                //turn into jquery object - use jquery functions
         let offset = $el.offset();      //get current position (with scrolling)
 
-        // make the box fit the element
-        box.show();
+        // make the selectionBox fit the element
+        selectionBox.show();
         selectionSpan.show();
-        box.css({
+        selectionBox.css({
           width: $el.outerWidth() - 1,
           height: $el.outerHeight() - 1,
           left: offset.left,
@@ -179,7 +180,7 @@ function stop_selecting() {
   $("body").off("click.eclipser");
   $('body').off("keydown.eclipser");
   el = null;
-  box.hide();
+  selectionBox.hide();
   selectionSpan.hide();
 }
 
@@ -217,15 +218,6 @@ function showReminder() {
       lastDomain = domain;     // to only show the reminder when the page loads the firs time
     }, 2000);  // miliseconds to wait
   })
-}
-
-// creates the overlay box div, add to body
-function make_box() {
-  box = $("<div id='eclipserBox' />").appendTo("body");
-
-  // selector span
-  selectionSpan = $("<div id='selectionSpan' />")
-    .appendTo("body");
 }
 
 // Get selector for element el

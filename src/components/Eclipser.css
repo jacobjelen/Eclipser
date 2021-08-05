@@ -11,7 +11,7 @@
   --title-font-weight: 500;       /* domain name, main settings lines */
   --title-font-size: 10pt;
   
-  --subtitle-font-weight: 300;    /* sets, sub settings */
+  --subtitle-font-weight: 400;    /* sets, sub settings */
   --subtitle-font-size: 10pt;
 
   --block-margin: 0px 0px 0px 10px;
@@ -25,16 +25,15 @@
 
 html {
   overflow: scroll;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 ::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  display: none;
 }
 
 .body{
   width: 250px;
-  height: 600px;
+  height: 500px;
   margin: 0;
   padding: 0;
   font-family: 'DINPro', sans-serif;
@@ -51,10 +50,11 @@ hr{
 #pophead{
   width: 250px;
   height: 80px;
-  
+  background-color: var(--black);
+  z-index: 5;
   font-family: 'DINPro', sans-serif;
   padding: 10px 0px;
-  text-align: center
+  text-align: center;
 }
 
 #pophead:hover{
@@ -93,6 +93,7 @@ hr{
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .topButton{
@@ -143,7 +144,7 @@ hr{
   display: grid;
   grid-template-columns: 10% 90%;
   margin: 5px 0;
-  padding: 4px 0;
+  padding: 5px 0;
   color: #fff;
 }
 
@@ -153,7 +154,7 @@ hr{
 
 .settingsSub{
   margin: 0px 0px 2px 25px;
-  padding: 4px 0;
+  padding: 5px 0;
   color: #fff;
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
@@ -163,17 +164,27 @@ hr{
   display: flex;
   justify-content: space-between;
   padding-right: 50px;
+  font-weight: 400;
 }
 
 .weekday--active{
-  background-color: var(--green);
-  padding: 0 5px
+  /* color: white; */
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
+}
+.weekday--active:hover{
+  color: var(--green);
 }
 
 .weekday--passive{
-  background-color: var(--black);
-  padding: 0 5px
+  color: var(--grey);
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--subtitle-font-size);
 }
+.weekday--passive:hover{
+  color: var(--green);
+}
+
 
 .timeLabel{
   padding-right: 7px;
@@ -219,7 +230,7 @@ color: var(--orange);
   display:grid;
   grid-template-columns: 83% 7% 10% ;
   margin: 5px 0px;
-  padding: 4px 0px;
+  padding: 5px 0px;
   color: white;
 }
 
@@ -335,7 +346,7 @@ color: var(--orange);
 
 .setName:hover{
 text-decoration: underline;
-/* color: var(--light-grey); */
+/* color: var(--green); */
 /* padding-left: 4px; */
 }
 
@@ -400,6 +411,7 @@ footer{
   font-size: 9pt;
   color: var(--light-gray);
   border-top: var(--black) solid 2px;
+  z-index: 5;
 }
 
 footer > a{
@@ -408,6 +420,9 @@ footer > a{
   width: 100%;
 }
 
+footer > a:hover{
+  color:var(--green);
+}
 
 
 /*  OTHER /////////////////////////////////////////////////*/
@@ -425,7 +440,6 @@ footer > a{
 .orange{
   color: var(--orange);
 }
-
 
 @font-face {
   font-family: 'DINPro';

@@ -16,9 +16,8 @@ const WeekdayButton = ({ weekday, localSettings, setLocalSettings, setStorageSet
         }}
         >
             {/* weekday is int 1-7; 
-            weekday-1 gives index to dayNames; 
-            [0] means first character only */}
-            {dayNames[weekday-1][0]} 
+            weekday-1 gives index to dayNames;*/}
+            {dayNames[weekday-1].substring(0,2)} 
         
         </span>
 

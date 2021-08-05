@@ -52,7 +52,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
         <div id="settings">
 
             {/* ACTIVE TIME CHECK */}
-            <div className="settingsMainLine" id="timeActive"
+            <div className={localSettings.general.activeTimeCheck ? "settingsMainLine" : "settingsMainLine passive" }id="timeActive"
                 onClick={(event) => {
                     const temp_localSettings = merge({}, localSettings)
                     temp_localSettings.general.activeTimeCheck = !temp_localSettings.general.activeTimeCheck
@@ -78,7 +78,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             >
                 {weekdaysArray.map((weekday) => (
 
-                    <WeekdayButton
+                    <WeekdayButton 
                         weekday={weekday}
                         localSettings={localSettings}
                         setLocalSettings={setLocalSettings}
@@ -118,7 +118,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 
             {/* SHOW REMINEDER BAR */}
 
-            <div className="settingsMainLine"
+            <div className={localSettings.general.showReminderBar ? "settingsMainLine" : "settingsMainLine passive" }
                 onClick={(event) => {
                     const temp_localSettings = merge({}, localSettings)
                     temp_localSettings.general.showReminderBar = !temp_localSettings.general.showReminderBar
@@ -141,7 +141,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
 
             <hr></hr>
 
-            {/* SHOW REMINEDER BAR */}
+            {/* RESET ALL */}
 
             <div className="settingsMainLine" id="resetSettings"
                 onClick={(event) => {
@@ -156,7 +156,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             >
                 <div className="statusIconDiv">
                     {resetAction ?
-                        <FiAlertCircle />
+                        <FiAlertCircle className="orange" />  //style={ alertIconStyle }
                         :
                         <FiCircle />
                     }
