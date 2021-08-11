@@ -12,79 +12,77 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
     console.log("R: Menu")
 
     const [selecting, setSelecting] = useState(false)
-    
+
     useEffect(() => {
-            // SELECTING    
-    messageCurrentTab('selecting')
-    .then(r => { setSelecting(r); console.log('selecgting :', selecting) })
-    .catch(e => { console.log(e) });
+        // SELECTING    
+        messageCurrentTab('selecting')
+            .then(r => { setSelecting(r); console.log('selecgting :', selecting) })
+            .catch(e => { console.log(e) });
 
     }, [])
 
-
-
-
     return (
-        <div>
+        <div id="topMenu">
+            {/* NEW FILTER */}
 
-
-            <div id="topMenu">
-                {/* NEW FILTER */}
-
-                {selecting ?
-                    <button 
+            {selecting ?
+                <div
                     id="buttonStop"
-                        className="topButton"
-                    onClick={() => { 
-                        messageCurrentTab('stop') 
+                    className="topButton"
+                    onClick={() => {
+                        messageCurrentTab('stop')
                         setSelecting(false)
                     }}>
-                        <MdCheckBox className="buttonIcon" />
-                        <span> Done Filtering </span>
-                        </button>
-                    :
-                    <button
-                        id="buttonNew"
-                        className="topButton"
-                        onClick={() => {
-                            messageCurrentTab('new');
-                            window.close()
-                        }}
-                    >
-                        <MdAddCircle className="buttonIcon" />
-                        <span> New Filter </span>
-                    </button>
-                }
-
-
-                {/* FILTERS */}
-                <button
-                    id="buttonFilter"
+                    <MdCheckBox className="buttonIcon" />
+                    <span> Done Filtering </span>
+                    
+                </div>
+                :
+                <div
+                    id="buttonNew"
                     className="topButton"
                     onClick={() => {
-                        setSettingsVisible(false)
+                        messageCurrentTab('new');
+                        window.close()
                     }}
                 >
-                    <MdSettings className="buttonIcon" />
-                    <span> Filters </span>
-                </button>
+                    <MdAddCircle className="buttonIcon" />
+                    <span> New Filter </span>
 
+                    
+                </div>
+            }
 
-                {/* SETTINGS */}
-                <button
-                    id="buttonSettings"
-                    className="topButton"
-                    onClick={() => {
-                        setSettingsVisible(true)
-                    }}
-                >
-                    <MdSettings className="buttonIcon" />
-                    <span> Settings </span>
-                </button>
+            {/* FILTERS */}
+            <div
+                id="buttonFilter"
+                className="topButton"
+                onClick={() => {
+                    setSettingsVisible(false)
+                }}
+            >
+                <MdSettings className="buttonIcon" />
+                <span> Filters </span>
+
+                
             </div>
 
 
+            {/* SETTINGS */}
+            <div
+                id="buttonSettings"
+                className="topButton"
+                onClick={() => {
+                    setSettingsVisible(true)
+                }}
+            >
+                <MdSettings className="buttonIcon" />
+                <span> Settings </span>
+
+                
+            </div>
         </div>
+
     )
 }
 

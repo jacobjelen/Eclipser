@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 import DomainList from './components/DomainList';
 import Menu from './components/Menu';
 import Settings from './components/Settings';
-
 import React, { useState, useEffect } from 'react'
 
 export const updated = React.createContext()
@@ -38,7 +37,6 @@ function App() {
 
   return (
     <div className="body" >
-
       {localSettings.general &&
         <Pophead
           localSettings={localSettings}
@@ -52,24 +50,24 @@ function App() {
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
       />
-
-      {settingsVisible ?
-        <Settings
-          localSettings={localSettings}
-          setLocalSettings={setLocalSettings}
-          setStorageSettings={setStorageSettings}
-          messageCurrentTab={messageCurrentTab}
-        />
-      :
-      <DomainList
+      <div id="content">
+        {settingsVisible ?
+          <Settings
+            localSettings={localSettings}
+            setLocalSettings={setLocalSettings}
+            setStorageSettings={setStorageSettings}
+            messageCurrentTab={messageCurrentTab}
+          />
+          :
+          <DomainList
             currentDomain={currentDomain}
             localSettings={localSettings}
             setLocalSettings={setLocalSettings}
             setStorageSettings={setStorageSettings}
             messageCurrentTab={messageCurrentTab}
           />
-      }
-
+        }
+      </div>
       {/* display domain of the current active tab */}
       {/* <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div> */}
 

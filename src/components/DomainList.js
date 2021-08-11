@@ -5,7 +5,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
     console.log("R: DomainList")
 
     return (
-        <>
+        <div className="domainList">
             {/* CURRENT DOMAIN  */}
             {   localSettings.domains && currentDomain &&       // the first && means 'and', the second means 'then' ???
                 Object.entries(localSettings.domains)          //Object.entries returns [ ['key1', {value1}],['key2', {value2}] ]
@@ -45,7 +45,7 @@ const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorage
             }
 
             
-        </>
+        </div>
     )
 }
 
