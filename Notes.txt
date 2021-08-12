@@ -1,5 +1,9 @@
 QUESTIONS ????
       - stop Netflix video... forEach does not go through all sets?? 
+
+      - errors in extension that don't cause any problems??
+      - content: 2x DOMContentLoaded listener, ok?
+        - add a 'loaded' flag instead?
 ______________________________________________________________
 
 TO DO: 
@@ -39,9 +43,9 @@ TO DO:
 CSS
 
 - blocked screen
-- menu button
++ menu button
 - pophead color
-- pophead and menu fixed position when scrolling
++ pophead and menu fixed position when scrolling
 
 
 

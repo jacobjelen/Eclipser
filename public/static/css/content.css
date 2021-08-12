@@ -14,7 +14,7 @@
     width: 100%;
     height: 30px;
     z-index: 99999999;
-    background: rgba(19, 235, 163, 1);
+    background-color: rgba(19, 235, 163, 1);
     padding-top: 7px;
     text-align: center;
   }
@@ -30,7 +30,7 @@
     display: none;
     position: absolute;
     z-index: 99999;
-    background: rgba(19, 235, 163, .3);
+    background-color: rgba(19, 235, 163, .3);
   }
 
   #selectionSpan{
@@ -42,7 +42,8 @@
     padding: 2px 5px;
     font-family: "DINPro", sans-serif !important;
     font-weight: normal;
-    background: rgba(19, 235, 163, 1);
+    text-align: left;
+    background-color: rgba(19, 235, 163, 1);
   }
 
   #blockedPage{
@@ -53,7 +54,7 @@
     display: block; 
     width: 100%; 
     height: 100%; 
-    background: #2F374C"
+    background-color: #2F374C"
   }
 
   #blockedPage > span{
@@ -66,8 +67,19 @@
     color: #fff; 
     margin: 50px auto; 
     text-align: center;
+    /* z-index: 5; */
   }
 
+  #blockedPage #Eclipser_logo{
+    /* opacity: 0.3; */
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 300px;
+    height: auto;
+    margin-left: -150px;
+    /* z-index: 1; */
+  }
   /* https://transfonter.org/ */
  
 @font-face {

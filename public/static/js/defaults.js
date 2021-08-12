@@ -206,12 +206,7 @@ const default_settings = {
                     '#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div.css-1dbjc4n.r-aqfbo4.r-zso239.r-1hycxz > div > div.css-1dbjc4n.r-1xcajam.r-ipm5af.r-1hycxz > div > div > div > div:nth-child(3)',
                     '#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div.css-1dbjc4n.r-aqfbo4.r-zso239.r-1hycxz > div > div.css-1dbjc4n.r-1xcajam.r-ipm5af.r-1hycxz > div > div > div > div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1bro5k0.r-1udh08x'
                 ],
-                },
-                d: {
-                    title: 'Messages',
-                    active: true,
-                    selectors: ['[testid="DMDrawer"]','#layers'],
-                },
+                }
             }
         },
 

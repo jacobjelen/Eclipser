@@ -33,8 +33,8 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
                         messageCurrentTab('stop')
                         setSelecting(false)
                     }}>
-                    <MdCheckBox className="buttonIcon" />
-                    <span> Done Filtering </span>
+                    {/* <MdCheckBox className="buttonIcon" /> */}
+                    <span> Stop </span>
                     
                 </div>
                 :
@@ -46,7 +46,7 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
                         window.close()
                     }}
                 >
-                    <MdAddCircle className="buttonIcon" />
+                    {/* <MdAddCircle className="buttonIcon" /> */}
                     <span> New Filter </span>
 
                     
@@ -56,12 +56,12 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
             {/* FILTERS */}
             <div
                 id="buttonFilter"
-                className="topButton"
+                className={settingsVisible ? "topButton tb_passive" :"topButton tb_active" }
                 onClick={() => {
                     setSettingsVisible(false)
                 }}
             >
-                <MdSettings className="buttonIcon" />
+                {/* <MdSettings className="buttonIcon" /> */}
                 <span> Filters </span>
 
                 
@@ -71,12 +71,12 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
             {/* SETTINGS */}
             <div
                 id="buttonSettings"
-                className="topButton"
+                className={settingsVisible ? "topButton tb_active" :"topButton tb_passive" }
                 onClick={() => {
                     setSettingsVisible(true)
                 }}
             >
-                <MdSettings className="buttonIcon" />
+                {/* <MdSettings className="buttonIcon" /> */}
                 <span> Settings </span>
 
                 

@@ -3,8 +3,8 @@
   --green: rgb(19, 235, 163);
   --dark-green: rgb(27, 167, 120);
   --light-grey: #A3B1C0;
-  --orange: #ff7300;
-  --grey: #808080;
+  --orange: #ff4800;
+  --grey: #979797;
   --dark-grey: #2F374C;
   --black: #202738;
 
@@ -91,59 +91,60 @@ hr{
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   position: fixed;
-  top: 100px;
+  top: 110px;
   z-index: 5;
+  background-color: var(--dark-grey);
 }
 
 .topButton{
   /* background-color: var(--dark-green); */
-  height: 30px;
+  height: 25px;
   width: 100%;
-  margin: 2px 1px ;
-
+  margin: 0 3px;
+  padding-top: 4px;
   text-align: center;
 
-  color: white;
   font-family: 'DINPro', sans-serif;
   font-size: 9pt;
   font-weight: 500;
 
-  border-bottom: 2px solid white;
+  
   box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 
   transition: var(--hover-transition);
 }
 
+.tb_active{
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
+}
+
+.tb_passive{
+  color: white;
+  /* border-bottom: 1px solid var(--grey); */
+}
+
 .topButton:hover{
-  border-bottom: 4px solid var(--green);
+  border-bottom: 3px solid var(--green);
+  color: var(--green);
   transition: var(--hover-transition);
 }
 
 .topButton:active{
-  background-color: var(--dark-green);
+  background-color: var(--black);
 } 
 
 .buttonIcon{
   vertical-align: middle
 }
 
-.buttonLine{
-  width: 100%;
-  height: 5px;
-  background-color: white;
-  bottom: 0px;
-}
-
-.topButton:hover > .buttonLine{
-  height: 10px;
-}
-
 #buttonStop{
-  background-color: #ff4b1e;
+  color: var(--green);
+  border-bottom: 3px solid var(--green);
+  transition: var(--hover-transition);
 }
 
 /* SETTINGS /////////////////////////////////////////////////*/ 
@@ -165,10 +166,14 @@ hr{
   margin: 5px 0;
   padding: 5px 0;
   color: #fff;
+  transition: var(--hover-transition);
+
 }
 
 .settingsMainLine:hover{
   color: var(--green);
+  transition: var(--hover-transition);
+
 }
 
 .settingsSub{
@@ -190,18 +195,26 @@ hr{
   /* color: white; */
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
+  transition: var(--hover-transition);
+
 }
 .weekday--active:hover{
   color: var(--green);
+  transition: var(--hover-transition);
+
 }
 
 .weekday--passive{
   color: var(--grey);
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
+  transition: var(--hover-transition);
+
 }
 .weekday--passive:hover{
   color: var(--green);
+  transition: var(--hover-transition);
+
 }
 
 
@@ -221,7 +234,9 @@ input[type="time"][class="timeInput"]{
 }
 
 input[type="time"][class="timeInput"]:hover{
-  color:var(--green)
+  color:var(--green);
+  transition: var(--hover-transition);
+
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
@@ -230,6 +245,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 #resetSettings:hover{
 color: var(--orange);
+transition: var(--hover-transition);
 }
 
 /*  DOMAIN LIST /////////////////////////////////////////////////*/
@@ -239,7 +255,7 @@ color: var(--orange);
 
 #content{
   position: relative;
-    top: 140px;
+    top: 150px;
     width: 100%;
     height: 380px;
     overflow: scroll;
@@ -282,6 +298,8 @@ color: var(--orange);
 
 .domainLine__arrow:hover{
   color: var(--green);
+  transition: var(--hover-transition);
+
   /* transform: rotate(90deg); */
   /* transition: var(--hover-transition); */
 }
@@ -289,13 +307,14 @@ color: var(--orange);
 .domainIconNameDiv{
   display: grid;
   grid-template-columns: 20% 80% ;
- 
+  transition: var(--hover-transition);
+
   /* transition: var(--hover-transition); */
 }
 
 .domainNameDiv:hover{
   color: var(--green);
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
 }
 
 .domainName{
@@ -305,9 +324,7 @@ color: var(--orange);
   vertical-align: middle;
   padding-bottom: 1px;
   margin-left: 2px;
-
-  /* transition: var(--hover-transition); */
-  /* margin: 2px 10px 8px; */
+  transition: var(--hover-transition);
 }
 
 /* STATUS ICON */
@@ -321,19 +338,19 @@ color: var(--orange);
 
 #iconBlocked{
   transform: rotate(95deg);
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
 
 }
 
 #iconFiltered{
   color: inherit;
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
 
 }
 
 #iconPasive{
   color: var(--light-gray);
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
 
 }
 
@@ -388,7 +405,7 @@ div.domainLine:hover > div.lineButtons > div.bin{
   bottom: 50%;
   color: white;
   margin-right: 8px;
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
   vertical-align: middle
 }
 
@@ -401,7 +418,7 @@ div.setLine:hover > div.lineButtons > div.bin{
   bottom: 50%;
   color: white;
   margin-right: 8px;
-  /* transition: var(--hover-transition); */
+  transition: var(--hover-transition);
   vertical-align: middle
 }
 
@@ -416,10 +433,14 @@ div.setLine:hover > div.lineButtons > div.bin{
 
 #bin:hover{
   color: var(--orange);
+  transition: var(--hover-transition);
+
 }
 
 #binCheck{
   color: var(--green);
+  transition: var(--hover-transition);
+
 }
 
 
@@ -462,6 +483,10 @@ footer > a:hover{
 
 .passive{
   color: var(--grey);
+}
+
+.passive_all{
+  color: var(--grey) !important;
 }
 
 .orange{

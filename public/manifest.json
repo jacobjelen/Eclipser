@@ -29,15 +29,7 @@
 	"permissions": ["storage","tabs","alarms"], 
 	"web_accessible_resources": [
 		"static/css/content.css", 
-		"static/css/fonts/DINPro-Bold.woff2",
-		"static/css/fonts/DINPro-Bold.woff",
-		"static/css/fonts/DINPro-Medium.woff2",
-		"static/css/fonts/DINPro-Medium.woff",
-		"static/css/fonts/DINPro-Regular.woff2",
-		"static/css/fonts/DINPro-Regular.woff",
-		"static/css/fonts/DINPro-Black.woff2",
-		"static/css/fonts/DINPro-Black.woff",
-		"static/css/fonts/DINPro-Light.woff2",
-		"static/css/fonts/DINPro-Light.woff"
+		"imgs/e_logo.png",
+		"imgs/Eclipser_logo.png"
 	]
 }

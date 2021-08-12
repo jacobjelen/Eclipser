@@ -19,7 +19,7 @@ function App() {
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
-
+  
   useEffect(() => {   //runs once when app loads
     console.log('>> useEffect App')
     // SETTINGS
@@ -45,11 +45,13 @@ function App() {
           messageCurrentTab={messageCurrentTab}
         />
       }
+      
       <Menu
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
       />
+      
       <div id="content">
         {settingsVisible ?
           <Settings
@@ -68,15 +70,6 @@ function App() {
           />
         }
       </div>
-      {/* display domain of the current active tab */}
-      {/* <div> {currentDomain !== '' ? currentDomain : 'No Current Domain'} </div> */}
-
-      {/* <button
-        onClick={() => {
-          console.log(localSettings)
-        }}
-      >Log settings</button> */}
-
       <Footer />
     </div>
   );

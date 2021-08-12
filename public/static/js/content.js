@@ -48,10 +48,18 @@ function set_elements_visibility() {
 
     // CHECK is domain blocked
     if (settings.domains[domain].blocked) {
-      document.body.innerHTML = `
-          <div id="blockedPage">
-            <span>The website ${domain} was blocked by Eclipser 2.0</span>
-          </div>`;
+      document.addEventListener('DOMContentLoaded', () => {
+        const imgURL = chrome.runtime.getURL('imgs/Eclipser_logo.png')
+        
+        document.body.innerHTML = `
+        <div id="blockedPage" style="background-color:#2F374C">
+          <img src="${imgURL}" id="Eclipser_logo">
+          <span>${domain[0].toUpperCase() + domain.substring(1)} is blocked!</span>
+          
+        </div>`;
+        // document.body.style.backgroundColor = '#2F374C'
+      })
+      
       return
     }
 
@@ -209,7 +217,7 @@ window.onload = function () {
 
 function showReminder() {
   document.addEventListener('DOMContentLoaded', () => {
-    const reminder = $(`<div id='eclipserReminder'>  
+    const reminder = $(`<div id='eclipserReminder' style=>  
     <span>Filtered by Eclipser 2.0</span>
     </div>`).appendTo("body");
 
