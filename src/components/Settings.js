@@ -6,7 +6,8 @@ import WeekdayButton from "./WeekdayButton";
 import {
     FiCheckCircle,
     FiCircle,       // empty circle
-    FiAlertCircle
+    FiAlertCircle,
+    FiArrowRightCircle
 } from "react-icons/fi";
 
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
@@ -142,7 +143,6 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
             <hr></hr>
 
             {/* RESET ALL */}
-
             <div className="settingsMainLine" id="resetSettings"
                 onClick={(event) => {
                     if (!resetAction) {
@@ -151,7 +151,6 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                         chrome.runtime.sendMessage('reset')
                         window.location.reload()
                     }
-
                 }}
             >
                 <div className="statusIconDiv">
@@ -171,6 +170,31 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                     </span>
                 }
             </div>
+
+            {/* <hr></hr> */}
+            {/* FEATURE / BUG / DONATION */}
+
+            {/* <div className={localSettings.general.showReminderBar ? "settingsMainLine" : "settingsMainLine passive" }>
+
+                <div className="statusIconDiv">
+                <FiArrowRightCircle />
+                </div>
+                <span className="settingName">Bug or Feature? </span>
+            </div>
+
+            <div className="settingsSub">
+                Request a Feature
+            </div>
+
+            <div className="settingsSub">
+                Report a Bug
+            </div>
+
+
+            <div className="settingsSub">
+                Donate
+            </div> */}
+          
 
         </div>
     )

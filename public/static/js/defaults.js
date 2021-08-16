@@ -20,7 +20,6 @@ const default_settings = {
 
     domains: {
         'facebook.com': {
-            url: ['facebook.com', 'fb.com'],
             active: true,
             blocked: false,
             sets: {
@@ -59,7 +58,6 @@ const default_settings = {
         },
         
         'linkedin.com': {
-            url: ['linkedin.com'],
             active: true,
             blocked: false,
             sets: {
@@ -96,7 +94,6 @@ const default_settings = {
         },
 
         'youtube.com': {
-            url: ['youtube.com', 'youtu.be'],
             active: true,
             blocked: false,
             sets: {
@@ -134,7 +131,7 @@ const default_settings = {
         },
 
         'amazon.co.uk': {
-            url: ["amazon.com.br", "amazon.ca", "amazon.com.mx", "amazon.com", "amazon.cn", "amazon.in", "amazon.co.jp", "amazon.sg", "amazon.ae", "amazon.sa", "amazon.fr", "amazon.de", "amazon.it", "amazon.nl", "amazon.pl", "amazon.es", "amazon.se", "amazon.com.tr", "amazon.co.uk", "amazon.com.au"],
+            urls: ["amazon.com.br", "amazon.ca", "amazon.com.mx", "amazon.com", "amazon.cn", "amazon.in", "amazon.co.jp", "amazon.sg", "amazon.ae", "amazon.sa", "amazon.fr", "amazon.de", "amazon.it", "amazon.nl", "amazon.pl", "amazon.es", "amazon.se", "amazon.com.tr", "amazon.co.uk", "amazon.com.au"],
             active: true,
             blocked: false,
             sets: {
@@ -162,7 +159,7 @@ const default_settings = {
         },
 
         'ebay.co.uk': {
-            url: ["ebay.co.uk", "ebay.com", "ebay.fr","ebay.it","ebay.de","ebay.es",],
+            urls: ["ebay.co.uk", "ebay.com", "ebay.fr","ebay.it","ebay.de","ebay.es",],
             active: true,
             blocked: false,
             sets: {
@@ -185,7 +182,6 @@ const default_settings = {
         },
 
         'twitter.com': {
-            url: ["twitter.com",],
             active: true,
             blocked: false,
             sets: {
@@ -211,7 +207,6 @@ const default_settings = {
         },
 
         'netflix.com': {
-            url: ["netflix.vom"],
             active: true,
             blocked: false,
             sets: {

@@ -321,7 +321,7 @@ transition: var(--hover-transition);
   font-weight: var(--title-font-weight);;
   font-size: var(--title-font-size);
   white-space: nowrap;
-  vertical-align: middle;
+  vertical-align: text-top;
   padding-bottom: 1px;
   margin-left: 2px;
   transition: var(--hover-transition);
@@ -352,6 +352,17 @@ transition: var(--hover-transition);
   color: var(--light-gray);
   transition: var(--hover-transition);
 
+}
+
+.pickUrl{
+  position: absolute;
+  color: var(--orange);
+  z-index: 5;
+}
+
+.pickUrl:hover{
+  color: white;
+  z-index: 5;
 }
 
 /*  SET LIST /////////////////////////////////////////////////*/

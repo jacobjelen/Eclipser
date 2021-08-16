@@ -1,31 +1,11 @@
 QUESTIONS ????
-      - stop Netflix video... forEach does not go through all sets?? 
-
       - errors in extension that don't cause any problems??
       - content: 2x DOMContentLoaded listener, ok?
         - add a 'loaded' flag instead?
+
 ______________________________________________________________
 
 TO DO: 
-
-+ fix EditableTitle
-    + removed the title state, stored title is updated with each character
-
-+ remove submit button from active time settings
-    + removed timeFrom, timeTo states, stored time settins updated with each change
-
-+ new filter / stop selecting
-    + variable called selecting in content script represents if we are currently selecting elemet or not
-    menu sends 'selecting' message to content scritp, gets a response true/false
-
-+ block this domain 
-
-+ content script: inject css in the head instead of attaching classes
-
-+ re-run the content script when a filter is deleted
-
-- check URL list, not domainName
-
 + add default sets for 
     + facebook
     + youtube
@@ -36,12 +16,20 @@ TO DO:
     x Reddit
     + Amazon...
 
-+ load DIN font
+- check URL list, not domainName
+- domain sending refresh or hardRefresh message to content... check the logic
+- content: 2x DOMContentLoaded listener => remove listener after
+- grey content if Eclipser is Paused
+- feature, bug, donation section in settings
+    - make a payment/donation page on jacobjelen.com
 
-+ hide scroll bar but still scroll
+- Chrome webstore
+    - create graphics
+    - write a better description/summary
+    - make a 15s explainer video
+    - publish
 
 CSS
-
 - blocked screen
 + menu button
 - pophead color

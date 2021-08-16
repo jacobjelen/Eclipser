@@ -1,8 +1,9 @@
 import './Eclipser.css';
 import SetList from "./SetList";
 import Delete from "./Delete";
+import UrlList from './UrlList';
 import { useState } from 'react'
-import { merge } from 'lodash'
+import { merge, stubTrue } from 'lodash'
 
 import { BsCaretDownFill } from "react-icons/bs";  // expand arrow
 
@@ -18,6 +19,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
     console.log('R: Domain')
     // HOOKS
     const [expanded, setExpanded] = useState(expand)     // is the domain expanded = setList visible?
+    const [urlsVisible, setUrlsVisible] = useState(false)
 
     const statusIcon = (() => {
         if (localSettings.domains[domainName].blocked) {
@@ -68,10 +70,10 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                         console.log(currentDomain, " - ", domainName)
 
                         if (currentDomain === domainName) {
-                            if(!temp.domains[domainName].active && !temp.domains[domainName].blocked){
+                            if (temp.domains[domainName].blocked) {
                                 // blocked -> set to off(unfiltered) => reload the entire page
                                 messageCurrentTab('hardRefresh')
-                            }else{
+                            } else {
                                 // rerun the setElementsVisibility()
                                 messageCurrentTab('refresh')
                             }
@@ -87,29 +89,32 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                         {domainName.length <= 25 ?
                             domainName[0].toUpperCase() + domainName.substring(1)
                             :
-                            domainName[0].toUpperCase() + domainName.substring(1,25) + "..."
+                            domainName[0].toUpperCase() + domainName.substring(1, 25) + "..."
                         }
                     </span>
+                    {localSettings.domains[domainName].urls &&
 
+                        <span className="pickUrl"
+                            onClick={() => { setUrlsVisible(!urlsVisible); }}
+                        >urls</span>}
                 </div>
-
 
                 {/* LINE BUTTONS */}
                 <div className="lineButtons" >
 
                     {/* DELETE BIN */}
-                        <Delete
-                            action={() => {
-                                const temp = merge({}, localSettings)  // deep merge (lodash)
-                                delete temp.domains[domainName]
-                                setStorageSettings(temp)
-                                if (currentDomain === domainName) {
-                                    console.log('domains match')
-                                    messageCurrentTab('hardRefresh')
-                                }
-                                setLocalSettings(temp)
-                            }}
-                        />
+                    <Delete
+                        action={() => {
+                            const temp = merge({}, localSettings)  // deep merge (lodash)
+                            delete temp.domains[domainName]
+                            setStorageSettings(temp)
+                            if (currentDomain === domainName) {
+                                console.log('domains match')
+                                messageCurrentTab('hardRefresh')
+                            }
+                            setLocalSettings(temp)
+                        }}
+                    />
                 </div>
 
                 {/* EXPAND ARROW */}
@@ -117,16 +122,22 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                     onClick={() => setExpanded(!expanded)}
                 >
 
-                    {expanded ? 
-                    <FiChevronsUp className="domainLine__arrow "/> 
-                    : 
-                    <FiChevronsDown className="domainLine__arrow "/>
+                    {expanded ?
+                        <FiChevronsUp className="domainLine__arrow " />
+                        :
+                        <FiChevronsDown className="domainLine__arrow " />
                     }
-                    
+
                 </div>
             </div>
 
-
+            {urlsVisible &&
+                    <UrlList
+                        domainName={domainName}
+                        localSettings={localSettings}
+                        setLocalSettings={setLocalSettings}
+                        setStorageSettings={setStorageSettings}
+                    />}
 
             {/* SET LIST
               && means if expanded == true render SetList */}
