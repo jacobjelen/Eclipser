@@ -40,10 +40,6 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
         }
     })()
 
-    const urlArrow = (() => {
-        if (!urlsVisible) return <BsCaretDownFill className="urlArrow" />
-        else return <BsCaretUpFill className="urlArrow" />
-    })()
 
     const displayDomainName = (() => {
         // only some of the default domains have multiple URLs
@@ -60,23 +56,15 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
             return (
                 <>
                     <span>{domainName[0].toUpperCase() + domainName.substring(1, domainName.indexOf('.'))}</span>
-                    
-                    <span className='domainAppendix'>
-                        {domainName.substring(domainName.indexOf('.'))}
 
-                        <span className="urlArrow"
-                            onClick={(event) => {
-                                setUrlsVisible(!urlsVisible);
-                                event.preventDefault()      //stop the key press from causing anything else
-                                event.stopPropagation()
-                                console.log(event)
-                                const el = document.elementFromPoint(event.clientX, event.clientY)
-                                console.log(el)
-                                
-                            }}
-                        >
-                            {urlArrow}
-                        </span>
+                    <span className='domainAppendix'
+                        onClick={(event) => {
+                            setUrlsVisible(!urlsVisible);
+                            event.preventDefault()      //stop the key press from causing anything else
+                            event.stopPropagation()
+                        }}
+                    >
+                        {domainName.substring(domainName.indexOf('.'))}
                     </span>
                 </>
             )
@@ -179,11 +167,12 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
             </div >
 
             {urlsVisible &&
-                <UrlList 
+                <UrlList
                     domainName={domainName}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
                     setStorageSettings={setStorageSettings}
+                    setUrlsVisible={setUrlsVisible}
                 />}
 
         </>

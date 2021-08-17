@@ -288,19 +288,19 @@ transition: var(--hover-transition);
 
 #iconBlocked{
   transform: rotate(95deg);
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 
 }
 
 #iconFiltered{
   color: inherit;
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 
 }
 
 #iconPasive{
   color: var(--light-gray);
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 }
 
 .domainArrowDiv{
@@ -308,7 +308,7 @@ transition: var(--hover-transition);
   font-size: 10pt;
   display: inline-block;
   vertical-align: middle;
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
   
 }
 
@@ -319,12 +319,12 @@ transition: var(--hover-transition);
   vertical-align: auto;
   margin-left: 5px;
   /* opacity: 0; */
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 }
 
 .domainLine__arrow:hover{
   color: var(--green);
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 
   /* transform: rotate(90deg); */
   /* transition: var(--hover-transition); */
@@ -333,14 +333,14 @@ transition: var(--hover-transition);
 .domainIconNameDiv{
   display: grid;
   grid-template-columns: 20% 80% ;
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 
   /* transition: var(--hover-transition); */
 }
 
 .domainNameDiv:hover{
   color: var(--green);
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 }
 
 .domainName{
@@ -350,70 +350,52 @@ transition: var(--hover-transition);
   vertical-align: text-top;
   padding-bottom: 1px;
   margin-left: 2px;
-  transition: var(--hover-transition);
+  /* transition: var(--hover-transition); */
 }
 
-.domainAppendix{
-  color: white
+.domainNameDiv:hover .domainAppendix{
+  text-decoration: underline;
+  /* transition: var(--hover-transition); */
 }
 
-.domainAppendix{
-  color: white;
-}
-
-.domainAppendix:hover .urlArrow{
-  display: unset
-}
-
-.passive .domainAppendix {
-  color: unset
-}
-
-.urlArrow{
-  font-size: 10px;
-  margin-left: 2px;
-  color: white;
-  z-index: 5;
-  display: none
-}
-
-.urlArrow:hover{
-  color: var(--green);
-  z-index: 5;
+.domainAppendix:hover{
+  color: var(--dark-green)
 }
 
 .urlList{
   position: absolute;
   left: 30px;
   z-index: 5;
-  left: 65px;
+  left: 60px;
   margin-top: -8px;
   background-color: var(--black);
   font-weight: var(--title-font-weight);;
   font-size: var(--title-font-size);
   
   max-height: 100px;
-  width: 60px;
+  width: 70px;
   overflow: scroll;
   /* border: solid 1px var(--green); */
 }
 
-#amazonURLS{
-  left: 73px;
-}
-
-#ebayURLS{
-  left: 54px;
-}
-
 .urlList span{
   display: block;
-  padding: 0px 10px;
+  padding: 0px 15px;
 }
 
 .urlList span:hover{
   background-color: var(--green);
 }
+
+#amazonURLS{
+  left: 68px;
+}
+
+#ebayURLS{
+  left: 49px;
+}
+
+
 
 /*  SET LIST /////////////////////////////////////////////////*/
 .setList{
