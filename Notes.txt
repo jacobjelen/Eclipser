@@ -11,7 +11,7 @@ TO DO:
 
 - errors in extension that don't cause any problems??
 
-- update to manifest v3: https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/
++ update to manifest v3: https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/
 
 - check URL list, not domainName
     - position the list of appendices
