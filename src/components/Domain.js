@@ -179,7 +179,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
             </div >
 
             {urlsVisible &&
-                <UrlList
+                <UrlList 
                     domainName={domainName}
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}

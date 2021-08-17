@@ -8,7 +8,7 @@ let selecting = false;
 set_elements_visibility();
 
 //// LISTEN FOR COMMAND MESSAGES ////////////////////////////////////////////////
-chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('Message Received: ', message)
 
   if (message === 'hardRefresh') window.location.reload();  // sometimes not working ??? 

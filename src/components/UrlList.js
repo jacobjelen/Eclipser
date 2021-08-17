@@ -5,7 +5,7 @@ const UrlList = ({domainName, localSettings, setLocalSettings, setStorageSetting
 
     return (
 
-        <div className="urlList">
+        <div className="urlList" id={domainName.substring(0, domainName.indexOf('.'))+"URLS"}>
             {urls.map( (url) => 
                 (
                     <span

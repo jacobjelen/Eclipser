@@ -1,25 +1,14 @@
 TO DO: 
-+ add default sets for 
-    + facebook
-    + youtube
-    + linkedIn
-    + ebay
-    + Twitter, 
-    + Netflix, 
-    x Reddit
-    + Amazon...
 
 - errors in extension that don't cause any problems??
 
-+ update to manifest v3: https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/
+- content: 2x DOMContentLoaded listener => remove listener after?
 
 - check URL list, not domainName
-    - position the list of appendices
     - hide it on click outside
 
-- separate button for "New Filter", not in the top menu
 
-- content: 2x DOMContentLoaded listener => remove listener after?
+- separate button for "New Filter", not in the top menu
 - grey content if Eclipser is Paused
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
@@ -42,3 +31,6 @@ CSS
 + menu button
 - pophead color
 + pophead and menu fixed position when scrolling
+
+
+Enter file in which to save the key (/Users/jacobjelen/.ssh/id_ed25519): 
