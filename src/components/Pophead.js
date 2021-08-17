@@ -3,7 +3,6 @@ import { merge } from 'lodash'
 import { useState } from 'react'
 
 const Pophead = ({ localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
-	console.log('R: Pophead')
 	const [mouseOver, setMouseOver] = useState(false)
 
 	let text,logo

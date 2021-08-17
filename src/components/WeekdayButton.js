@@ -1,7 +1,6 @@
 import { merge } from 'lodash'
 
 const WeekdayButton = ({ weekday, localSettings, setLocalSettings, setStorageSettings }) => {
-    console.log("hello")
     
     const dayNames = ["Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
     return (
@@ -10,7 +9,6 @@ const WeekdayButton = ({ weekday, localSettings, setLocalSettings, setStorageSet
         onClick={(event) => {
             const temp_localSettings = merge({}, localSettings)
             temp_localSettings.general.weekdays[weekday] = !temp_localSettings.general.weekdays[weekday]
-            console.log(event.target.checked)
             setStorageSettings(temp_localSettings)
             setLocalSettings(temp_localSettings)
         }}

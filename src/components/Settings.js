@@ -11,7 +11,6 @@ import {
 } from "react-icons/fi";
 
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
-    console.log("R: Settings")
 
     const [resetAction, setResetAction] = useState(false)
 
@@ -47,7 +46,6 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     }
 
     const weekdaysArray = Object.keys(localSettings.general.weekdays)
-    console.log(weekdaysArray)
 
     return (
         <div id="settings">
@@ -57,7 +55,6 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 onClick={(event) => {
                     const temp_localSettings = merge({}, localSettings)
                     temp_localSettings.general.activeTimeCheck = !temp_localSettings.general.activeTimeCheck
-                    console.log(event.target.checked)
                     setStorageSettings(temp_localSettings)
                     setLocalSettings(temp_localSettings)
                 }}
@@ -123,7 +120,6 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 onClick={(event) => {
                     const temp_localSettings = merge({}, localSettings)
                     temp_localSettings.general.showReminderBar = !temp_localSettings.general.showReminderBar
-                    console.log(event.target.checked)
                     setStorageSettings(temp_localSettings)
                     setLocalSettings(temp_localSettings)
                 }}

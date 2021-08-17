@@ -1,10 +1,3 @@
-QUESTIONS ????
-      - errors in extension that don't cause any problems??
-      - content: 2x DOMContentLoaded listener, ok?
-        - add a 'loaded' flag instead?
-
-______________________________________________________________
-
 TO DO: 
 + add default sets for 
     + facebook
@@ -16,26 +9,36 @@ TO DO:
     x Reddit
     + Amazon...
 
+- errors in extension that don't cause any problems??
+
+- update to manifest v3: https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/
+
 - check URL list, not domainName
-- domain sending refresh or hardRefresh message to content... check the logic
-- content: 2x DOMContentLoaded listener => remove listener after
+    - position the list of appendices
+    - hide it on click outside
+
+- separate button for "New Filter", not in the top menu
+
+- content: 2x DOMContentLoaded listener => remove listener after?
 - grey content if Eclipser is Paused
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
 
-- Chrome webstore
+BUGS:
+- domain sending refresh or hardRefresh message to content... check the logic
+- Facebook not showing content after search >> check 'feed' selectors
+- check that filters on alternative URLs actually work
+
+Chrome webstore
     - create graphics
     - write a better description/summary
     - make a 15s explainer video
     - publish
+
+- make an Eclipser page on my website/github
 
 CSS
 - blocked screen
 + menu button
 - pophead color
 + pophead and menu fixed position when scrolling
-
-
-
-
-

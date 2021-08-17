@@ -25,7 +25,6 @@ import {
 
 
 const Delete = ({ action }) => {
-    console.log('R: Delete')
     const [confirmVisible, setConfirmVisible] = useState(false) // false-> bin visible; true -> ok or stop visible
 
     return (

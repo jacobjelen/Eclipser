@@ -1,15 +1,27 @@
-const UrlList = ({domainName, localSettings, setLocalSettings, setStorageSettings}) => {
-    
+import { merge } from 'lodash'
+
+const UrlList = ({domainName, localSettings, setLocalSettings, setStorageSettings}) => {    
     const urls = Object.values(localSettings.domains[domainName].urls).sort()
 
     return (
-        <ul className="setList">
+
+        <div className="urlList">
             {urls.map( (url) => 
                 (
-                    <li> {url} </li>
+                    <span
+                        onClick={()=>{
+                            console.log('url clicked')
+                            const temp = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
+                            temp.domains[url] = temp.domains[domainName]
+                            delete temp.domains[domainName]
+                            setStorageSettings(temp)
+                            setLocalSettings(temp)
+                        }}
+
+                    > {url.substring(url.indexOf('.'))} </span>
                 )           
             )}
-        </ul>
+        </div>
     )
 }
 

@@ -14,14 +14,12 @@ export const updated = React.createContext()
 
 // POPUP WINDOW //////////////////////////////////////
 function App() {
-  console.log('R: App')
   // state that holds allSettings
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
   
   useEffect(() => {   //runs once when app loads
-    console.log('>> useEffect App')
     // SETTINGS
     getStorageSettings()
       .then(r => { setLocalSettings(r) })
@@ -95,14 +93,9 @@ function messageCurrentTab(message) {
 
 // returns object with all Eclpser settings
 function getStorageSettings() {
-  console.log('>> getStorageSettings()')
-
   return new Promise((resolve, reject) => {
 
     chrome.storage.sync.get('settings', (result) => {
-      console.log('storage settings loaded: ')
-      console.log(result)
-
       if (result.settings) {
         resolve(result.settings)
       } else {

@@ -4,7 +4,6 @@ import EditableTitle from "./EditableTitle"
 
 
 const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
-    console.log("R: Set")
 
     return (
         <>

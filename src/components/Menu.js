@@ -9,7 +9,6 @@ import {
 } from "react-icons/md";
 
 const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
-    console.log("R: Menu")
 
     const [selecting, setSelecting] = useState(false)
 

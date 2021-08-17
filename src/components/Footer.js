@@ -1,5 +1,4 @@
 const Footer = () => {
-    console.log("R: Footer")
 
     return (
         <footer>

@@ -5,9 +5,7 @@ import { merge } from 'lodash'
 const EditableTitle = ({ 
     localSettings, setLocalSettings, setStorageSettings, 
     domainName, currentDomain, set, messageCurrentTab }) => {
-    
-    console.log("R: EditableTitle - Set: ",set)
-        
+            
     const [inputVisible, setInputVisible] = useState(false)          // input inputVisible
     const inputRef = useRef()    // close text input if we click anywhere outside of it
 
@@ -25,7 +23,6 @@ const EditableTitle = ({
 
         // function to run when we click outside
         const outsideClickHandler = (event) => {
-            console.log('event.target ',event.target)
 
             if (inputRef.current !== null && 
                 inputRef.current !== undefined &&
@@ -68,7 +65,6 @@ const EditableTitle = ({
 
             // show text input on double click
             onDoubleClick={(event) => {
-                console.log(event)
                 setInputVisible(true)
             }}
         >

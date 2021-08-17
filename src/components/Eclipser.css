@@ -159,7 +159,7 @@ hr{
 .settingsMainLine{
   font-weight: var(--title-font-weight);;
   font-size: var(--title-font-size);
-  vertical-align: middle;
+  vertical-align: text-top;
   width: 100%;
   display: grid;
   grid-template-columns: 10% 90%;
@@ -277,6 +277,32 @@ transition: var(--hover-transition);
   color: white;
 }
 
+/* STATUS ICON */
+.statusIconDiv{
+  padding: 0px 5px;
+}
+
+.statusIcon{
+  vertical-align: middle;
+}
+
+#iconBlocked{
+  transform: rotate(95deg);
+  transition: var(--hover-transition);
+
+}
+
+#iconFiltered{
+  color: inherit;
+  transition: var(--hover-transition);
+
+}
+
+#iconPasive{
+  color: var(--light-gray);
+  transition: var(--hover-transition);
+}
+
 .domainArrowDiv{
   font-weight: 500;
   font-size: 10pt;
@@ -327,42 +353,48 @@ transition: var(--hover-transition);
   transition: var(--hover-transition);
 }
 
-/* STATUS ICON */
-.statusIconDiv{
-  padding: 0px 5px;
+.domainAppendix{
+  color: white
 }
 
-.statusIcon{
-  vertical-align: middle;
+.domainAppendix{
+  color: white;
 }
 
-#iconBlocked{
-  transform: rotate(95deg);
-  transition: var(--hover-transition);
-
+.domainAppendix:hover .urlArrow{
+  display: unset
 }
 
-#iconFiltered{
-  color: inherit;
-  transition: var(--hover-transition);
-
+.passive .domainAppendix {
+  color: unset
 }
 
-#iconPasive{
-  color: var(--light-gray);
-  transition: var(--hover-transition);
-
-}
-
-.pickUrl{
-  position: absolute;
-  color: var(--orange);
-  z-index: 5;
-}
-
-.pickUrl:hover{
+.urlArrow{
+  font-size: 10px;
+  margin-left: 2px;
   color: white;
   z-index: 5;
+  display: none
+}
+
+.urlArrow:hover{
+  color: var(--green);
+  z-index: 5;
+}
+
+.urlList{
+  position: absolute;
+  z-index: 5;
+  background-color: var(--black);
+  /* border: solid 1px var(--green); */
+}
+
+.urlList span{
+  display: block;
+}
+
+.urlList span:hover{
+  background-color: var(--green);
 }
 
 /*  SET LIST /////////////////////////////////////////////////*/
