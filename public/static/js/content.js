@@ -48,24 +48,13 @@ function set_elements_visibility() {
 
     // CHECK is domain blocked
     if (settings.domains[domain].blocked) {
-      document.addEventListener('DOMContentLoaded', () => {
-        const imgURL = chrome.runtime.getURL('imgs/Eclipser_logo.png')
-        
-        document.body.innerHTML = `
-        <div id="blockedPage" style="background-color:#2F374C">
-          <img src="${imgURL}" id="Eclipser_logo">
-          <span>${domain[0].toUpperCase() + domain.substring(1)} is blocked!</span>
-          
-        </div>`;
-        // document.body.style.backgroundColor = '#2F374C'
-      })
-      
+      document.addEventListener('DOMContentLoaded', showBlockedPage)  
       return
     }
 
     // Show reminder bar - otherwise websites seem broken when Eclipser is blocking content
     if (settings.general.showReminderBar && (lastDomain !== domain)) {
-      showReminder()
+      document.addEventListener('DOMContentLoaded', showReminder)
     }
 
     Object.keys(settings.domains[domain].sets).forEach((set) => {
@@ -216,7 +205,6 @@ window.onload = function () {
 //// FUNCTIONS ///////////////////////////////////////////////////////////
 
 function showReminder() {
-  document.addEventListener('DOMContentLoaded', () => {
     const reminder = $(`<div id='eclipserReminder' style=>  
     <span>Filtered by Eclipser 2.0</span>
     </div>`).appendTo("body");
@@ -225,7 +213,20 @@ function showReminder() {
       reminder.slideUp(500)
       lastDomain = domain;     // to only show the reminder when the page loads the firs time
     }, 2000);  // miliseconds to wait
-  })
+    document.removeEventListener('DOMContentLoaded', showBlockedPage)   // remove the listener after showBlockedPage runs, for good practice  
+}
+
+function showBlockedPage(){
+  const imgURL = chrome.runtime.getURL('imgs/Eclipser_logo.png')
+        
+  document.body.innerHTML = `
+  <div id="blockedPage" style="background-color:#2F374C">
+    <img src="${imgURL}" id="Eclipser_logo">
+    <span>${domain[0].toUpperCase() + domain.substring(1)} is blocked!</span>
+    
+  </div>`;
+  // document.body.style.backgroundColor = '#2F374C'
+  document.removeEventListener('DOMContentLoaded', showBlockedPage)   // remove the listener after showBlockedPage runs, for good practice
 }
 
 // Get selector for element el
