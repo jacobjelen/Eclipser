@@ -137,15 +137,44 @@ hr{
   background-color: var(--black);
 } 
 
+/* ADD FILTER BUTTON /////////////////////////////////////////////////*/ 
+
+.filterButton{
+  /* border on the inside */
+  /* box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;*/
+  border-radius: var(--border-radius);
+  border: solid 1pt var(--green); 
+  
+  font-weight: var(--title-font-weight);
+  font-size: var(--title-font-size);
+  
+  background-color: var(--dark-green);
+  
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 75%;
+  margin: 5px 10px 0 10px;
+  padding: 3px 0;
+}
+
+.filterButton:hover{
+  color: var(--black);
+  background-color: var(--green);
+}
+
 .buttonIcon{
   vertical-align: middle
 }
 
 #buttonStop{
-  color: var(--green);
-  border-bottom: 3px solid var(--green);
+  color: var(--orange);
+  border: 1pt solid var(--orange);
   transition: var(--hover-transition);
 }
+
+
 
 /* SETTINGS /////////////////////////////////////////////////*/ 
 
@@ -275,6 +304,18 @@ transition: var(--hover-transition);
   margin: 5px 0px;
   padding: 5px 0px;
   color: white;
+}
+
+.domainLine:hover{
+  background-color: var(--dark-green);
+  border-radius: 5px 0px 0px 5px;
+}
+
+.domainLineExpanded{
+  /* background-color: var(--dark-green); */
+  border:unset;
+  border-bottom: 1px solid var(--green);
+  border-radius: 5px 0px 0 0;
 }
 
 /* STATUS ICON */

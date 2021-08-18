@@ -22,35 +22,6 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
 
     return (
         <div id="topMenu">
-            {/* NEW FILTER */}
-
-            {selecting ?
-                <div
-                    id="buttonStop"
-                    className="topButton"
-                    onClick={() => {
-                        messageCurrentTab('stop')
-                        setSelecting(false)
-                    }}>
-                    {/* <MdCheckBox className="buttonIcon" /> */}
-                    <span> Stop </span>
-                    
-                </div>
-                :
-                <div
-                    id="buttonNew"
-                    className="topButton"
-                    onClick={() => {
-                        messageCurrentTab('new');
-                        window.close()
-                    }}
-                >
-                    {/* <MdAddCircle className="buttonIcon" /> */}
-                    <span> New Filter </span>
-
-                    
-                </div>
-            }
 
             {/* FILTERS */}
             <div

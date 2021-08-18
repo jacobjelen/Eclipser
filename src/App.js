@@ -4,10 +4,11 @@
 import './components/Eclipser.css';
 import './fonts/DINPro.css';
 import Pophead from './components/Pophead';
-import Footer from './components/Footer';
-import DomainList from './components/DomainList';
 import Menu from './components/Menu';
+import AddFilterButton from './components/AddFilterButton';
+import DomainList from './components/DomainList';
 import Settings from './components/Settings';
+import Footer from './components/Footer';
 import React, { useState, useEffect } from 'react'
 
 export const updated = React.createContext()
@@ -18,7 +19,7 @@ function App() {
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
-  
+
   useEffect(() => {   //runs once when app loads
     // SETTINGS
     getStorageSettings()
@@ -43,13 +44,13 @@ function App() {
           messageCurrentTab={messageCurrentTab}
         />
       }
-      
+
       <Menu
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
       />
-      
+
       <div id="content">
         {settingsVisible ?
           <Settings
@@ -59,13 +60,21 @@ function App() {
             messageCurrentTab={messageCurrentTab}
           />
           :
-          <DomainList
-            currentDomain={currentDomain}
-            localSettings={localSettings}
-            setLocalSettings={setLocalSettings}
-            setStorageSettings={setStorageSettings}
-            messageCurrentTab={messageCurrentTab}
-          />
+          <>
+            <AddFilterButton
+              settingsVisible={settingsVisible}
+              setSettingsVisible={setSettingsVisible}
+              messageCurrentTab={messageCurrentTab}
+            />
+
+            <DomainList
+              currentDomain={currentDomain}
+              localSettings={localSettings}
+              setLocalSettings={setLocalSettings}
+              setStorageSettings={setStorageSettings}
+              messageCurrentTab={messageCurrentTab}
+            />
+          </>
         }
       </div>
       <Footer />
