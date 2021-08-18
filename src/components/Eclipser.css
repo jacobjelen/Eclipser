@@ -142,8 +142,8 @@ hr{
 }
 
 #buttonStop{
-  color: var(--green);
-  border-bottom: 3px solid var(--green);
+  color: var(--orange);
+  border-bottom: 3px solid var(--orange);
   transition: var(--hover-transition);
 }
 

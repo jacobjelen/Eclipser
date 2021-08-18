@@ -4,9 +4,6 @@ TO DO:
 
 - content: 2x DOMContentLoaded listener => remove listener after?
 
-+ check URL list, not domainName
-    + hide it on click outside
-
 - separate button for "New Filter", not in the top menu
 - grey content if Eclipser is Paused
 - feature, bug, donation section in settings
