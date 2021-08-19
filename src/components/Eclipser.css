@@ -127,11 +127,6 @@ hr{
   border-bottom: 2px solid var(--dark-green);
 }
 
-.tb_passive{
-  /* color: white; */
-  /* border-bottom: 1px solid var(--grey); */
-}
-
 .topButton:hover{
   border-bottom: 3px solid var(--green);
   color: var(--green);
@@ -142,15 +137,40 @@ hr{
   background-color: var(--black);
 } 
 
+/* ADD FILTER BUTTON /////////////////////////////////////////////////*/ 
+
+.filterButton{
+  border-radius: var(--border-radius);
+  border: solid 1pt var(--green); 
+  
+  font-weight: var(--title-font-weight);
+  font-size: var(--title-font-size);
+  
+  background-color: var(--dark-grey);
+  
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 75%;
+  margin: 5px 10px 0 10px;
+  padding: 3px 0;
+}
+
+.filterButton:hover{
+  /* color: var(--black); */
+  background-color: var(--dark-grey);
+}
+
 .buttonIcon{
   vertical-align: middle
 }
 
 #buttonStop{
   color: var(--orange);
-  border-bottom: 3px solid var(--orange);
+  border: 1pt solid var(--orange);
   transition: var(--hover-transition);
 }
+
+
 
 /* SETTINGS /////////////////////////////////////////////////*/ 
 
@@ -282,6 +302,18 @@ transition: var(--hover-transition);
   /* color: white; */
 }
 
+.domainLine:hover{
+  background-color: var(--dark-green);
+  border-radius: 5px 0px 0px 5px;
+}
+
+.domainLineExpanded{
+  /* background-color: var(--dark-green); */
+  /* border:unset; */
+  /* border-bottom: 1px solid var(--green); */
+  border-radius: 5px 0px 0 0;
+}
+
 /* STATUS ICON */
 .statusIconDiv{
   padding: 0px 5px;
@@ -344,7 +376,7 @@ transition: var(--hover-transition);
 }
 
 .domainNameDiv:hover{
-  color: var(--green);
+  /* color: var(--green); */
   /* transition: var(--hover-transition); */
 }
 

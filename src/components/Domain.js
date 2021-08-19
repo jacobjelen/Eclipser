@@ -75,7 +75,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
         <>
             <div className={localSettings.general && localSettings.general.active ? "domainDiv" : "domainDiv passive"}>
 
-                <div className="domainLine">
+                <div className={!expanded ? "domainLine" : "domainLine domainLineExpanded"} >
 
                     {/* DOMAIN NAME */}
                     <div className={localSettings.domains[domainName].active ? "domainNameDiv" : "domainNameDiv passive"}

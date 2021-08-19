@@ -1,12 +1,4 @@
 import { useState, useEffect } from "react";
-import {
-    MdAddCircle,           // new filter
-    MdSettings,            // settings
-    MdPlaylistAdd,
-    MdPlaylistAddCheck,
-    MdQueue,
-    MdCheckBox
-} from "react-icons/md";
 
 const Menu = ({ localSettings, messageCurrentTab, settingsVisible, setSettingsVisible }) => {
 
@@ -21,36 +13,7 @@ const Menu = ({ localSettings, messageCurrentTab, settingsVisible, setSettingsVi
     }, [])
 
     return (
-        <div id="topMenu" className={localSettings.general && !localSettings.general.active && "passive"}>
-            {/* NEW FILTER */}
-
-            {selecting ?
-                <div
-                    id="buttonStop"
-                    className="topButton"
-                    onClick={() => {
-                        messageCurrentTab('stop')
-                        setSelecting(false)
-                    }}>
-                    {/* <MdCheckBox className="buttonIcon" /> */}
-                    <span> Stop </span>
-                    
-                </div>
-                :
-                <div
-                    id="buttonNew"
-                    className="topButton"
-                    onClick={() => {
-                        messageCurrentTab('new');
-                        window.close()
-                    }}
-                >
-                    {/* <MdAddCircle className="buttonIcon" /> */}
-                    <span> New Filter </span>
-
-                    
-                </div>
-            }
+        <div id="topMenu">
 
             {/* FILTERS */}
             <div
