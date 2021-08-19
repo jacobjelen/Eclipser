@@ -18,11 +18,11 @@ function App() {
   const [localSettings, setLocalSettings] = useState({})  // entire settings object from chrome.storage
   const [currentDomain, setCurrentDomain] = useState('')  // domain of the current active tab
   const [settingsVisible, setSettingsVisible] = useState(false)
-  
+
   useEffect(() => {   //runs once when app loads
     // SETTINGS
     getStorageSettings()
-      .then(r => { setLocalSettings(r) })
+      .then(r => { setLocalSettings(r)})
       .catch(e => { console.log(e) })
 
     // CURRENT DOMAIN    
@@ -32,8 +32,7 @@ function App() {
 
   }, [])  // if [] is empty, useEffect only runs once on component mount
 
-
-  return (
+  let toReturn = (
     <div className="body" >
       {localSettings.general &&
         <Pophead
@@ -45,6 +44,7 @@ function App() {
       }
       
       <Menu
+        localSettings={localSettings}
         settingsVisible={settingsVisible}
         setSettingsVisible={setSettingsVisible}
         messageCurrentTab={messageCurrentTab}
@@ -68,9 +68,12 @@ function App() {
           />
         }
       </div>
+
       <Footer />
     </div>
-  );
+  )
+
+  return toReturn;
 }
 
 export default App;

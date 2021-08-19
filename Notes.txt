@@ -3,7 +3,9 @@ TO DO:
 - errors in extension that don't cause any problems??
 
 -? separate button for "New Filter", not in the top menu
-- grey content if Eclipser is Paused
+
+- appendix list appearing under expanded domain div -> put it under the domainLine
+
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
 

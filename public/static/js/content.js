@@ -57,6 +57,7 @@ function set_elements_visibility() {
       document.addEventListener('DOMContentLoaded', showReminder)
     }
 
+    // create CSS to be injected to HEAD: add display display none to all stored selectors
     Object.keys(settings.domains[domain].sets).forEach((set) => {
 
       if (settings.domains[domain].sets[set].active) {              //is is the set active 
@@ -180,27 +181,6 @@ function stop_selecting() {
   selectionBox.hide();
   selectionSpan.hide();
 }
-
-//// MUTATION SCRIPT ///////////////////////////////////////////////////////////
-// re-runs set_elements_visibility() when URL changes, important for dynamically generated pages like youtube... 
-let oldHref = document.location.href;
-window.onload = function () {
-  let bodyList = document.querySelector("body"),
-    observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        if (oldHref !== document.location.href) {
-          oldHref = document.location.href;
-          console.log("url change");
-          set_elements_visibility();
-        }
-      });
-    });
-  let config = {
-    childList: true,
-    subtree: true,
-  };
-  observer.observe(bodyList, config);
-};
 
 //// FUNCTIONS ///////////////////////////////////////////////////////////
 
@@ -366,3 +346,25 @@ function isNowActiveTime(timeFrom, timeTo) {              // function to check i
     }
   }
 }
+
+
+//// MUTATION SCRIPT ///////////////////////////////////////////////////////////
+// re-runs set_elements_visibility() when URL changes, important for dynamically generated pages like youtube... 
+let oldHref = document.location.href;
+window.onload = function () {
+  let bodyList = document.querySelector("body"),
+    observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (oldHref !== document.location.href) {
+          oldHref = document.location.href;
+          console.log("url change");
+          set_elements_visibility();
+        }
+      });
+    });
+  let config = {
+    childList: true,
+    subtree: true,
+  };
+  observer.observe(bodyList, config);
+};

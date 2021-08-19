@@ -151,7 +151,7 @@ hr{
 
 #settings{
   background-color: var(--dark-grey);
-  color: #fff;
+  /* color: #fff; */
   margin: var(--block-margin);
   border-radius: var(--border-radius);
 }
@@ -165,7 +165,7 @@ hr{
   grid-template-columns: 10% 90%;
   margin: 5px 0;
   padding: 5px 0;
-  color: #fff;
+  /* color: #fff; */
   transition: var(--hover-transition);
 
 }
@@ -179,7 +179,7 @@ hr{
 .settingsSub{
   margin: 0px 0px 2px 25px;
   padding: 5px 0;
-  color: #fff;
+  /* color: #fff; */
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
 }
@@ -263,7 +263,7 @@ transition: var(--hover-transition);
 
 .domainDiv{
   background-color: var(--dark-grey);
-  color: white;
+  /* color: white; */
   margin: var(--block-margin);
   border-radius: var(--border-radius);
 }
@@ -274,7 +274,7 @@ transition: var(--hover-transition);
   grid-template-columns: 83% 7% 10% ;
   margin: 5px 0px;
   padding: 5px 0px;
-  color: white;
+  /* color: white; */
 }
 
 /* STATUS ICON */
@@ -409,7 +409,7 @@ transition: var(--hover-transition);
   grid-template-columns: 79% 21% ;
   padding: 0px 0px 2px 10px;
   vertical-align: middle;
-  color: white;
+  /* color: white; */
 }
 
 .setRename{
@@ -419,7 +419,7 @@ transition: var(--hover-transition);
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
   padding: 0px;
-  color: white;
+  /* color: white; */
   background-color: var(--black);
 }
 
@@ -446,7 +446,7 @@ div.domainLine > div.lineButtons > div.bin{
 div.domainLine:hover > div.lineButtons > div.bin{
   display: unset;
   bottom: 50%;
-  color: white;
+  /* color: white; */
   margin-right: 8px;
   transition: var(--hover-transition);
   vertical-align: middle
@@ -459,7 +459,7 @@ div.setLine > div.lineButtons > div.bin{
 div.setLine:hover > div.lineButtons > div.bin{
   display: unset;
   bottom: 50%;
-  color: white;
+  /* color: white; */
   margin-right: 8px;
   transition: var(--hover-transition);
   vertical-align: middle
@@ -528,9 +528,14 @@ footer > a:hover{
   color: var(--grey);
 }
 
-.passive_all{
-  color: var(--grey) !important;
+.passive:hover{
+  color: unset  /* on hover, everything will seem as active */
 }
+
+/* .passive_all{
+  color: var(--grey) !important;
+} */
+
 
 .orange{
   color: var(--orange);

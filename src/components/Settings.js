@@ -48,7 +48,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
     const weekdaysArray = Object.keys(localSettings.general.weekdays)
 
     return (
-        <div id="settings">
+        <div id="settings" className={!localSettings.general.active && "passive"}>
 
             {/* ACTIVE TIME CHECK */}
             <div className={localSettings.general.activeTimeCheck ? "settingsMainLine" : "settingsMainLine passive" }id="timeActive"

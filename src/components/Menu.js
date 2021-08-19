@@ -8,7 +8,7 @@ import {
     MdCheckBox
 } from "react-icons/md";
 
-const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
+const Menu = ({ localSettings, messageCurrentTab, settingsVisible, setSettingsVisible }) => {
 
     const [selecting, setSelecting] = useState(false)
 
@@ -21,7 +21,7 @@ const Menu = ({ messageCurrentTab, settingsVisible, setSettingsVisible }) => {
     }, [])
 
     return (
-        <div id="topMenu">
+        <div id="topMenu" className={localSettings.general && !localSettings.general.active && "passive"}>
             {/* NEW FILTER */}
 
             {selecting ?
