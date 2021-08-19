@@ -17,6 +17,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message === 'stop') stop_selecting();   //'stop' button in the popup is clicked
   if (message === 'selecting') sendResponse(selecting);
   if (message === 'domain') sendResponse(noWWW(window.location.hostname));
+
+  return true // to prevent Unchecked runtime.lastError: The message port closed before a response was received. https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
 });
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
