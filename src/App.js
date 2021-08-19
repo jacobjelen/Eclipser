@@ -96,7 +96,7 @@ function messageCurrentTab(message) {
         if (response) {
           resolve(response)
         } else {
-          reject()
+          reject('error: content script not responding')
         }
       });
     });//tabs query

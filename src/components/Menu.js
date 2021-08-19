@@ -13,7 +13,7 @@ const Menu = ({ localSettings, messageCurrentTab, settingsVisible, setSettingsVi
     }, [])
 
     return (
-        <div id="topMenu" className={localSettings.general && localSettings.general.active ? "" : "passive"}>
+        <div id="topMenu" className={localSettings.general && localSettings.general.active ? "" : "passive_all"}>
 
             {/* FILTERS */}
             <div

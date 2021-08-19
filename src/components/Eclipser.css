@@ -555,17 +555,18 @@ footer > a:hover{
   visibility: hidden !important;
 }
 
-.passive{
+.passive{ /* when a specific filter/setting is passive */
   color: var(--grey);
 }
 
-.passive:hover{
-  color: unset  /* on hover, everything will seem as active */
+
+.passive_all{  /* when Eclipser is paused */
+  color: var(--grey);
 }
 
-/* .passive_all{
-  color: var(--grey) !important;
-} */
+.passive_all:hover{
+  color: unset  /* on hover, everything will seem as active */
+}
 
 
 .orange{

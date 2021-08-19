@@ -2,13 +2,18 @@ TO DO:
 
 - errors in extension that don't cause any problems??
 
+- Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+    - happens when Eclipser popup is opened and the current tab does not have the content.js loaded
+    - popup sends a message to tab asking for currentDomain
+    
+
+
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
 
 BUGS:
 - domain sending refresh or hardRefresh message to content... check the logic
 - Facebook not showing content after search >> check 'feed' selectors
-- check that filters on alternative URLs actually work
 
 Chrome webstore
     - create graphics
