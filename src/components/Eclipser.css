@@ -450,7 +450,7 @@ transition: var(--hover-transition);
   font-weight: var(--subtitle-font-weight);
   font-size: var(--subtitle-font-size);
   padding: 0px;
-  /* color: white; */
+  color: white;
   background-color: var(--black);
 }
 

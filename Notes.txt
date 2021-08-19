@@ -2,8 +2,6 @@ TO DO:
 
 - errors in extension that don't cause any problems??
 
--? separate button for "New Filter", not in the top menu
-
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
 
@@ -19,10 +17,6 @@ Chrome webstore
     - publish
 
 - make an Eclipser page on my website/github
-
-CSS
-- blocked screen
-- pophead color
 
 
 Enter file in which to save the key (/Users/jacobjelen/.ssh/id_ed25519): 
