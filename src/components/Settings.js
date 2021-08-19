@@ -6,8 +6,7 @@ import WeekdayButton from "./WeekdayButton";
 import {
     FiCheckCircle,
     FiCircle,       // empty circle
-    FiAlertCircle,
-    FiArrowRightCircle
+    FiAlertCircle
 } from "react-icons/fi";
 
 const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
@@ -61,13 +60,13 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 }}
             >
 
-                <div className="statusIconDiv">
+                <span className="statusIconDiv">
                     {localSettings.general.activeTimeCheck ?
                         <FiCheckCircle />
                         :
                         <FiCircle />
                     }
-                </div>
+                </span>
                 <span className="settingName">Eclipser Active Time </span>
             </div>
 
@@ -86,9 +85,7 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 ))
                 }
 
-
             </div>
-
             {/* TIME SETTINGS */}
             <div className={localSettings.general.activeTimeCheck ? "settingsSub" : "settingsSub passive"} >
                 <span className="timeLabel">From</span>
@@ -126,13 +123,13 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                 }}
             >
 
-                <div className="statusIconDiv">
+                <span className="statusIconDiv">
                     {localSettings.general.showReminderBar ?
                         <FiCheckCircle />
                         :
                         <FiCircle />
                     }
-                </div>
+                </span>
                 <span className="settingName">Show Reminder Bar </span>
             </div>
 
@@ -150,13 +147,13 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
                     }
                 }}
             >
-                <div className="statusIconDiv">
+                <span className="statusIconDiv">
                     {resetAction ?
                         <FiAlertCircle className="orange" />  //style={ alertIconStyle }
                         :
                         <FiCircle />
                     }
-                </div>
+                </span>
                 {!resetAction ?
                     <span className="settingName" >
                         Reset All Settings & Domains

@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {   //runs once when app loads
     // SETTINGS
     getStorageSettings()
-      .then(r => { setLocalSettings(r)})
+      .then(r => { setLocalSettings(r) })
       .catch(e => { console.log(e) })
 
     // CURRENT DOMAIN    
@@ -61,17 +61,17 @@ function App() {
           />
           :
           <>
-            <AddFilterButton
-              settingsVisible={settingsVisible}
-              setSettingsVisible={setSettingsVisible}
-              messageCurrentTab={messageCurrentTab}
-            />
-
             <DomainList
               currentDomain={currentDomain}
               localSettings={localSettings}
               setLocalSettings={setLocalSettings}
               setStorageSettings={setStorageSettings}
+              messageCurrentTab={messageCurrentTab}
+            />
+
+            <AddFilterButton
+              settingsVisible={settingsVisible}
+              setSettingsVisible={setSettingsVisible}
               messageCurrentTab={messageCurrentTab}
             />
           </>

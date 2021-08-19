@@ -26,7 +26,7 @@ const AddFilterButton = ({ messageCurrentTab, settingsVisible, setSettingsVisibl
                     setSelecting(false)
                 }}>
                 <div className="statusIconDiv"><FiCheckCircle className="buttonIcon" /></div>
-                <span> Stop Selecting </span>
+                <div className="filterButtonText"> Stop Selecting </div>
 
             </div>
             :
@@ -39,7 +39,7 @@ const AddFilterButton = ({ messageCurrentTab, settingsVisible, setSettingsVisibl
                 }}
             >
                 <div className="statusIconDiv"> <FiPlusCircle className="buttonIcon" /> </div>
-                <span className="filterButtonLine"> Add New Filter </span>
+                <div className="filterButtonText"> Add New Filter </div>
 
 
             </div>
