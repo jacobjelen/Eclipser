@@ -4,8 +4,6 @@ TO DO:
 
 -? separate button for "New Filter", not in the top menu
 
-- appendix list appearing under expanded domain div -> put it under the domainLine
-
 - feature, bug, donation section in settings
     - make a payment/donation page on jacobjelen.com
 

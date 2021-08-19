@@ -51,7 +51,8 @@ const Settings = ({ localSettings, setLocalSettings, setStorageSettings }) => {
         <div id="settings" className={!localSettings.general.active && "passive"}>
 
             {/* ACTIVE TIME CHECK */}
-            <div className={localSettings.general.activeTimeCheck ? "settingsMainLine" : "settingsMainLine passive" }id="timeActive"
+            <div className={localSettings.general.activeTimeCheck ? "settingsMainLine" : "settingsMainLine passive" }
+                id="timeActive"
                 onClick={(event) => {
                     const temp_localSettings = merge({}, localSettings)
                     temp_localSettings.general.activeTimeCheck = !temp_localSettings.general.activeTimeCheck

@@ -73,7 +73,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
 
     return (
         <>
-            <div className="domainDiv">
+            <div className={localSettings.general && localSettings.general.active ? "domainDiv" : "domainDiv passive"}>
 
                 <div className="domainLine">
 
@@ -151,6 +151,15 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                     </div>
                 </div>
 
+                {urlsVisible &&
+                <UrlList
+                    domainName={domainName}
+                    localSettings={localSettings}
+                    setLocalSettings={setLocalSettings}
+                    setStorageSettings={setStorageSettings}
+                    setUrlsVisible={setUrlsVisible}
+                />}
+                
                 {/* SET LIST
               && means if expanded == true render SetList */}
                 {
@@ -166,14 +175,7 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                 }
             </div >
 
-            {urlsVisible &&
-                <UrlList
-                    domainName={domainName}
-                    localSettings={localSettings}
-                    setLocalSettings={setLocalSettings}
-                    setStorageSettings={setStorageSettings}
-                    setUrlsVisible={setUrlsVisible}
-                />}
+            
 
         </>
     )

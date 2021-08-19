@@ -122,8 +122,13 @@ hr{
   border-bottom: 2px solid var(--green);
 }
 
+.passive .tb_active{
+  color: var(--dark-green);
+  border-bottom: 2px solid var(--dark-green);
+}
+
 .tb_passive{
-  color: white;
+  /* color: white; */
   /* border-bottom: 1px solid var(--grey); */
 }
 
@@ -388,7 +393,7 @@ transition: var(--hover-transition);
 }
 
 #amazonURLS{
-  left: 68px;
+  left: 70px;
 }
 
 #ebayURLS{

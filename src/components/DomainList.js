@@ -4,7 +4,7 @@ import Domain from './Domain';
 const DomainList = ({ currentDomain, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
 
     return (
-        <div className={localSettings.general && localSettings.general.active ? "domainList" : "domainList passive"}>
+        <div className="domainList">
             {/* CURRENT DOMAIN  */}
             {localSettings.domains && currentDomain &&       // the first && means 'and', the second means 'then' ???
                 Object.entries(localSettings.domains)          //Object.entries returns [ ['key1', {value1}],['key2', {value2}] ]
