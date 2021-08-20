@@ -148,7 +148,13 @@ hr{
   grid-template-columns: 10% 75%;
   margin: 5px 10px 0 10px;
   padding: 3px 0;
-  transition: var(--hover-transition);
+  transition: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.filterButton:hover{
+  left: 0px;
+  transition-timing-function: ease-out;
 }
 
 .filterButtonText{
@@ -157,19 +163,12 @@ hr{
   vertical-align: text-bottom;
 }
 
-.filterButton:hover{
-  left: 0px;
-  transition: var(--hover-transition);
-}
-
 .buttonIcon{
   vertical-align: middle
 }
 
 #buttonStop{
   background-color: var(--orange);
-  /* border: 1pt solid var(--orange); */
-  transition: var(--hover-transition);
 }
 
 
