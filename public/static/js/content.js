@@ -8,18 +8,32 @@ let selecting = false;
 set_elements_visibility();
 
 //// LISTEN FOR COMMAND MESSAGES ////////////////////////////////////////////////
+// chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+//   console.log('Message Received: ', message)
+
+//   if (message === 'hardRefresh') window.location.reload();  // sometimes not working ??? 
+//   if (message === 'refresh') set_elements_visibility(); //set_elements_visibility();
+//   if (message === 'new') select_elements();   //'new' button in the popup is clicked
+//   if (message === 'stop') stop_selecting();    //'stop' button in the popup is clicked
+//   if (message === 'selecting') sendResponse(selecting);
+//   if (message === 'domain') sendResponse(noWWW(window.location.hostname));
+
+//   return true // to prevent Unchecked runtime.lastError: The message port closed before a response was received. https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
+// });
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   console.log('Message Received: ', message)
 
   if (message === 'hardRefresh') window.location.reload();  // sometimes not working ??? 
-  if (message === 'refresh') set_elements_visibility(); //set_elements_visibility();
-  if (message === 'new') select_elements();   //'new' button in the popup is clicked
-  if (message === 'stop') stop_selecting();    //'stop' button in the popup is clicked
-  if (message === 'selecting') sendResponse(selecting);
-  if (message === 'domain') sendResponse(noWWW(window.location.hostname));
-
-  return false // to prevent Unchecked runtime.lastError: The message port closed before a response was received. https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
+  else if (message === 'refresh') set_elements_visibility(); //set_elements_visibility();
+  else if (message === 'new') select_elements();   //'new' button in the popup is clicked
+  else if (message === 'stop') stop_selecting();    //'stop' button in the popup is clicked
+  else if (message === 'selecting') return Promise.resolve(selecting);
+  else if (message === 'domain') return Promise.resolve( noWWW(window.location.hostname) );
+  
+  return true
 });
+
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {

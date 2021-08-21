@@ -66,6 +66,7 @@ function App() {
               setSettingsVisible={setSettingsVisible}
               messageCurrentTab={messageCurrentTab}
             />
+
             <DomainList
               currentDomain={currentDomain}
               localSettings={localSettings}
@@ -73,7 +74,6 @@ function App() {
               setStorageSettings={setStorageSettings}
               messageCurrentTab={messageCurrentTab}
             />
-
 
           </>
         }
