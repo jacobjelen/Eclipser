@@ -61,6 +61,11 @@ function App() {
           />
           :
           <>
+            <AddFilterButton
+              settingsVisible={settingsVisible}
+              setSettingsVisible={setSettingsVisible}
+              messageCurrentTab={messageCurrentTab}
+            />
             <DomainList
               currentDomain={currentDomain}
               localSettings={localSettings}
@@ -69,11 +74,7 @@ function App() {
               messageCurrentTab={messageCurrentTab}
             />
 
-            <AddFilterButton
-              settingsVisible={settingsVisible}
-              setSettingsVisible={setSettingsVisible}
-              messageCurrentTab={messageCurrentTab}
-            />
+
           </>
         }
       </div>
