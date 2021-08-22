@@ -84,31 +84,20 @@ const Domain = ({ currentDomain, domainName, localSettings, setLocalSettings, se
                             // toggle true/false 
                             const temp = merge({}, localSettings)  // deep merge (lodash.com), clones the localSettings object
 
-                            if (localSettings.domains[domainName].blocked) {                 // Is Blocked - Set to OFF(unfiltered)
-                                temp.domains[domainName].active = false;
+                            if (localSettings.domains[domainName].blocked) {                 // Is Blocked - Set to OFF(unfiltered) -> hard refresh
+                                temp.domains[domainName].active = false;                        
                                 temp.domains[domainName].blocked = false;
-
-                            } else if (localSettings.domains[domainName].active) {          // is filtered - Set to BLOCK
+                            } else if (localSettings.domains[domainName].active) {          // is filtered - Set to BLOCK           -> refresh
                                 // temp.domains[domainName].active = true;
                                 temp.domains[domainName].blocked = true;
-
-                            } else {                                                       // is off(unfiltered) - Set to FILTER
+                            } else {                                                       // is off(unfiltered) - Set to FILTER    -> refresh
                                 temp.domains[domainName].active = true;
                                 temp.domains[domainName].blocked = false;
                             }
 
                             setStorageSettings(temp)
                             setLocalSettings(temp)
-
-                            if (currentDomain === domainName) {
-                                if (temp.domains[domainName].blocked) {
-                                    // blocked -> set to off(unfiltered) => reload the entire page
-                                    messageCurrentTab('hardRefresh')
-                                } else {
-                                    // rerun the setElementsVisibility()
-                                    messageCurrentTab('refresh')
-                                }
-                            }
+                            if (currentDomain === domainName) messageCurrentTab('hardRefresh') 
                         }
                         }>
 

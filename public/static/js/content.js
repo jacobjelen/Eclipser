@@ -25,13 +25,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 //// ECLIPSE ELEMENTS BASED ON SETTINGS ////////////////////////////////////////////
 function set_elements_visibility() {
-  // removeEclipserStyle()
+  
   let css = ''           //hold all the css that will be injected into head
 
   // load settings from storage
   chrome.storage.sync.get("settings", function (result) {
     let settings;
-
+    removeEclipserStyle()
+    
     // CHECK if Eclipser is active
     if (result.settings.general.active) {
       settings = result.settings;
