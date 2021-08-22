@@ -96,8 +96,8 @@ function messageCurrentTab(message) {
       chrome.tabs.sendMessage(tabs[0].id, message, (response) => {
         if (response) {
           resolve(response)
-        } else {
-          reject('error: content script not responding')
+        // } else {
+        //   reject('error: content script not responding')
         }
       });
     });//tabs query

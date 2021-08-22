@@ -27,8 +27,20 @@ const default_settings = {
                     title: 'Feed',
                     active: true,
                     selectors: [
-                        '[role="feed"]',
-                        '[aria-label="Stories"]',
+                        // '[role="feed"]',
+                        // '[aria-label="Stories"]',
+                        // '[aria-label="Create a post"]',
+                        // '[data-pagelet="VideoChatHomeUnit"]',
+                        // '[data-pagelet="VideoChatHomeUnitNoDDD"]'
+                        '.home .newsFeedComposer #contentArea, #m_newsfeed_stream, #MComposer, #MStoriesTray, [role="main"]:not([aria-label="Search Results"]) div:not([data-pagelet="GroupFeed"])>[role="feed"], [data-pagelet="Stories"] '
+                    ],
+                },
+                post: {
+                    title: 'New Post',
+                    active: true,
+                    selectors: [
+                        // '[role="feed"]',
+                        // '[aria-label="Stories"]',
                         '[aria-label="Create a post"]',
                         '[data-pagelet="VideoChatHomeUnit"]',
                         '[data-pagelet="VideoChatHomeUnitNoDDD"]'
@@ -42,7 +54,11 @@ const default_settings = {
                 likes: {
                     title: 'Likes & Comments',
                     active: true,
-                    selectors: ['div.cwj9ozl2.tvmbv18p', 'div.stjgntxs.ni8dbmo4.l82x9zwi.uo3d90p7.h905i5nu.monazrh9'],
+                    selectors: [
+                        // 'div.cwj9ozl2.tvmbv18p', 
+                        // 'div.stjgntxs.ni8dbmo4.l82x9zwi.uo3d90p7.h905i5nu.monazrh9'
+                        '.commentable_item, .story_body_container + footer, [role="article"] div[data-vc-ignore-dynamic], div[data-pagelet^="FeedUnit_"] div[data-visualcompletion=ignore-dynamic]'
+                    ],
                 },
                 chat: {
                     title: 'Chat',

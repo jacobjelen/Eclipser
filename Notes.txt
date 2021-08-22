@@ -6,7 +6,7 @@ TO DO:
         - happens when Eclipser popup is opened and the current tab does not have the content.js loaded
         - popup sends a message to tab asking for currentDomain
         
-    + Unchecked runtime.lastError: The message port closed before a response was received.
+    -? Unchecked runtime.lastError: The message port closed before a response was received.
         - something to do with async 
         - fixed by adding 'return true' in onMessage.eventlistener in content.js
 
@@ -15,7 +15,7 @@ TO DO:
 
 BUGS:
 - domain sending refresh or hardRefresh message to content... check the logic
-- Facebook not showing content after search >> check 'feed' selectors
+
 
 Chrome webstore
     - create graphics
