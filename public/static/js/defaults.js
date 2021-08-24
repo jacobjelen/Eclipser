@@ -1,5 +1,8 @@
 // Default settings
 
+// RegEx in CSS selectors!!!!!!!!!
+// https://stackoverflow.com/questions/8903313/using-regular-expression-in-css
+
 const default_settings = {
     general: {
         active: true,
@@ -157,14 +160,17 @@ const default_settings = {
                     selectors: ['#gw-layout'],
                 },
                 banner: {
-                    title: 'Top Banner',
+                    title: 'Banners',
                     active: true,
-                    selectors: ['#desktop-banner'],
+                    selectors: [
+                        '#desktop-banner', '#bhp-herotator', '.bhp-card', 'bhp-billboardRowGrid', '#bnp',
+                        "div[id^='bhp-billboard']"]
+                    ,
                 },
                 history: {
                     title: 'Inspired by your browsing',
                     active: true,
-                    selectors: ['#rhf'],
+                    selectors: ['#rhf', '#CardInstanceLX0WvPMhzWlSbDBZlrg2cg'],
                 },
                 footer: {
                     title: 'Footer',

@@ -14,7 +14,6 @@ TO DO:
     - make a payment/donation page on jacobjelen.com
 
 BUGS:
-- domain sending refresh or hardRefresh message to content... check the logic
 
 
 Chrome webstore

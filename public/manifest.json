@@ -15,6 +15,10 @@
 			"matches": [ "*://*/*" ],
 			"run_at": "document_start",
 			"css": ["static/css/content.css"]
+		 },{
+			"js": [ "static/js/contentNetflix.js" ],
+			"matches": [ "*://*.netflix.com/*" ],
+			"run_at": "document_start"
 		 }
 	],
   "action": {
