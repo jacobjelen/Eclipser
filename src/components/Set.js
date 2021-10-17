@@ -2,6 +2,7 @@ import { merge } from 'lodash'
 import Delete from "./Delete"
 import EditableTitle from "./EditableTitle"
 
+import { FiEye, FiEyeOff } from "react-icons/fi"
 
 const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, setStorageSettings, messageCurrentTab }) => {
 
@@ -9,8 +10,19 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
         <>
             <div className="setLine">
 
+
+                <div className="setIconEye" >
+                    {localSettings.domains[domainName].sets[set].active ?
+                        <FiEyeOff className="setIconEye_closed passive" />
+                        :
+                        <FiEye />
+                    }
+                </div>
+
+
+
                 {/* <div className="setName">{set}</div> */}
-                <EditableTitle 
+                <EditableTitle
                     localSettings={localSettings}
                     setLocalSettings={setLocalSettings}
                     setStorageSettings={setStorageSettings}
@@ -21,7 +33,7 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                 />
 
                 <div class="lineButtons">
-                        <Delete
+                    <Delete
                         action={() => {
                             console.log("domain name: ", domainName, " set: ", set)
                             const tempLocalSettings = merge({}, localSettings)  // deep merge (lodash)
@@ -29,7 +41,7 @@ const Set = ({ currentDomain, set, domainName, localSettings, setLocalSettings, 
                             setStorageSettings(tempLocalSettings)
                             setLocalSettings(tempLocalSettings)
                             // if(domainName === currentDomain){
-                                messageCurrentTab('refresh')
+                            messageCurrentTab('refresh')
                             // }
                         }}
                     />

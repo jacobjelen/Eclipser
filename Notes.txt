@@ -15,6 +15,13 @@ TO DO:
 
 BUGS:
 
+FILTERED
+set active: 
+set active .hover:
+
+UNFILTERED: 
+set passive: grey
+set passive .hover: green
 
 Chrome webstore
     - create graphics
