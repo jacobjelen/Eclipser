@@ -154,12 +154,12 @@ const default_settings = {
             active: true,
             blocked: false,
             sets: {
-                recomendations: {
+                a: {
                     title: 'All Recomendations',
                     active: true,
                     selectors: ['#gw-layout'],
                 },
-                banner: {
+                c: {
                     title: 'Banners',
                     active: true,
                     selectors: [
@@ -167,12 +167,12 @@ const default_settings = {
                         "div[id^='bhp-billboard']"]
                     ,
                 },
-                history: {
+                b: {
                     title: 'Inspired by your browsing',
                     active: true,
                     selectors: ['#rhf', '#CardInstanceLX0WvPMhzWlSbDBZlrg2cg'],
                 },
-                footer: {
+                d: {
                     title: 'Footer',
                     active: true,
                     selectors: ['#navFooter'],

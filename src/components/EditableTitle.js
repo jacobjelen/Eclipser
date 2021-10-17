@@ -47,7 +47,7 @@ const EditableTitle = ({
     }
 
     return (
-        <div className={ localSettings.domains[domainName].sets[set].active ? "setName" : "setName passive"}
+        <div className={ localSettings.domains[domainName].sets[set].active ? "setName passive" : "setName"}
             
             // activate/deactive filter on click
             onClick={(event) => {
