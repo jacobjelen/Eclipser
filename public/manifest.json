@@ -1,7 +1,7 @@
 {
 	"name": "Eclipser - Block Feeds, Hide Distractions!",
   "short_name": "Eclipser",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"manifest_version": 3,
 	"description": "Mindful, Focused & Private Browsing",
 	"icons": {
@@ -29,7 +29,7 @@
 	"background": {
 		"service_worker": "background.js"
 	 },
-	"permissions": ["storage","scripting"], 
+	"permissions": ["storage"], 
 	"host_permissions": ["<all_urls>"], 
 	"web_accessible_resources": [
 		{
