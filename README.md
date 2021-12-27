@@ -1,5 +1,5 @@
 # Eclipser Chrome/Brave Extension
-## Focused, Mindful & Private Browsing
+#### Focused, Mindful & Private Browsing
 
 https://chrome.google.com/webstore/detail/eclipser-block-feeds-hide/kohioonehhfdggidjcpifjagdcjlkkfb
 
