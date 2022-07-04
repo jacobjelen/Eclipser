@@ -1,9 +1,9 @@
 {
 	"name": "Eclipser - Block Feeds, Hide Distractions!",
   "short_name": "Eclipser",
-	"version": "2.0.2",
+	"version": "2.0.5",
 	"manifest_version": 3,
-	"description": "Stay focused! Filter out distracting content!",
+	"description": "Mindful, Focused & Private Browsing",
 	"icons": {
 		"128":"imgs/128.png",
 		"48":"imgs/48.png",
