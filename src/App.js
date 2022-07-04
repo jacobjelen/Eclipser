@@ -119,6 +119,7 @@ function getStorageSettings() {
 }
 
 function setStorageSettings(newSettings) {
+  console.log(newSettings)
   chrome.storage.sync.set({ 'settings': newSettings }, () => { console.log('storage settings updated') });
 }
 

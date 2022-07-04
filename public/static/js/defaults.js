@@ -19,6 +19,7 @@ const default_settings = {
             7: false,
         },
         showReminderBar: true,
+        lastUpdate: 'default'
     },
 
     domains: {
